@@ -2,12 +2,48 @@
     <string name="app_name">Parking5</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">泊克約翰</string>
+    <string name="nav_header_subtitle">鳳山保華</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_home">首頁</string>
+    <string name="menu_system">系統設定</string>
+    <string name="menu_revenue">車位營收</string>
+    <string name="menu_data_search">查詢資料</string>
+    <string name="menu_regular">月租管理</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- 系統設定-->
+    <string name="system_basic_setting">基本設置</string>
+    <string name="system_account_setting">管理帳號</string>
+    <string name="system_camera_setting">車辨管理</string>
+    <string name="system_bill_setting">發票設定</string>
+    <string name="system_holiday_setting">假日設定</string>
+    <string name="system_subtitle_setting">字幕設置</string>
+
+    <!-- 車位營收-->
+    <string name="revenue_basic_fee">基本收費</string>
+    <string name="revenue_car_setting">車位設置</string>
+    <string name="revenue_print_setting">列印設置</string>
+    <string name="revenue_manage">收益管理</string>
+    <string name="revenue_coupon">票券管理</string>
+    <!-- 查詢資料-->
+    <string name="history_view">歷史紀錄</string>
+    <string name="history_pay">繳費紀錄</string>
+    <string name="history_out">允許出場</string>
+    <string name="history_license">車牌修改</string>
 </resources>

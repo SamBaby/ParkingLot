@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.parking5.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_system"
+        android:name="com.example.parking5.ui.system.BasicSettingFragment"
+        android:label="@string/menu_system"
+        tools:layout="@layout/fragment_basic_setting" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.parking5.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_revenue"
+        android:name="com.example.parking5.ui.revenue.BasicFeeFragment"
+        android:label="@string/menu_revenue"
+        tools:layout="@layout/fragment_basic_fee" />
+
+    <fragment
+        android:id="@+id/nav_data_search"
+        android:name="com.example.parking5.ui.data_search.HistoryFragment"
+        android:label="@string/menu_data_search"
+        tools:layout="@layout/fragment_history" />
 </navigation>

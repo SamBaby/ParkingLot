@@ -1,16 +1,16 @@
-package com.example.parking5.ui.gallery;
+package com.example.parking5.ui.revenue;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class BasicFeeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public BasicFeeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("車位營收");
     }
 
     public LiveData<String> getText() {

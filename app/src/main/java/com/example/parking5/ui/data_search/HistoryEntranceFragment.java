@@ -1,4 +1,4 @@
-package com.example.parking5.ui.revenue;
+package com.example.parking5.ui.data_search;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import com.example.parking5.R;
 
-public class BasicFeeFragment extends Fragment {
+public class HistoryEntranceFragment extends Fragment {
 
-    private BasicFeeViewModel mViewModel;
+    private HistoryEntranceViewModel mViewModel;
 
-    public static BasicFeeFragment newInstance() {
-        return new BasicFeeFragment();
+    public static HistoryEntranceFragment newInstance() {
+        return new HistoryEntranceFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_basic_fee, container, false);
+        return inflater.inflate(R.layout.fragment_history_entrance, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BasicFeeViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(HistoryEntranceViewModel.class);
         // TODO: Use the ViewModel
     }
 

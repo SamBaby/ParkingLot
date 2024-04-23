@@ -1,4 +1,4 @@
-package com.example.parking5.ui.revenue;
+package com.example.parking5;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,26 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.parking5.R;
+public class BasicSettingFragment extends Fragment {
 
-public class BasicFeeFragment extends Fragment {
+    private BasicSettingViewModel mViewModel;
 
-    private BasicFeeViewModel mViewModel;
-
-    public static BasicFeeFragment newInstance() {
-        return new BasicFeeFragment();
+    public static BasicSettingFragment newInstance() {
+        return new BasicSettingFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_basic_fee, container, false);
+        return inflater.inflate(R.layout.fragment_basic_setting, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BasicFeeViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(BasicSettingViewModel.class);
         // TODO: Use the ViewModel
     }
 

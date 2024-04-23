@@ -9,23 +9,37 @@
         android:id="@+id/nav_home"
         android:name="com.example.parking5.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_revenueFragment"
+            app:destination="@id/nav_revenue"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_dataSearchFragment"
+            app:destination="@id/nav_data_search"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_system"
-        android:name="com.example.parking5.ui.system.BasicSettingFragment"
+        android:name="com.example.parking5.ui.system.SystemSettingFragment"
         android:label="@string/menu_system"
-        tools:layout="@layout/fragment_basic_setting" />
+        tools:layout="@layout/fragment_system_setting" />
 
     <fragment
         android:id="@+id/nav_revenue"
-        android:name="com.example.parking5.ui.revenue.BasicFeeFragment"
+        android:name="com.example.parking5.ui.revenue.RevenueFragment"
         android:label="@string/menu_revenue"
-        tools:layout="@layout/fragment_basic_fee" />
+        tools:layout="@layout/fragment_revenue" >
+    </fragment>
 
     <fragment
         android:id="@+id/nav_data_search"
-        android:name="com.example.parking5.ui.data_search.HistoryFragment"
+        android:name="com.example.parking5.ui.data_search.DataSearchFragment"
         android:label="@string/menu_data_search"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_data_search" />
 </navigation>

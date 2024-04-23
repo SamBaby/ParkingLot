@@ -6,12 +6,14 @@
     <string name="nav_header_subtitle">鳳山保華</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="modify_confirm">確認修改</string>
 
     <string name="menu_home">首頁</string>
     <string name="menu_system">系統設定</string>
     <string name="menu_revenue">車位營收</string>
     <string name="menu_data_search">查詢資料</string>
     <string name="menu_regular">月租管理</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -27,6 +29,24 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+    <!--General-->
+    <string name="upload">上傳</string>
+    <string name="add">新增</string>
+    <string name="modify">修改</string>
+    <string name="delete">刪除</string>
+    <string name="date">日期</string>
+    <string name="update_date">更新日期</string>
+    <string name="description">說明</string>
+
+
+    <!--首頁-->
+    <string name="lots_left">剩餘車位</string>
+    <string name="bill_left">發票剩餘</string>
+    <string name="revenue_day">當日營收</string>
+    <string name="revenue_month">當月營收</string>
+    <string name="abnormal_license">異常車辨查詢</string>
+    <string name="revenue_extract">提取收益</string>
+
     <!-- 系統設定-->
     <string name="system_basic_setting">基本設置</string>
     <string name="system_account_setting">管理帳號</string>
@@ -35,15 +55,134 @@
     <string name="system_holiday_setting">假日設定</string>
     <string name="system_subtitle_setting">字幕設置</string>
 
+    <string name="parking_lot_name">停車場名稱</string>
+    <string name="company_name">公司名稱</string>
+    <string name="company_address">公司地址</string>
+    <string name="service_phone_number">服務電話</string>
+    <string name="server_token">訪問ParkJohn伺服器Token:</string>
+    <string name="lots_update_CHT">即時車位上傳中華電信</string>
+    <string name="chat_id">接收管理通知 Chat id:</string>
+    <string name="play_standby">播放待機畫面</string>
+    <string name="standby_path">待機畫面存放路徑:</string>
+    <string name="standby_play_interval">待機畫面播放間隔時間</string>
+    <string name="standby_setting">待機畫面設置</string>
+    <string name="standby_preview">待機畫面預覽</string>
+
+    <string name="account">帳號</string>
+    <string name="password">密碼</string>
+    <string name="person_name">姓名</string>
+    <string name="phone_number">電話號碼</string>
+    <string name="permission">權限</string>
+
+    <string name="name">名稱</string>
+    <string name="serial_number">編號</string>
+    <string name="position">位置</string>
+    <string name="mark">標示</string>
+    <string name="billing">計費</string>
+    <string name="default_open_gate">默認開閘</string>
+
+    <string name="print_bill">列印發票</string>
+    <string name="print_Receipt">列印收據</string>
+    <string name="print_none">不列印</string>
+    <string name="print_car_number">是否附加車號</string>
+    <string name="cooperate_store_number">合作特約店編號</string>
+    <string name="company_number">公司統一編號</string>
+    <string name="connect_hash_key">介接Hash Key:</string>
+    <string name="connect_hash_IV">介接Hash IV:</string>
+    <string name="bill_title">發票抬頭文字</string>
+    <string name="header_image">抬頭圖檔</string>
+    <string name="image_position">圖檔位置</string>
+    <string name="bill_bottom_title">發票底端文字</string>
+    <string name="bottom_image">底端圖檔</string>
+    <string name="test_version">測試版本</string>
+
+    <string name="regular_holiday_setting">常規設定</string>
+    <string name="sunday">周日</string>
+    <string name="saturday">周六</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="weekday">周別</string>
+
     <!-- 車位營收-->
     <string name="revenue_basic_fee">基本收費</string>
     <string name="revenue_car_setting">車位設置</string>
     <string name="revenue_print_setting">列印設置</string>
     <string name="revenue_manage">收益管理</string>
     <string name="revenue_coupon">票券管理</string>
+
+    <string name="regular_reservation">月租保留</string>
+    <string name="car_slot">汽車車位</string>
+    <string name="charging_slot">充電車位</string>
+    <string name="disabled_slot">殘障車位</string>
+    <string name="pregnant_slot">婦幼車位</string>
+
+    <string name="reserved_slot_setting">保留車位</string>
+
+    <string name="fee_setting">收費設置</string>
+    <string name="car_entrance">車輛進場</string>
+    <string name="not_count_minute">分鐘 不計費</string>
+    <string name="one_hour_pay">車輛進場一小時內以一小時計算</string>
+    <string name="pay_count_time_unit">車輛進場一小時後計價單位</string>
+    <string name="thirty_minute">30分鐘</string>
+    <string name="one_hour">1小時</string>
+    <string name="parking_fee">停車收費</string>
+    <string name="weekday_fee">平日收費</string>
+    <string name="weekend_fee">假日收費</string>
+    <string name="every">每</string>
+    <string name="hour_fee">小時 ; 收費</string>
+    <string name="dollar">元</string>
+    <string name="most_fee_a_day">當日最高收費</string>
+    <string name="cross_weekday_weekend">跨平假日收費</string>
+
+    <string name="bill_list">發票列表</string>
+    <string name="new_print_piece">新列印紙捲張數</string>
+    <string name="print_alert">列印紙不⾜提⽰張數</string>
+    <string name="print_bill_minus">列印⼀張(發票/收據)扣除張數</string>
+    <string name="print_revenue_minus">列印⼀張(收益/補充硬幣)扣除張數</string>
+    <string name="print_coupon_minus">列印⼀張(折價卷)扣除張數</string>
+    <string name="pay_machine_piece_left">繳費機紙卷剩餘</string>
+    <string name="out_piece_left">出口處紙卷剩餘</string>
+    <string name="piece">張</string>
+    <string name="refresh">刷新</string>
+
+    <string name="coupon_setting">折價券設置</string>
+    <string name="discount_time">折抵時間</string>
+    <string name="discount_fee">折抵費用</string>
+    <string name="discount">折抵</string>
+    <string name="deadline">到期時間</string>
+    <string name="semicolon">;</string>
+    <string name="print_piece">發行張數</string>
+    <string name="coupon_history">發行紀錄</string>
+    <string name="go_print">去列印</string>
+    <string name="discount_way">抵用</string>
+    <string name="amount">數量</string>
+    <string name="employee">人員</string>
+    <string name="additional">標註</string>
+    <string name="hour">小時</string>
     <!-- 查詢資料-->
     <string name="history_view">歷史紀錄</string>
     <string name="history_pay">繳費紀錄</string>
     <string name="history_out">允許出場</string>
     <string name="history_license">車牌修改</string>
+
+    <string name="car_number">車號</string>
+    <string name="in_out_time">進出場時間</string>
+    <string name="type">類型</string>
+    <string name="color">顏色</string>
+    <string name="in_or_out">進出</string>
+    <string name="artificial">人工</string>
+
+    <string name="search">查詢</string>
+    <string name="in_time">進場時間</string>
+    <string name="pay_time">繳費時間</string>
+    <string name="pay_amount">繳費金額</string>
+    <string name="bill_number">發票</string>
+    <string name="pay_way">繳費方式</string>
+    
+    <string name="photo">照片</string>
+
+    <string name="car_number_modify">修改車號</string>
 </resources>

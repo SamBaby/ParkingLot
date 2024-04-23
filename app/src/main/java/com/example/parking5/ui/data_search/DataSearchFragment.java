@@ -1,52 +1,48 @@
 package com.example.parking5.ui.data_search;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.parking5.BasicSettingFragment;
 import com.example.parking5.R;
-import com.example.parking5.databinding.FragmentBasicFeeBinding;
-import com.example.parking5.databinding.FragmentHistoryBinding;
-import com.example.parking5.ui.revenue.BasicFeeFragment;
-import com.example.parking5.ui.revenue.BasicFeeViewModel;
-import com.example.parking5.ui.revenue.CarSettingFragment;
-import com.example.parking5.ui.revenue.PrintSettingFragment;
-import com.example.parking5.ui.revenue.RevenueCouponFragment;
-import com.example.parking5.ui.revenue.RevenueManageFragment;
+import com.example.parking5.databinding.FragmentDataSearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HistoryFragment extends Fragment {
+public class DataSearchFragment extends Fragment {
 
-    private HistoryViewModel mViewModel;
-    private FragmentHistoryBinding binding;
+    private DataSearchViewModel mViewModel;
+    private FragmentDataSearchBinding binding;
 
-    public static HistoryFragment newInstance() {
-        return new HistoryFragment();
+    public static DataSearchFragment newInstance() {
+        return new DataSearchFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        HistoryViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(HistoryViewModel.class);
+        DataSearchViewModel slideshowViewModel =
+                new ViewModelProvider(this).get(DataSearchViewModel.class);
 
-        binding = FragmentHistoryBinding.inflate(inflater, container, false);
+        binding = FragmentDataSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_system);
+        BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_history);
+        // Set the default fragment
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.frameLayout_system_setting, new HistoryEntranceFragment())
+                .commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if (menuItem.getItemId() == R.id.nav_history_view) {
-                    getChildFragmentManager().beginTransaction().replace(R.id.frameLayout, new HistoryFragment(), null).commit();
+                    getChildFragmentManager().beginTransaction().replace(R.id.frameLayout, new HistoryEntranceFragment(), null).commit();
                     return true;
                 } else if (menuItem.getItemId() == R.id.nav_history_pay) {
                     getChildFragmentManager().beginTransaction().replace(R.id.frameLayout, new HistoryPayFragment(), null).commit();
@@ -67,7 +63,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(DataSearchViewModel.class);
         // TODO: Use the ViewModel
     }
 

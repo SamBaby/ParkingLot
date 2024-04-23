@@ -2,6 +2,6 @@ package com.example.parking5.ui.data_search;
 
 import androidx.lifecycle.ViewModel;
 
-public class HistoryViewModel extends ViewModel {
+public class HistoryEntranceViewModel extends ViewModel {
     // TODO: Implement the ViewModel
 }

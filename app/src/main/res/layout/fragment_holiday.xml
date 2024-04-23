@@ -6,20 +6,254 @@
     android:layout_height="match_parent"
     tools:context=".ui.system.HolidayFragment">
 
-
-    <TextView
-        android:id="@+id/text_gallery"
+    <TableLayout
+        android:id="@+id/table_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="@string/system_holiday_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/textView_regular_holiday_setting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:text="@string/regular_holiday_setting" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/saturday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_saturday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/textView_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/sunday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_sunday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/monday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_monday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/textView_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/tuesday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_tuesday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/textView_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/wednesday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_wednesday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/textView_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/thursday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_thursday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/textView_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|end"
+                android:padding="5dp"
+                android:text="@string/friday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_friday"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/custom_toggle_background"
+                android:textOff=""
+                android:textOn="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/textView_holiday_serial_number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/serial_number"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_holiday_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/date"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_weekday"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/weekday"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_description"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/description"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_update_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="@string/update_date"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_account"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/account"
+                android:textAlignment="center" />
+        </TableRow>
+    </TableLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/table_title">
 
+        <TableLayout
+            android:id="@+id/table_holiday_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/button_holiday_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
+        <Button
+            android:id="@+id/button_holiday_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/modify" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button_holiday_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

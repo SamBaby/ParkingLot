@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.data_search.HistoryOutFragment">
+    tools:context=".ui.data_search.HistoryEntranceFragment">
 
     <TableLayout
         android:id="@+id/table_title"
@@ -21,24 +21,16 @@
                 android:id="@+id/textView_car_number"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/car_number"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView_in_time"
+                android:id="@+id/textView_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/in_time"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/textView_pay_time"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/pay_time"
+                android:layout_weight="2"
+                android:text="@string/in_out_time"
                 android:textAlignment="center" />
 
             <TextView
@@ -49,13 +41,28 @@
                 android:text="@string/type"
                 android:textAlignment="center" />
 
-
             <TextView
-                android:id="@+id/textView_photo"
+                android:id="@+id/textView_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/photo"
+                android:text="@string/color"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_in_or_out"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/in_or_out"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textView_artificial"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/artificial"
                 android:textAlignment="center" />
         </TableRow>
     </TableLayout>
@@ -69,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/table_title">
 
         <TableLayout
-            android:id="@+id/table_pay_data"
+            android:id="@+id/table_entrance_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
@@ -89,10 +96,10 @@
             android:text="@string/add" />
 
         <Button
-            android:id="@+id/button_delete"
+            android:id="@+id/button_modify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete" />
+            android:text="@string/modify" />
 
         <View
             android:layout_width="0dp"

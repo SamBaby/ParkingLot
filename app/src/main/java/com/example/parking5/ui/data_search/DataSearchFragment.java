@@ -33,10 +33,10 @@ public class DataSearchFragment extends Fragment {
 
         binding = FragmentDataSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_history);
+        BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_data_search);
         // Set the default fragment
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout_system_setting, new HistoryEntranceFragment())
+                .replace(R.id.frameLayout, new HistoryEntranceFragment())
                 .commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

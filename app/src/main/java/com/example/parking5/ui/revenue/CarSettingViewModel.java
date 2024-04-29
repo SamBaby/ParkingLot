@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.parking5.common.HTTPGetRequest;
+import com.example.parking5.util.HTTPGetRequest;
 
 import org.json.JSONObject;
 
@@ -28,21 +28,21 @@ public class CarSettingViewModel extends ViewModel {
     }
 
     private void getSlotCondition() {
-        new Thread(() -> {
-            try {
-                String slot = HTTPGetRequest.get("func=slot_search");
-                if (slot != null && !slot.isEmpty()) {
-                    JSONObject obj = new JSONObject(slot);
-                    carSlotCondition.postValue(String.valueOf(obj.getInt("car_slot")));
-                    pregnantCondition.postValue(String.valueOf(obj.getInt("pregnant_slot")));
-                    chargingCondition.postValue(String.valueOf(obj.getInt("charging_slot")));
-                    disabledCondition.postValue(String.valueOf(obj.getInt("disabled_slot")));
-                    reservedCondition.postValue(String.valueOf(obj.getInt("reserved_slot")));
-                }
-            } catch (Exception e) {
-                Log.d("getLeftLots", "getLeftLots");
-            }
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                String slot = HTTPGetRequest.get("func=slot_search");
+//                if (slot != null && !slot.isEmpty()) {
+//                    JSONObject obj = new JSONObject(slot);
+//                    carSlotCondition.postValue(String.valueOf(obj.getInt("car_slot")));
+//                    pregnantCondition.postValue(String.valueOf(obj.getInt("pregnant_slot")));
+//                    chargingCondition.postValue(String.valueOf(obj.getInt("charging_slot")));
+//                    disabledCondition.postValue(String.valueOf(obj.getInt("disabled_slot")));
+//                    reservedCondition.postValue(String.valueOf(obj.getInt("reserved_slot")));
+//                }
+//            } catch (Exception e) {
+//                Log.d("getLeftLots", "getLeftLots");
+//            }
+//        }).start();
     }
 
 

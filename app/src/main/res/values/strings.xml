@@ -37,8 +37,8 @@
     <string name="date">日期</string>
     <string name="update_date">更新日期</string>
     <string name="description">說明</string>
-
-
+    <string name="cancel">取消</string>
+    <string name="confirm">確定</string>
     <!--首頁-->
     <string name="lots_left">剩餘車位</string>
     <string name="bill_left">發票剩餘</string>
@@ -73,6 +73,14 @@
     <string name="person_name">姓名</string>
     <string name="phone_number">電話號碼</string>
     <string name="permission">權限</string>
+    <string name="phone">電話</string>
+    <string name="permissionA">工程及經營</string>
+    <string name="permissionB">帳號設置及C,D權限</string>
+    <string name="permissionC">現金處理及D權限</string>
+    <string name="permissionD">巡場 換發票 車位更新 遠端開關柵欄</string>
+    <string name="permissionSettingButton">權限設定及註解</string>
+    <string name="account_add">帳號新增</string>
+    <string name="account_update">帳號修改</string>
 
     <string name="name">名稱</string>
     <string name="serial_number">編號</string>

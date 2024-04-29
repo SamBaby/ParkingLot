@@ -1,4 +1,4 @@
-package com.example.parking5.common;
+package com.example.parking5.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,13 +6,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HTTPGetRequest {
-    public static String get(String args) {
+    public static synchronized String get(String url ,String args) {
         try {
             // 创建 URL 对象
-            URL url = new URL("http://192.168.50.5:8080?" + args);
+            URL urlPass = new URL("http://192.168.50.5:8080?" + args);
 
             // 创建 HttpURLConnection 对象
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) urlPass.openConnection();
 
             // 设置请求方式为 GET
             connection.setRequestMethod("GET");

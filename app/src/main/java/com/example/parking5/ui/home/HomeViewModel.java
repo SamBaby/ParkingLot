@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.parking5.common.HTTPGetRequest;
+import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.HTTPGetRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class HomeViewModel extends ViewModel {
@@ -29,9 +31,9 @@ public class HomeViewModel extends ViewModel {
         new Thread(() -> {
             int total = 0;
             try {
-                String slot = HTTPGetRequest.get("func=slot_search");
+                String slot = ApacheServerReqeust.getLeftLot();
                 if (slot != null && !slot.isEmpty()) {
-                    JSONObject obj = new JSONObject(slot);
+                    JSONObject obj =  new JSONArray(slot).getJSONObject(0);
                     total += obj.getInt("car_slot");
                     total += obj.getInt("pregnant_slot");
                     total += obj.getInt("disabled_slot");
@@ -39,9 +41,9 @@ public class HomeViewModel extends ViewModel {
                     total += obj.getInt("reserved_slot");
                 }
 
-                String cars = HTTPGetRequest.get("func=cars_inside");
+                String cars = ApacheServerReqeust.getCarInside();
                 if (cars != null && !cars.isEmpty()) {
-                    JSONObject obj = new JSONObject(cars);
+                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
                     total -= obj.getInt("COUNT(*)");
                 }
                 lotLeft.postValue("剩餘車位:" + String.valueOf(total));

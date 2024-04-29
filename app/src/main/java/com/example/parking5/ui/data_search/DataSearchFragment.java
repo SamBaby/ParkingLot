@@ -28,7 +28,7 @@ public class DataSearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        DataSearchViewModel slideshowViewModel =
+        mViewModel =
                 new ViewModelProvider(this).get(DataSearchViewModel.class);
 
         binding = FragmentDataSearchBinding.inflate(inflater, container, false);

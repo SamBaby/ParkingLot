@@ -3,7 +3,6 @@ package com.example.parking5.ui.system;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -16,28 +15,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentAccountSettingBinding;
-import com.example.parking5.databinding.FragmentHomeBinding;
-import com.example.parking5.dialog.AccountAddDialog;
 import com.example.parking5.event.Var;
-import com.example.parking5.ui.home.HomeViewModel;
 import com.example.parking5.util.ApacheServerReqeust;
-import com.example.parking5.util.User;
+import com.example.parking5.datamodel.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 public class AccountSettingFragment extends Fragment {
@@ -45,6 +37,8 @@ public class AccountSettingFragment extends Fragment {
     Var<TableRow> selectedRow;
     private AccountSettingViewModel mViewModel;
     private FragmentAccountSettingBinding binding;
+
+    private Vector<User> users ;
 
     public static AccountSettingFragment newInstance() {
         return new AccountSettingFragment();
@@ -59,6 +53,7 @@ public class AccountSettingFragment extends Fragment {
         binding = FragmentAccountSettingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         selectedRow = new Var<>();
+        users = new Vector<>();
         tableSetting();
 
         Button btnAdd = binding.buttonAccountSettingAdd;
@@ -74,6 +69,7 @@ public class AccountSettingFragment extends Fragment {
             if (selectedRow.get() != null) {
                 String account = (String) ((TextView) selectedRow.get().getChildAt(0)).getText();
                 deleteAccount(account);
+                selectedRow.set(null);
             }
 
         });
@@ -83,53 +79,58 @@ public class AccountSettingFragment extends Fragment {
     private void tableSetting() {
         TableLayout tableUser = binding.tableUser;
         tableUser.removeAllViews();
-        Vector<User> users = mViewModel.getUsers().getValue();
-        // 遍历数据列表并为每行创建 TableRow
-        for (int i = 0; i < users.size(); i++) {
-            TableRow tableRow = new TableRow(tableUser.getContext());
-            tableRow.setLayoutParams(new TableRow.LayoutParams(
-                    TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT));
-            User user = users.get(i);
-            // 为每行添加单元格
-            for (int j = 0; j < 5; j++) {
-                TextView textView = new TextView(tableRow.getContext());
-                textView.setPadding(5, 5, 5, 5);
-                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                textView.setGravity(Gravity.CENTER);
-                textView.setLayoutParams(layoutParams);
-                switch (j) {
-                    case 0:
-                        textView.setText(user.getAccount());
-                        break;
-                    case 1:
-                        textView.setText(user.getPassword());
-                        break;
-                    case 2:
-                        textView.setText(user.getName());
-                        break;
-                    case 3:
-                        textView.setText(user.getPhone());
-                        break;
-                    case 4:
-                        textView.setText(user.getPermission());
-                        break;
-                    default:
-                        break;
-                }
-                tableRow.addView(textView);
-                tableRow.setOnClickListener(v -> {
-                    if (selectedRow.get() != null) {
-                        selectedRow.get().setBackground(null);
+        selectedRow.set(null);
+        new Thread(()->{
+            getUsers();
+            getActivity().runOnUiThread(()->{
+                // 遍历数据列表并为每行创建 TableRow
+                for (int i = 0; i < users.size(); i++) {
+                    TableRow tableRow = new TableRow(tableUser.getContext());
+                    tableRow.setLayoutParams(new TableRow.LayoutParams(
+                            TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.WRAP_CONTENT));
+                    User user = users.get(i);
+                    // 为每行添加单元格
+                    for (int j = 0; j < 5; j++) {
+                        TextView textView = new TextView(tableRow.getContext());
+                        textView.setPadding(5, 5, 5, 5);
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(layoutParams);
+                        switch (j) {
+                            case 0:
+                                textView.setText(user.getAccount());
+                                break;
+                            case 1:
+                                textView.setText(user.getPassword());
+                                break;
+                            case 2:
+                                textView.setText(user.getName());
+                                break;
+                            case 3:
+                                textView.setText(user.getPhone());
+                                break;
+                            case 4:
+                                textView.setText(user.getPermission());
+                                break;
+                            default:
+                                break;
+                        }
+                        tableRow.addView(textView);
+                        tableRow.setOnClickListener(v -> {
+                            if (selectedRow.get() != null) {
+                                selectedRow.get().setBackground(null);
+                            }
+                            v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                            selectedRow.set((TableRow) v);
+                        });
                     }
-                    v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                    selectedRow.set((TableRow) v);
-                });
-            }
 
-            // 将 TableRow 添加到 TableLayout
-            tableUser.addView(tableRow);
-        }
+                    // 将 TableRow 添加到 TableLayout
+                    tableUser.addView(tableRow);
+                }
+            });
+        }).start();
     }
 
     @Override
@@ -279,7 +280,6 @@ public class AccountSettingFragment extends Fragment {
         try {
             t.start();
             t.join();
-            mViewModel.refreshUsers();
             tableSetting();
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,7 +293,6 @@ public class AccountSettingFragment extends Fragment {
         try {
             t.start();
             t.join();
-            mViewModel.refreshUsers();
             tableSetting();
         } catch (Exception e) {
             e.printStackTrace();
@@ -307,9 +306,26 @@ public class AccountSettingFragment extends Fragment {
         try {
             t.start();
             t.join();
-            mViewModel.refreshUsers();
             tableSetting();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getUsers(){
+        try {
+            String json = ApacheServerReqeust.getUsers();
+            JSONArray array = new JSONArray(json);
+            if (array.length() > 0) {
+                users.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+                    users.add(new User(obj.getString("account"), obj.getString("password"),
+                            obj.getString("name"), obj.getString("phone"), obj.getString("permission")));
+
+                }
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

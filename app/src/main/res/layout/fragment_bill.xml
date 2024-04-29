@@ -9,9 +9,12 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent
+"
+        android:id="@+id/table_invoice">
 
         <TableRow
             android:layout_width="match_parent"
@@ -108,14 +111,14 @@
                 android:text="@string/cooperate_store_number" />
 
             <EditText
-                android:id="@+id/editText_cooperate_store_number"
+                android:id="@+id/editText_merchant_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
 
         <TableRow
@@ -132,14 +135,14 @@
                 android:text="@string/company_number" />
 
             <EditText
-                android:id="@+id/editText_company_number"
+                android:id="@+id/editText_company_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
 
         <TableRow
@@ -190,7 +193,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
 
         <TableRow
@@ -215,7 +218,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -239,7 +242,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -263,7 +266,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -287,7 +290,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -311,7 +314,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -335,7 +338,7 @@
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -359,4 +362,11 @@
                 android:text="" />
         </TableRow>
     </TableLayout>
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table_invoice"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

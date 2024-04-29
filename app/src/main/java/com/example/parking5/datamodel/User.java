@@ -1,4 +1,4 @@
-package com.example.parking5.util;
+package com.example.parking5.datamodel;
 
 public class User {
     private String account;

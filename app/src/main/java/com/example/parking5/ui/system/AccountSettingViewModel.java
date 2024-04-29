@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.parking5.util.ApacheServerReqeust;
-import com.example.parking5.util.User;
+import com.example.parking5.datamodel.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

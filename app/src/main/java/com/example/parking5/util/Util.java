@@ -1,11 +1,23 @@
 package com.example.parking5.util;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Build;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import com.example.parking5.R;
+import com.example.parking5.event.Var;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -78,5 +90,29 @@ public class Util {
     public static String ECPayDecrypt(String data, String algorithm, String key, String IV) {
         String aesDecrypt = decrypt(algorithm, data, new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(IV.getBytes(StandardCharsets.UTF_8)));
         return decode(aesDecrypt);
+    }
+
+    public static void showDateDialog(Context context, TextView v) {
+        final View dialogView = View.inflate(context, R.layout.date_picker, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        dialogView.findViewById(R.id.confirm_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+                v.setText(String.format(Locale.TAIWAN, "%04d-%02d-%02d", datePicker.getYear(),
+                        datePicker.getMonth() + 1,
+                        datePicker.getDayOfMonth()));
+                alertDialog.dismiss();
+            }
+        });
+        dialogView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.setView(dialogView);
+        alertDialog.show();
+
     }
 }

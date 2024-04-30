@@ -214,4 +214,26 @@
     <string name="photo">照片</string>
 
     <string name="car_number_modify">修改車號</string>
+
+    <string name="history_search">歷史資料查詢</string>
+    <string name="today">今日</string>
+    <string name="this_week">本週</string>
+    <string name="this_month">本月</string>
+    <string name="self_def">自訂義</string>
+    <string name="start_time">起始時間</string>
+    <string name="end_time">時間結束</string>
+
+    <string name="cash">現金(C)</string>
+    <string name="EPay">電子支付(E)</string>
+    <string name="pay_history_search">繳費記錄查詢</string>
+
+    <string name="allow_exit_search">允許出場查詢</string>
+    <string name="allow_exit_add">允許出場新增</string>
+    <string name="non_regular">臨停</string>
+    <string name="regular_car">月租車</string>
+    <string name="all">全部</string>
+    <string name="allow_exit_time">允許離場時間</string>
+
+    <string name="modify_car_number_search">車牌修改查詢</string>
+    <string name="modify_car_number">車牌修改</string>
 </resources>

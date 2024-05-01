@@ -115,4 +115,85 @@ public class Util {
         alertDialog.show();
 
     }
+
+    public static void showDateTimeDialog(Context context, TextView v) {
+        final View dialogView = View.inflate(context, R.layout.date_time_picker, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        dialogView.findViewById(R.id.confirm_button).setOnClickListener(view -> {
+            DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+            TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
+            timePicker.setIs24HourView(true);
+            alertDialog.dismiss();
+            v.setText(String.format(Locale.TAIWAN, "%04d-%02d-%02d %02d:%02d:%02d", datePicker.getYear(),
+                    datePicker.getMonth() + 1,
+                    datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0));
+            alertDialog.dismiss();
+        });
+        dialogView.findViewById(R.id.cancel_button).setOnClickListener(view -> alertDialog.dismiss());
+        alertDialog.setView(dialogView);
+        alertDialog.show();
+    }
+
+    public static long getStartOfToday() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 0, 0, 0);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getEndOfToday() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 23, 59, 59);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getStartOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 0, 0, 0);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getEndOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 23, 59, 59);
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getStartOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 0, 0, 0);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        return calendar.getTimeInMillis();
+    }
+
+    public static long getEndOfMonth() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        calendar.setTimeInMillis(0);
+        calendar.set(year, month, day, 23, 59, 59);
+        calendar.set(Calendar.DAY_OF_MONTH, -1);
+        return calendar.getTimeInMillis();
+    }
 }

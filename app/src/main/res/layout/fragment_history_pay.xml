@@ -21,7 +21,7 @@
                 android:id="@+id/textView_car_number"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/car_number"
                 android:textAlignment="center" />
 
@@ -29,7 +29,7 @@
                 android:id="@+id/textView_in_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/in_time"
                 android:textAlignment="center" />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/textView_pay_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/pay_time"
                 android:textAlignment="center" />
 
@@ -54,7 +54,7 @@
                 android:id="@+id/textView_bill_number"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="@string/bill_number"
                 android:textAlignment="center" />
 

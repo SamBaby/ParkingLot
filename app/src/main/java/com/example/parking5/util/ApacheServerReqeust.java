@@ -78,4 +78,24 @@ public class ApacheServerReqeust {
     public static String deleteHoliday(String date) {
         return HTTPGetRequest.get(url, String.format("func=holiday_delete&date=%s", date));
     }
+
+    public static String getHistories() {
+        return HTTPGetRequest.get(url, "func=history_search");
+    }
+
+    public static String getHistoriesWithDates(String start, String end) {
+        return HTTPGetRequest.get(url, String.format("func=history_date_search&start=%s&end=%s", start, end));
+    }
+
+    public static String deleteHistory(long id) {
+        return HTTPGetRequest.get(url, String.format("func=history_delete&id=%d", id));
+    }
+
+    public static String getPayHistory() {
+        return HTTPGetRequest.get(url, "func=pay_search");
+    }
+
+    public static String getPayHistoryWithDates(String start, String end, String carNumber, String payment) {
+        return HTTPGetRequest.get(url, String.format("func=pay_dates_search&start=%s&end=%s&car_number=%s&payment=%s",start,end,carNumber,payment));
+    }
 }

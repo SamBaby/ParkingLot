@@ -10,9 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.parking5.BasicSettingFragment;
 import com.example.parking5.R;
+import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentRevenueBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -53,6 +56,12 @@ public class RevenueFragment extends Fragment {
                 return false;
             }
         });
+        Bundle bundle = this.getArguments();
+        if(bundle !=null){
+            if(bundle.getBoolean(ConfigurationString.todayRevenue)){
+                navigation.setSelectedItemId(R.id.nav_revenue_manage);
+            }
+        }
         return root;
     }
 

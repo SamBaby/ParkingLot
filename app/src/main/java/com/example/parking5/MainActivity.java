@@ -1,7 +1,9 @@
 package com.example.parking5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,7 +12,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.parking5.data.LoginRepository;
 import com.example.parking5.databinding.ActivityMainBinding;
+import com.example.parking5.ui.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Check if the user is logged in
+        boolean isLoggedIn = checkIfUserIsLoggedIn(); // Implement this method
+
+        if (!isLoggedIn) {
+            // User is not logged in, navigate to the login activity
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,11 +60,39 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    private boolean checkIfUserIsLoggedIn() {
+        if (LoginRepository.getInstance() != null) {
+            return LoginRepository.getInstance().isLoggedIn();
+        }
+        return false;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.reset_password){
+            return true;
+        } else if (id == R.id.logout) {
+            if (LoginRepository.getInstance() != null) {
+                LoginRepository.getInstance().logout();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            }else{
+                return false;
+            }
+
+        }else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

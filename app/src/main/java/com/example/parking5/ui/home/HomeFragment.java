@@ -21,6 +21,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.parking5.R;
+import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -68,15 +69,9 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
-            }
-
-        });
-        txtDay.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            if (activity != null) {
-                NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.todayRevenue, true);
+                navController.navigate(R.id.action_homeFragment_to_revenueFragment, bundle);
             }
 
         });

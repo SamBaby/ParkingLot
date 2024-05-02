@@ -49,6 +49,11 @@ public class LoginRepository {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
+    public User getLoggedInUser() {
+        return this.user;
+        // If user credentials will be cached in local storage, it is recommended it be encrypted
+        // @see https://developer.android.com/training/articles/keystore
+    }
 
     public Result<User> login(String username, String password) {
         // handle login

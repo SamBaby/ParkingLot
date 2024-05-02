@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.data.LoginRepository;
 import com.example.parking5.data.Result;
 import com.example.parking5.data.model.LoggedInUser;
@@ -38,7 +39,7 @@ public class LoginViewModel extends ViewModel {
             User data = ((Result.Success<User>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getName())));
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            loginResult.setValue(new LoginResult(ConfigurationString.loginFail));
         }
     }
 

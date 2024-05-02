@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Parking5</string>
+    <string name="app_name">泊克約翰</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">泊克約翰</string>
@@ -236,16 +236,21 @@
 
     <string name="modify_car_number_search">車牌修改查詢</string>
     <string name="modify_car_number">車牌修改</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">登入</string>
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
+    <string name="prompt_password">帳號</string>
     <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="action_sign_in_short">登入</string>
+    <string name="welcome">"歡迎 !"</string>
+    <string name="invalid_username">帳號不能是空的</string>
+    <string name="invalid_password">密碼不能是空的</string>
     <string name="login_failed">"Login failed"</string>
     <string name="login">登入</string>
     <string name="logout">登出</string>
     <string name="reset_password">更換密碼</string>
+    <string name="account_change_password">帳戶更換密碼</string>
+    <string name="current_password">目前密碼</string>
+    <string name="new_password">新密碼</string>
+    <string name="confirm_password">確認密碼</string>
+
 </resources>

@@ -16,10 +16,10 @@ import java.io.IOException;
 public class LoginDataSource {
 
     public Result<User> login(String username, String password) {
-
+        Var<User> user = new Var<>();
         try {
             // TODO: handle loggedInUser authentication
-            Var<User> user = new Var<>();
+
             Thread t = new Thread(() -> {
                 try {
                     String json = ApacheServerReqeust.getUser(username, password);
@@ -42,9 +42,14 @@ public class LoginDataSource {
 //                    new LoggedInUser(
 //                            java.util.UUID.randomUUID().toString(),
 //                            "Jane Doe", permission);
-            return new Result.Success<>(user.get());
+
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
+            e.printStackTrace();
+        }
+        if(user.get() != null){
+            return new Result.Success<>(user.get());
+        }else{
+            return new Result.Error(new IOException("Error logging in"));
         }
     }
 

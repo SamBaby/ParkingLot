@@ -22,7 +22,9 @@ public class ApacheServerReqeust {
     public static String addUser(String account, String password, String name, String phone, String permission) {
         return HTTPGetRequest.get(url, String.format("func=user_add&account=%s&password=%s&name=%s&phone=%s&permission=%s", account, password, name, phone, permission));
     }
-
+    public static String changeUserPassword(String account, String password) {
+        return HTTPGetRequest.get(url, String.format("func=user_password_change&account=%s&password=%s", account, password));
+    }
     public static String getLeftLot() {
         return HTTPGetRequest.get(url, "func=slot_search");
     }

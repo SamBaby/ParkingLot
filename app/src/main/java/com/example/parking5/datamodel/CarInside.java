@@ -1,37 +1,34 @@
 package com.example.parking5.datamodel;
 
-public class CarHistory {
-    private long id;
+public class CarInside {
     private String car_number;
     private String time_in;
-    private String time_out;
+    private String time_pay_count;
     private String time_pay;
     private int cost;
+    private int discount;
+    private String gate;
     private String bill_number;
     private String payment;
     private int artificial;
+    private String picture_url;
     private String type;
     private String color;
-    public CarHistory(long id, String carNumber, String timeIn, String timeOut, String timePay, int cost, String billNumber, String payment, int artificial, String type, String color) {
+
+    public CarInside(String carNumber, String timeIn, String timePayCount, String timePay, int cost, int discount, String gate, String billNumber, String payment, int artificial, String pictureUrl, String type, String color) {
         this.setType(type);
         this.setColor(color);
-        this.setArtificial(artificial);
-        this.setId(id);
+        setPicture_url(pictureUrl);
         setCar_number(carNumber);
         setTime_in(timeIn);
-        setTime_out(timeOut);
+        setTime_pay_count(timePayCount);
         setTime_pay(timePay);
         this.setCost(cost);
+        this.setDiscount(discount);
+        this.setGate(gate);
         setBill_number(billNumber);
         this.setPayment(payment);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+        this.setArtificial(artificial);
     }
 
     public String getCar_number() {
@@ -50,12 +47,12 @@ public class CarHistory {
         this.time_in = time_in;
     }
 
-    public String getTime_out() {
-        return time_out;
+    public String getTime_pay_count() {
+        return time_pay_count;
     }
 
-    public void setTime_out(String time_out) {
-        this.time_out = time_out;
+    public void setTime_pay_count(String time_pay_count) {
+        this.time_pay_count = time_pay_count;
     }
 
     public String getTime_pay() {
@@ -72,6 +69,22 @@ public class CarHistory {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public String getGate() {
+        return gate;
+    }
+
+    public void setGate(String gate) {
+        this.gate = gate;
     }
 
     public String getBill_number() {
@@ -96,6 +109,14 @@ public class CarHistory {
 
     public void setArtificial(int artificial) {
         this.artificial = artificial;
+    }
+
+    public String getPicture_url() {
+        return picture_url;
+    }
+
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
     }
 
     public String getType() {

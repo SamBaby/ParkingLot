@@ -259,7 +259,6 @@ public class HistoryEntranceFragment extends Fragment {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
                 histories.add(history);
-
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -41,7 +41,7 @@ public class HomeViewModel extends ViewModel {
                     total += obj.getInt("reserved_slot");
                 }
 
-                String cars = ApacheServerReqeust.getCarInside();
+                String cars = ApacheServerReqeust.getCarInsideCount();
                 if (cars != null && !cars.isEmpty()) {
                     JSONObject obj = new JSONArray(cars).getJSONObject(0);
                     total -= obj.getInt("COUNT(*)");

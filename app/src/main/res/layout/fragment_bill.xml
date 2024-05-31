@@ -8,13 +8,13 @@
 
 
     <TableLayout
+        android:id="@+id/table_invoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent
-"
-        android:id="@+id/table_invoice">
+">
 
         <TableRow
             android:layout_width="match_parent"
@@ -94,7 +94,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="" />
+                android:text=""
+                android:track="@drawable/switch_states_track" />
         </TableRow>
 
         <TableRow
@@ -148,6 +149,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/textView_hash_key"
                 android:layout_width="0dp"
@@ -157,9 +159,11 @@
                 android:padding="5dp"
                 android:text="@string/connect_hash_key" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/editText_hash_key"
                 android:layout_width="0dp"
@@ -170,9 +174,11 @@
                 android:text=""
                 android:textAlignment="textEnd" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/textView_hash_IV"
                 android:layout_width="0dp"
@@ -182,9 +188,11 @@
                 android:padding="5dp"
                 android:text="@string/connect_hash_IV" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/editText_hash_IV"
                 android:layout_width="wrap_content"
@@ -220,6 +228,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -244,6 +253,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -268,6 +278,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -292,6 +303,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -316,6 +328,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -340,6 +353,7 @@
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -359,14 +373,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="" />
+                android:text=""
+                android:track="@drawable/switch_states_track" />
         </TableRow>
     </TableLayout>
+
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_invoice"/>
+        app:layout_constraintTop_toBottomOf="@+id/table_invoice" />
 </androidx.constraintlayout.widget.ConstraintLayout>

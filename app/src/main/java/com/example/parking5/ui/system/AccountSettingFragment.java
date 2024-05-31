@@ -87,16 +87,18 @@ public class AccountSettingFragment extends Fragment {
                 for (int i = 0; i < users.size(); i++) {
                     TableRow tableRow = new TableRow(tableUser.getContext());
                     tableRow.setLayoutParams(new TableRow.LayoutParams(
-                            TableRow.LayoutParams.WRAP_CONTENT,
+                            TableRow.LayoutParams.MATCH_PARENT,
                             TableRow.LayoutParams.WRAP_CONTENT));
+                    // 将 TableRow 添加到 TableLayout
+                    tableUser.addView(tableRow);
+
                     User user = users.get(i);
                     // 为每行添加单元格
                     for (int j = 0; j < 5; j++) {
                         TextView textView = new TextView(tableRow.getContext());
                         textView.setPadding(5, 5, 5, 5);
-                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, tableWeight[j]);
                         textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(layoutParams);
                         switch (j) {
                             case 0:
                                 textView.setText(user.getAccount());
@@ -116,7 +118,7 @@ public class AccountSettingFragment extends Fragment {
                             default:
                                 break;
                         }
-                        tableRow.addView(textView);
+                        tableRow.addView(textView, layoutParams);
                         tableRow.setOnClickListener(v -> {
                             if (selectedRow.get() != null) {
                                 selectedRow.get().setBackground(null);
@@ -126,8 +128,6 @@ public class AccountSettingFragment extends Fragment {
                         });
                     }
 
-                    // 将 TableRow 添加到 TableLayout
-                    tableUser.addView(tableRow);
                 }
             });
         }).start();

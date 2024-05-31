@@ -147,6 +147,8 @@
     <string name="charging_slot">充電車位</string>
     <string name="disabled_slot">殘障車位</string>
     <string name="pregnant_slot">婦幼車位</string>
+    <string name="car_slot_display">車位即時顯示</string>
+    <string name="left_slot_modify">剩餘車位修改</string>
 
     <string name="reserved_slot_setting">保留車位</string>
 
@@ -161,7 +163,7 @@
     <string name="weekday_fee">平日收費</string>
     <string name="weekend_fee">假日收費</string>
     <string name="every">每</string>
-    <string name="hour_fee">小時 ; 收費</string>
+    <string name="hour_fee">單位 ; 收費</string>
     <string name="dollar">元</string>
     <string name="most_fee_a_day">當日最高收費</string>
     <string name="cross_weekday_weekend">跨平假日收費</string>

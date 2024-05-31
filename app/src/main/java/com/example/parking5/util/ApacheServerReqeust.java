@@ -1,7 +1,10 @@
 package com.example.parking5.util;
 
+import com.example.parking5.datamodel.BasicFee;
+import com.example.parking5.datamodel.BasicSetting;
+
 public class ApacheServerReqeust {
-    public static final String url = "192.168.50.5:8080";
+    public static final String url = "localhost:8080/function.php";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -28,11 +31,15 @@ public class ApacheServerReqeust {
     public static String getLeftLot() {
         return HTTPGetRequest.get(url, "func=slot_search");
     }
-
+    public static String getCarInsideCount() {
+        return HTTPGetRequest.get(url, "func=cars_inside_count");
+    }
     public static String getCarInside() {
         return HTTPGetRequest.get(url, "func=cars_inside");
     }
-
+    public static String getCarInsideWithDates(String start, String end) {
+        return HTTPGetRequest.get(url, "func=cars_inside");
+    }
     public static String getCams() {
         return HTTPGetRequest.get(url, "func=cam_search");
     }
@@ -99,5 +106,38 @@ public class ApacheServerReqeust {
 
     public static String getPayHistoryWithDates(String start, String end, String carNumber, String payment) {
         return HTTPGetRequest.get(url, String.format("func=pay_dates_search&start=%s&end=%s&car_number=%s&payment=%s",start,end,carNumber,payment));
+    }
+
+    public static String getCompanyInformation() {
+        return HTTPGetRequest.get(url, "func=company_info_search");
+    }
+    public static String setCompanyInformation(BasicSetting setting) {
+        return HTTPGetRequest.get(url,
+                String.format("func=company_info_update&lot_name=%s&company_name=%s&company_address=%s&company_phone=%s&server_token=%s&cht_chat_id=%s&standby_path=%s&standby_sec=%d&auto_upload_server=%d&standby_play=%d",
+                        setting.getLot_name(),
+                        setting.getCompany_name(),
+                        setting.getCompany_address(),
+                        setting.getCompany_phone(),
+                        setting.getServer_token(),
+                        setting.getCht_chat_id(),
+                        setting.getStandby_path(),
+                        setting.getStandby_sec(),
+                        setting.getAuto_upload_server(),
+                        setting.getStandby_play()));
+    }
+    public static String getBasicFee() {
+        return HTTPGetRequest.get(url, "func=fee_search");
+    }
+    public static String setBasicFee(BasicFee fee) {
+        return HTTPGetRequest.get(url, String.format("func=fee_update&enter_time_not_count=%d&before_one_hour_count=%d&after_one_hour_unit=%d&weekday_fee=%d&weekday_most_fee=%d&holiday_fee=%d&holiday_most_fee=%d&weekday_holiday_cross=%d",
+                fee.getEnter_time_not_count(),
+                fee.getBefore_one_hour_count(),
+                fee.getAfter_one_hour_unit(),
+                fee.getWeekday_fee(),
+                fee.getWeekday_most_fee(),
+                fee.getHoliday_fee(),
+                fee.getHoliday_most_fee(),
+                fee.getWeekday_holiday_cross()
+                ));
     }
 }

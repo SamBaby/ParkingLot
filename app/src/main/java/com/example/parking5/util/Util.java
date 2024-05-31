@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -24,6 +25,18 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Util {
+    private static String algorithm = "AES/CBC/PKCS7Padding";
+
+    public String ECPayEncrypt(String data, String key, String IV) {
+        String URLEncode = encodeValue(data);
+        return encrypt(algorithm, URLEncode, new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(IV.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    public String ECPayDecrypt(String data, String key, String IV) {
+        String aesDecrypt = decrypt(algorithm, data, new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES"), new IvParameterSpec(IV.getBytes(StandardCharsets.UTF_8)));
+        return decode(aesDecrypt);
+    }
+
     private static String encodeValue(String value) {
         String code = null;
         try {
@@ -195,5 +208,18 @@ public class Util {
         calendar.set(year, month, day, 23, 59, 59);
         calendar.set(Calendar.DAY_OF_MONTH, -1);
         return calendar.getTimeInMillis();
+    }
+
+    public static boolean isAllowedOut(long time) {
+        Date date = new Date();
+        return (date.getTime() - time) <= 900;
+    }
+
+    public static byte[] getBase64Decode(String base64) {
+        return android.util.Base64.decode(base64, 0);
+    }
+
+    public static String getBase64Encode(byte[] text) {
+        return android.util.Base64.encodeToString(text, 0);
     }
 }

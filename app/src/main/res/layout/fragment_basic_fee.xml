@@ -76,11 +76,13 @@
                     android:textAlignment="center" />
 
                 <Switch
-                    android:id="@+id/switch_test_version"
+                    android:id="@+id/switch_before_one_hour"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:track="@drawable/switch_states_track"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
             </TableRow>
 
             <TableRow
@@ -165,16 +167,16 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="@string/every"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_weekday_hour"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
                     android:textAlignment="textEnd" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/editText_weekday_hour"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/border"-->
+<!--                    android:inputType="number"-->
+<!--                    android:text=""-->
+<!--                    android:textAlignment="textEnd" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -250,16 +252,16 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="@string/every"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_weekend_hour"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
                     android:textAlignment="textEnd" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/editText_weekend_hour"-->
+<!--                    android:layout_width="60dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/border"-->
+<!--                    android:inputType="number"-->
+<!--                    android:text=""-->
+<!--                    android:textAlignment="textEnd" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -339,10 +341,27 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:track="@drawable/switch_states_track"/>
             </TableRow>
         </TableLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+        </LinearLayout>
 
     </LinearLayout>
 

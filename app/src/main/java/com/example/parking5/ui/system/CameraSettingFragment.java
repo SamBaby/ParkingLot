@@ -145,13 +145,12 @@ public class CameraSettingFragment extends Fragment {
         Dialog dialog = new Dialog(getActivity());
         Switch swPay = dialogView.findViewById(R.id.billing_gate);
         Switch swOpen = dialogView.findViewById(R.id.switch_default_open_gate);
-
         dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
             try {
                 String number = ((TextView) dialogView.findViewById(R.id.number_edittext)).getText().toString();
                 String name = ((TextView) dialogView.findViewById(R.id.name_edittext)).getText().toString();
                 String ip = ((TextView) dialogView.findViewById(R.id.ip_edittext)).getText().toString();
-                String in_out = ((Spinner) dialogView.findViewById(R.id.mark_edittext)).getPrompt().toString();
+                String in_out = ((Spinner) dialogView.findViewById(R.id.mark_edittext)).getSelectedItem().toString();
                 boolean pay = swPay.isChecked();
                 boolean open = swOpen.isChecked();
                 if (!number.isEmpty() && !name.isEmpty() && !ip.isEmpty() && !in_out.isEmpty()) {
@@ -194,7 +193,7 @@ public class CameraSettingFragment extends Fragment {
                     for (int i = 0; i < cams.size(); i++) {
                         TableRow tableRow = new TableRow(tableCam.getContext());
                         tableRow.setLayoutParams(new TableRow.LayoutParams(
-                                TableRow.LayoutParams.WRAP_CONTENT,
+                                TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.WRAP_CONTENT));
                         Cam cam = cams.get(i);
                         // 为每行添加单元格

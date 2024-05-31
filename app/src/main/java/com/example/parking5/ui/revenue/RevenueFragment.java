@@ -10,10 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import com.example.parking5.BasicSettingFragment;
 import com.example.parking5.R;
 import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentRevenueBinding;

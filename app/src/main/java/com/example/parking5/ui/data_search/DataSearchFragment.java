@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.parking5.BasicSettingFragment;
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentDataSearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

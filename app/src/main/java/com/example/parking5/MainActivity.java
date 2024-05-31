@@ -1,7 +1,9 @@
 package com.example.parking5;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -36,37 +41,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Check if the user is logged in
         boolean isLoggedIn = checkIfUserIsLoggedIn(); // Implement this method
-
         if (!isLoggedIn) {
             // User is not logged in, navigate to the login activity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
+        } else {
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            setSupportActionBar(binding.appBarMain.toolbar);
+            DrawerLayout drawer = binding.drawerLayout;
+            NavigationView navigationView = binding.navView;
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_system, R.id.nav_revenue, R.id.nav_data_search)
+                    .setOpenableLayout(drawer)
+                    .build();
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+            NavigationUI.setupWithNavController(navigationView, navController);
         }
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.appBarMain.toolbar);
-//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null)
-//                        .setAnchorView(R.id.fab).show();
-//            }
-//        });
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_system, R.id.nav_revenue, R.id.nav_data_search)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     private boolean checkIfUserIsLoggedIn() {
@@ -116,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         if (LoginRepository.getInstance() == null) {
             return;
         }
-        User user =LoginRepository.getInstance().getLoggedInUser();
+        User user = LoginRepository.getInstance().getLoggedInUser();
 
         final View dialogView = View.inflate(this, R.layout.password_change, null);
         Dialog dialog = new Dialog(this);
@@ -133,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
             } else if (confirm_password.isEmpty()) {
                 Toast.makeText(getApplicationContext(), ConfigurationString.confirmPasswordNull, Toast.LENGTH_SHORT).show();
                 return;
-            }else if (!user.getPassword().equals(current_password)){
+            } else if (!user.getPassword().equals(current_password)) {
                 Toast.makeText(getApplicationContext(), ConfigurationString.currentPasswordNotSame, Toast.LENGTH_SHORT).show();
                 return;
-            }else if (!new_password.equals(confirm_password)){
+            } else if (!new_password.equals(confirm_password)) {
                 Toast.makeText(getApplicationContext(), ConfigurationString.newConfirmPasswordNotSame, Toast.LENGTH_SHORT).show();
                 return;
             }

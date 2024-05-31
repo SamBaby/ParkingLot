@@ -9,14 +9,14 @@ public class HTTPGetRequest {
     public static synchronized String get(String url ,String args) {
         try {
             // 创建 URL 对象
-            URL urlPass = new URL("http://192.168.50.5:8080?" + args);
+            URL urlPass = new URL("http://localhost:8080/function.php?" + args);
 
             // 创建 HttpURLConnection 对象
             HttpURLConnection connection = (HttpURLConnection) urlPass.openConnection();
 
             // 设置请求方式为 GET
             connection.setRequestMethod("GET");
-
+            connection.setRequestProperty("Accept-Charset", "UTF-8");
             // 获取响应码
             int responseCode = connection.getResponseCode();
             System.out.println("Response Code: " + responseCode);

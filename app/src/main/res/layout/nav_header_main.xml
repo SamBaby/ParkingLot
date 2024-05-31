@@ -18,7 +18,7 @@
         android:layout_height="53dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@mipmap/ic_parkjohn_no_title" />
 
     <TextView
         android:layout_width="match_parent"

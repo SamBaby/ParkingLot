@@ -101,14 +101,23 @@ public class CarSettingFragment extends Fragment {
 
         Button btnRefresh = binding.buttonRefresh;
         btnRefresh.setOnClickListener(v -> {
-            new Thread(()->{
+            Thread t = new Thread(()->{
                 getCarSlot();
-                carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside));
-                pregnantSlotCondition.setText(String.valueOf(carSlot.get().getPregnant_slot()));
-                chargingSlotCondition.setText(String.valueOf(carSlot.get().getDisabled_slot()));
-                disabledSlotCondition.setText(String.valueOf(carSlot.get().getCharging_slot()));
-                reservedSlotCondition.setText(String.valueOf(carSlot.get().getReserved_slot()));
-            }).start();
+            });
+            try {
+                t.start();
+                t.join();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            if(carSlot.get() == null){
+                return;
+            }
+            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside));
+            pregnantSlotCondition.setText(String.valueOf(carSlot.get().getPregnant_slot()));
+            chargingSlotCondition.setText(String.valueOf(carSlot.get().getDisabled_slot()));
+            disabledSlotCondition.setText(String.valueOf(carSlot.get().getCharging_slot()));
+            reservedSlotCondition.setText(String.valueOf(carSlot.get().getReserved_slot()));
         });
         return root;
     }

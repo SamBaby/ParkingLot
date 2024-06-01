@@ -104,11 +104,35 @@
     </TableLayout>
 
     <TableLayout
+
+        android:id="@+id/table_channel"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table_home"
-        android:id="@+id/table_channel">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/layout_buttons"
+        app:layout_constraintTop_toBottomOf="@id/table_home">
 
     </TableLayout>
+
+    <LinearLayout
+
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/table_channel">
+
+        <Button
+            android:id="@+id/remote_open_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remote_open_in"
+            android:layout_marginRight="80dp"></Button>
+
+        <Button
+            android:id="@+id/remote_open_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remote_open_out"></Button>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

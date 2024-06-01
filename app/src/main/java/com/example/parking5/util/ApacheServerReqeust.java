@@ -64,7 +64,7 @@ public class ApacheServerReqeust {
         return HTTPGetRequest.get(url, "func=ecpay_search");
     }
 
-    public static String updateECPay(int printStatus, int plusCarNumber, String merchantID, String CompanyID, String key, String IV) {
+    public static String updateECPay(int printStatus, int plusCarNumber, String merchantID, String CompanyID, String key, String IV, String machineID) {
         return HTTPGetRequest.get(url, String.format("func=ecpay_update&print_status=%d&plus_car_number=%d&merchant_id=%s&company_id=%s&hash_key=%s&hash_iv=%s", printStatus, plusCarNumber, merchantID, CompanyID, key, IV));
     }
 

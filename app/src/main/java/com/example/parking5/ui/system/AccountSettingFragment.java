@@ -130,6 +130,7 @@ public class AccountSettingFragment extends Fragment {
 
                 }
             });
+
         }).start();
     }
 

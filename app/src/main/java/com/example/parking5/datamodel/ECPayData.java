@@ -3,18 +3,20 @@ package com.example.parking5.datamodel;
 public class ECPayData {
     private int printStatus;
     private int plusCarNumber;
+    private String machineID;
     private String merchantID;
     private String companyID;
     private String hashKey;
     private String hashIV;
 
-    public ECPayData(int printStatus, int plusCarNumber, String merchantID, String companyID, String hashKey, String hashIV) {
+    public ECPayData(int printStatus, int plusCarNumber, String merchantID, String companyID, String hashKey, String hashIV, String machineID) {
         this.setPrintStatus(printStatus);
         this.setPlusCarNumber(plusCarNumber);
         this.setMerchantID(merchantID);
         this.setCompanyID(companyID);
         this.setHashKey(hashKey);
         this.setHashIV(hashIV);
+        this.setMachineID(machineID);
     }
 
     public int getPrintStatus() {
@@ -63,5 +65,13 @@ public class ECPayData {
 
     public void setHashIV(String hashIV) {
         this.hashIV = hashIV;
+    }
+
+    public String getMachineID() {
+        return machineID;
+    }
+
+    public void setMachineID(String machineID) {
+        this.machineID = machineID;
     }
 }

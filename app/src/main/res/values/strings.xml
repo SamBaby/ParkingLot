@@ -104,6 +104,7 @@
     <string name="print_Receipt">列印收據</string>
     <string name="print_none">不列印</string>
     <string name="print_car_number">是否附加車號</string>
+    <string name="machine_id">機台編號</string>
     <string name="cooperate_store_number">合作特約店編號</string>
     <string name="company_number">公司統一編號</string>
     <string name="connect_hash_key">介接Hash Key:</string>
@@ -255,4 +256,6 @@
     <string name="new_password">新密碼</string>
     <string name="confirm_password">確認密碼</string>
 
+    <string name="remote_open_in">遠端開啟IN</string>
+    <string name="remote_open_out">遠端開啟OUT</string>
 </resources>

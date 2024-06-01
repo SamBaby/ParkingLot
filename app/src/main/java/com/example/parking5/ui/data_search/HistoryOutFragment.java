@@ -78,59 +78,57 @@ public class HistoryOutFragment extends Fragment {
     private void tableSetting(String start, String end) {
         TableLayout tableData = binding.tableOutData;
         tableData.removeAllViews();
-        new Thread(() -> {
-            getCarsWithDates(start, end);
-            getActivity().runOnUiThread(() -> {
-                // 遍历数据列表并为每行创建 TableRow
-                for (int i = 0; i < cars.size(); i++) {
-                    TableRow tableRow = new TableRow(tableData.getContext());
-                    tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                    CarInside car = cars.get(i);
-                    // 为每行添加单元格
-                    for (int j = 0; j < 5; j++) {
-                        if (j < 4) {
-                            TextView textView = new TextView(tableRow.getContext());
-                            textView.setPadding(5, 5, 5, 5);
-                            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(layoutParams);
-                            switch (j) {
-                                case 0:
-                                    textView.setText(car.getCar_number());
-                                    break;
-                                case 1:
-                                    textView.setText(car.getTime_in());
-                                    break;
-                                case 2:
-                                    textView.setText(car.getTime_pay());
-                                    break;
-                                case 3:
-                                    textView.setText("臨停");
-                                    break;
-                                default:
-                                    break;
-                            }
-                            tableRow.addView(textView);
-                        } else {
-                            ImageView imageView = new ImageView(tableRow.getContext());
-                            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                            imageView.setLayoutParams(layoutParams);
-                            try {
-                                // Load the image and set it to the ImageView
-                                Bitmap bitmap = BitmapFactory.decodeFile(car.getPicture_url());
-                                // Handle the case where the image could not be loaded
-                                imageView.setImageBitmap(bitmap);
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-                            tableRow.addView(imageView);
+        getCarsWithDates(start, end);
+        getActivity().runOnUiThread(() -> {
+            // 遍历数据列表并为每行创建 TableRow
+            for (int i = 0; i < cars.size(); i++) {
+                TableRow tableRow = new TableRow(tableData.getContext());
+                tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                CarInside car = cars.get(i);
+                // 为每行添加单元格
+                for (int j = 0; j < 5; j++) {
+                    if (j < 4) {
+                        TextView textView = new TextView(tableRow.getContext());
+                        textView.setPadding(5, 5, 5, 5);
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setLayoutParams(layoutParams);
+                        switch (j) {
+                            case 0:
+                                textView.setText(car.getCar_number());
+                                break;
+                            case 1:
+                                textView.setText(car.getTime_in());
+                                break;
+                            case 2:
+                                textView.setText(car.getTime_pay());
+                                break;
+                            case 3:
+                                textView.setText("臨停");
+                                break;
+                            default:
+                                break;
                         }
+                        tableRow.addView(textView);
+                    } else {
+                        ImageView imageView = new ImageView(tableRow.getContext());
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                        imageView.setLayoutParams(layoutParams);
+                        try {
+                            // Load the image and set it to the ImageView
+                            Bitmap bitmap = BitmapFactory.decodeFile(car.getPicture_url());
+                            // Handle the case where the image could not be loaded
+                            imageView.setImageBitmap(bitmap);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        tableRow.addView(imageView);
                     }
-                    // 将 TableRow 添加到 TableLayout
-                    tableData.addView(tableRow);
                 }
-            });
-        }).start();
+                // 将 TableRow 添加到 TableLayout
+                tableData.addView(tableRow);
+            }
+        });
     }
 
     private void getCarsWithDates(String start, String end) {

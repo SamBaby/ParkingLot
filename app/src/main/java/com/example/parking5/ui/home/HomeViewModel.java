@@ -24,16 +24,19 @@ public class HomeViewModel extends ViewModel {
         billLeft = new MutableLiveData<>();
         revenueDay = new MutableLiveData<>();
         revenueMonth = new MutableLiveData<>();
-        getLeftLots();
+        setLeftLots();
+        setBillNumber();
+        setRevenueDay();
+        setRevenueMonth();
     }
 
-    private void getLeftLots() {
+    private void setLeftLots() {
         new Thread(() -> {
             int total = 0;
             try {
                 String slot = ApacheServerReqeust.getLeftLot();
                 if (slot != null && !slot.isEmpty()) {
-                    JSONObject obj =  new JSONArray(slot).getJSONObject(0);
+                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
                     total += obj.getInt("car_slot");
                     total += obj.getInt("pregnant_slot");
                     total += obj.getInt("disabled_slot");
@@ -51,6 +54,87 @@ public class HomeViewModel extends ViewModel {
                 Log.d("getLeftLots", "getLeftLots");
             }
         }).start();
+    }
+
+    private void setBillNumber() {
+//        new Thread(() -> {
+//            int total = 0;
+//            try {
+//                String slot = ApacheServerReqeust.getLeftLot();
+//                if (slot != null && !slot.isEmpty()) {
+//                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
+//                    total += obj.getInt("car_slot");
+//                    total += obj.getInt("pregnant_slot");
+//                    total += obj.getInt("disabled_slot");
+//                    total += obj.getInt("charging_slot");
+//                    total += obj.getInt("reserved_slot");
+//                }
+//
+//                String cars = ApacheServerReqeust.getCarInsideCount();
+//                if (cars != null && !cars.isEmpty()) {
+//                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
+//                    total -= obj.getInt("COUNT(*)");
+//                }
+//                lotLeft.postValue("剩餘車位:" + String.valueOf(total));
+//            } catch (Exception e) {
+//                Log.d("getLeftLots", "getLeftLots");
+//            }
+//        }).start();
+        billLeft.postValue("0");
+    }
+
+    private void setRevenueDay() {
+//        new Thread(() -> {
+//            int total = 0;
+//            try {
+//                String slot = ApacheServerReqeust.getLeftLot();
+//                if (slot != null && !slot.isEmpty()) {
+//                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
+//                    total += obj.getInt("car_slot");
+//                    total += obj.getInt("pregnant_slot");
+//                    total += obj.getInt("disabled_slot");
+//                    total += obj.getInt("charging_slot");
+//                    total += obj.getInt("reserved_slot");
+//                }
+//
+//                String cars = ApacheServerReqeust.getCarInsideCount();
+//                if (cars != null && !cars.isEmpty()) {
+//                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
+//                    total -= obj.getInt("COUNT(*)");
+//                }
+//                lotLeft.postValue("剩餘車位:" + String.valueOf(total));
+//            } catch (Exception e) {
+//                Log.d("getLeftLots", "getLeftLots");
+//            }
+//        }).start();
+        revenueDay.postValue("0");
+    }
+
+    private void setRevenueMonth() {
+//        new Thread(() -> {
+//            int total = 0;
+//            try {
+//                String slot = ApacheServerReqeust.getLeftLot();
+//                if (slot != null && !slot.isEmpty()) {
+//                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
+//                    total += obj.getInt("car_slot");
+//                    total += obj.getInt("pregnant_slot");
+//                    total += obj.getInt("disabled_slot");
+//                    total += obj.getInt("charging_slot");
+//                    total += obj.getInt("reserved_slot");
+//                }
+//
+//                String cars = ApacheServerReqeust.getCarInsideCount();
+//                if (cars != null && !cars.isEmpty()) {
+//                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
+//                    total -= obj.getInt("COUNT(*)");
+//                }
+//                lotLeft.postValue("剩餘車位:" + String.valueOf(total));
+//            } catch (Exception e) {
+//                Log.d("getLeftLots", "getLeftLots");
+//            }
+//        }).start();
+        revenueMonth.postValue("0");
     }
 
     public LiveData<String> getLots() {

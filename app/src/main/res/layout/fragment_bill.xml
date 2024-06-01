@@ -97,7 +97,29 @@
                 android:text=""
                 android:track="@drawable/switch_states_track" />
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/textView_machine_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|end"
+                android:paddingRight="5dp"
+                android:text="@string/machine_id" />
+
+            <EditText
+                android:id="@+id/editText_machine_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/border"
+                android:inputType="text"
+                android:text=""
+                android:textAlignment="textStart" />
+        </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">

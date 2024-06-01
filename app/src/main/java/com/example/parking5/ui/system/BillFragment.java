@@ -44,7 +44,7 @@ public class BillFragment extends Fragment {
         setUi();
         setToggleEvent();
         binding.buttonSave.setOnClickListener(v -> {
-            updateECPayDate();
+            updateECPayData();
         });
         return root;
     }
@@ -122,7 +122,7 @@ public class BillFragment extends Fragment {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = array.getJSONObject(i);
                         data.set(new ECPayData(obj.getInt("print_status"), obj.getInt("plus_car_number"), obj.getString("merchant_id"),
-                                obj.getString("company_id"), obj.getString("hash_key"), obj.getString("hash_iv")));
+                                obj.getString("company_id"), obj.getString("hash_key"), obj.getString("hash_iv"), obj.getString("machine_id")));
 
                     }
                 }
@@ -138,13 +138,14 @@ public class BillFragment extends Fragment {
         }
     }
 
-    private void updateECPayDate() {
+    private void updateECPayData() {
         Thread t = new Thread(() -> {
             ApacheServerReqeust.updateECPay(printStatus, binding.switchPrintCarNumber.isChecked() ? 1 : 0,
                     binding.editTextMerchantId.getText().toString(),
                     binding.editTextCompanyId.getText().toString(),
                     binding.editTextHashKey.getText().toString(),
-                    binding.editTextHashIV.getText().toString());
+                    binding.editTextHashIV.getText().toString(),
+                    binding.editTextMachineId.getText().toString());
         });
         try {
             t.start();

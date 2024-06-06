@@ -25,21 +25,27 @@ public class ApacheServerReqeust {
     public static String addUser(String account, String password, String name, String phone, String permission) {
         return HTTPGetRequest.get(url, String.format("func=user_add&account=%s&password=%s&name=%s&phone=%s&permission=%s", account, password, name, phone, permission));
     }
+
     public static String changeUserPassword(String account, String password) {
         return HTTPGetRequest.get(url, String.format("func=user_password_change&account=%s&password=%s", account, password));
     }
+
     public static String getLeftLot() {
         return HTTPGetRequest.get(url, "func=slot_search");
     }
+
     public static String getCarInsideCount() {
         return HTTPGetRequest.get(url, "func=cars_inside_count");
     }
+
     public static String getCarInside() {
         return HTTPGetRequest.get(url, "func=cars_inside");
     }
+
     public static String getCarInsideWithDates(String start, String end) {
         return HTTPGetRequest.get(url, "func=cars_inside");
     }
+
     public static String getCams() {
         return HTTPGetRequest.get(url, "func=cam_search");
     }
@@ -49,7 +55,7 @@ public class ApacheServerReqeust {
     }
 
     public static String updateCam(int number, String name, int inOut, int pay, int open, String oldIp, String newIp) {
-        return HTTPGetRequest.get(url, String.format("func=cam_update&number=%d&name=%s&in_out=%d&pay=%d&open=%d&old_ip=%s&new_ip=%s", number, name, inOut, pay, open, oldIp, newIp));
+        return HTTPGetRequest.get(url, String.format("func=cam_update&number=%d&name=%s&in_out=%d&pay=%d&read_gio=%d&old_ip=%s&new_ip=%s", number, name, inOut, pay, open, oldIp, newIp));
     }
 
     public static String addCam(int number, String name, String ip, int inOut, int pay, int open) {
@@ -105,12 +111,13 @@ public class ApacheServerReqeust {
     }
 
     public static String getPayHistoryWithDates(String start, String end, String carNumber, String payment) {
-        return HTTPGetRequest.get(url, String.format("func=pay_dates_search&start=%s&end=%s&car_number=%s&payment=%s",start,end,carNumber,payment));
+        return HTTPGetRequest.get(url, String.format("func=pay_dates_search&start=%s&end=%s&car_number=%s&payment=%s", start, end, carNumber, payment));
     }
 
     public static String getCompanyInformation() {
         return HTTPGetRequest.get(url, "func=company_info_search");
     }
+
     public static String setCompanyInformation(BasicSetting setting) {
         return HTTPGetRequest.get(url,
                 String.format("func=company_info_update&lot_name=%s&company_name=%s&company_address=%s&company_phone=%s&server_token=%s&cht_chat_id=%s&standby_path=%s&standby_sec=%d&auto_upload_server=%d&standby_play=%d",
@@ -125,9 +132,11 @@ public class ApacheServerReqeust {
                         setting.getAuto_upload_server(),
                         setting.getStandby_play()));
     }
+
     public static String getBasicFee() {
         return HTTPGetRequest.get(url, "func=fee_search");
     }
+
     public static String setBasicFee(BasicFee fee) {
         return HTTPGetRequest.get(url, String.format("func=fee_update&enter_time_not_count=%d&before_one_hour_count=%d&after_one_hour_unit=%d&weekday_fee=%d&weekday_most_fee=%d&holiday_fee=%d&holiday_most_fee=%d&weekday_holiday_cross=%d",
                 fee.getEnter_time_not_count(),
@@ -138,6 +147,20 @@ public class ApacheServerReqeust {
                 fee.getHoliday_fee(),
                 fee.getHoliday_most_fee(),
                 fee.getWeekday_holiday_cross()
-                ));
+        ));
     }
+
+    public static void setCamGateOpen(String ip) {
+        HTTPGetRequest.get(url, String.format("func=cam_update_open&ip=%s&open=1", ip));
+    }
+
+    public static String getDayHoliday() {
+        return HTTPGetRequest.get(url, "func=day_holiday_search");
+    }
+
+    public static String setDayHoliday(int sunday, int monday, int tuesday, int wednesday, int thursday, int friday, int saturday) {
+        return HTTPGetRequest.get(url, String.format("func=day_holiday_update&sunday=%d&monday=%d&tuesday=%d&wednesday=%d&thursday=%d&friday=%d&saturday=%d",
+                sunday, monday, tuesday, wednesday, thursday, friday, saturday));
+    }
+
 }

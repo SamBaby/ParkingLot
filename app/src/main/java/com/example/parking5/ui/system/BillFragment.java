@@ -70,6 +70,7 @@ public class BillFragment extends Fragment {
             if (data.get().getPlusCarNumber() == 1) {
                 binding.switchPrintCarNumber.setChecked(true);
             }
+            binding.editTextMachineId.setText(data.get().getMachineID());
             binding.editTextMerchantId.setText(data.get().getMerchantID());
             binding.editTextCompanyId.setText(data.get().getCompanyID());
             binding.editTextHashKey.setText(data.get().getHashKey());

@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +23,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHolidayBinding;
+import com.example.parking5.datamodel.DayHoliday;
 import com.example.parking5.datamodel.Holiday;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerReqeust;
 import com.example.parking5.util.Util;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +41,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 
 public class HolidayFragment extends Fragment {
@@ -51,6 +58,13 @@ public class HolidayFragment extends Fragment {
 
     Vector<Holiday> holidays;
     Var<TableRow> selectedRow;
+    ToggleButton btnSaturday;
+    ToggleButton btnSunday;
+    ToggleButton btnMonday;
+    ToggleButton btnTuesday;
+    ToggleButton btnWednesday;
+    ToggleButton btnThursday;
+    ToggleButton btnFriday;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -62,6 +76,7 @@ public class HolidayFragment extends Fragment {
         View root = binding.getRoot();
         holidays = new Vector<>();
         selectedRow = new Var<>();
+        buttonWeekDaySetting();
         tableSetting();
 
         Button btnAdd = binding.buttonHolidayAdd;
@@ -80,6 +95,124 @@ public class HolidayFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void buttonWeekDaySetting() {
+        btnSaturday = binding.toggleButtonSaturday;
+        btnSunday = binding.toggleButtonSunday;
+        btnMonday = binding.toggleButtonMonday;
+        btnTuesday = binding.toggleButtonTuesday;
+        btnWednesday = binding.toggleButtonWednesday;
+        btnThursday = binding.toggleButtonThursday;
+        btnFriday = binding.toggleButtonFriday;
+
+        btnSaturday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnSunday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnMonday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnTuesday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnWednesday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnThursday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        btnFriday.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setDayHoliday();
+        });
+        Map<Integer, Boolean> map = getDayHoliday();
+
+        for (Integer key : map.keySet()) {
+            switch (key) {
+                case 1:
+                    btnMonday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 2:
+                    btnTuesday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 3:
+                    btnWednesday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 4:
+                    btnThursday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 5:
+                    btnFriday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 6:
+                    btnSaturday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+                case 7:
+                    btnSunday.setChecked(Boolean.TRUE.equals(map.get(key)));
+                    break;
+            }
+        }
+
+
+    }
+
+    private void setDayHoliday() {
+        Thread t = new Thread(() -> {
+            ApacheServerReqeust.setDayHoliday(
+                    btnSunday.isChecked() ? 1 : 0,
+                    btnMonday.isChecked() ? 1 : 0,
+                    btnTuesday.isChecked() ? 1 : 0,
+                    btnWednesday.isChecked() ? 1 : 0,
+                    btnThursday.isChecked() ? 1 : 0,
+                    btnFriday.isChecked() ? 1 : 0,
+                    btnSaturday.isChecked() ? 1 : 0
+            );
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Map<Integer, Boolean> getDayHoliday() {
+        Var<DayHoliday> holiday = new Var<>(null);
+        Thread t = new Thread(() -> {
+            String json = ApacheServerReqeust.getDayHoliday();
+            if (json != null) {
+                try {
+                    JSONArray array = new JSONArray(json);
+                    if (array.length() > 0) {
+                        JSONObject obj = array.getJSONObject(0);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        DayHoliday fee = gson.fromJson(obj.toString(), DayHoliday.class);
+                        holiday.set(fee);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<Integer, Boolean> ret = new HashMap<>();
+        if (holiday.get() != null) {
+            ret.put(1, holiday.get().getMonday() == 1);
+            ret.put(2, holiday.get().getTuesday() == 1);
+            ret.put(3, holiday.get().getWednesday() == 1);
+            ret.put(4, holiday.get().getThursday() == 1);
+            ret.put(5, holiday.get().getFriday() == 1);
+            ret.put(6, holiday.get().getSaturday() == 1);
+            ret.put(7, holiday.get().getSunday() == 1);
+        }
+        return ret;
     }
 
     private void deleteHoliday(String date) {

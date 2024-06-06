@@ -126,6 +126,20 @@ public class HomeFragment extends Fragment {
     private void setButtons() {
         Button in = binding.remoteOpenIn;
         Button out = binding.remoteOpenOut;
+        in.setOnClickListener(v -> {
+            for (Cam cam : cams) {
+                if (cam.getIn_out() == 0) {
+                    new Thread(() -> ApacheServerReqeust.setCamGateOpen(cam.getIp())).start();
+                }
+            }
+        });
+        out.setOnClickListener(v -> {
+            for (Cam cam : cams) {
+                if (cam.getIn_out() == 1) {
+                    new Thread(() -> ApacheServerReqeust.setCamGateOpen(cam.getIp())).start();
+                }
+            }
+        });
     }
 
     private void setChannelTable() {
@@ -142,6 +156,7 @@ public class HomeFragment extends Fragment {
             // 创建并设置按钮
             try {
                 Cam cam = cams.get(i - 1);
+                String ip = "rtsp://" + cam.getIp() + ":50000/video";
                 ToggleButton toggleButton = new ToggleButton(tableRow.getContext());
                 toggleButton.setTextOn("CH" + String.valueOf(i));
                 toggleButton.setTextOff("CH" + String.valueOf(i));
@@ -149,13 +164,13 @@ public class HomeFragment extends Fragment {
                 if (i == 1) {
                     toggleButton.setChecked(true);
                     toggleButton.setTextColor(Color.BLACK);
-                    playRTSP(cam.getIp());
+                    playRTSP(ip);
                 } else {
                     toggleButton.setTextColor(Color.GRAY);
                 }
                 toggleButton.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 toggleButton.setOnClickListener(v -> {
-                    playRTSP(cam.getIp());
+                    playRTSP(ip);
                     toggleButton.setTextColor(Color.BLACK);
                     for (ToggleButton btn : channelButtons) {
                         if (!btn.equals(toggleButton)) {
@@ -177,28 +192,37 @@ public class HomeFragment extends Fragment {
     private void playRTSP(String ip) {
         Uri url = Uri.parse(ip);
         videoView.setVideoURI(url);
+        videoView.requestFocus();
         videoView.start();
     }
 
     private Vector<Cam> getCams() {
         Vector<Cam> cams = new Vector<>();
-        try {
-            String json = ApacheServerReqeust.getCams();
-            JSONArray array = new JSONArray(json);
-            if (array.length() > 0) {
-                cams.clear();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    cams.add(new Cam(obj.getInt("number"), obj.getString("ip"),
-                            obj.getString("name"), obj.getInt("in_out"), obj.getInt("pay"), obj.getInt("open")));
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerReqeust.getCams();
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    cams.clear();
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        cams.add(new Cam(obj.getInt("number"), obj.getString("ip"),
+                                obj.getString("name"), obj.getInt("in_out"), obj.getInt("pay"), obj.getInt("open")));
+
+                    }
 
                 }
-                return cams;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return cams;
     }
 
     @Override

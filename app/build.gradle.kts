@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.gson)
     implementation(libs.annotation)
+    implementation("androidx.media3:media3-exoplayer-rtsp:1.3.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

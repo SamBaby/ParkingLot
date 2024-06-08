@@ -57,6 +57,8 @@ public class RevenueFragment extends Fragment {
         if(bundle !=null){
             if(bundle.getBoolean(ConfigurationString.todayRevenue)){
                 navigation.setSelectedItemId(R.id.nav_revenue_manage);
+            }else if(bundle.getBoolean(ConfigurationString.carSetting)){
+                navigation.setSelectedItemId(R.id.nav_car_setting);
             }
         }
         return root;

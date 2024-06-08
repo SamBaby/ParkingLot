@@ -41,6 +41,7 @@ public class CameraSettingFragment extends Fragment {
     private static final int[] tableWeight = new int[]{1, 1, 2, 1, 1, 2};
     Var<TableRow> selectedRow;
     Vector<Cam> cams;
+
     public static CameraSettingFragment newInstance() {
         return new CameraSettingFragment();
     }
@@ -185,86 +186,88 @@ public class CameraSettingFragment extends Fragment {
         TableLayout tableCam = binding.tableCameraData;
         tableCam.removeAllViews();
         selectedRow.set(null);
-        new Thread(() -> {
-            getCams();
-            getActivity().runOnUiThread(() -> {
-                try {
-                    // 遍历数据列表并为每行创建 TableRow
-                    for (int i = 0; i < cams.size(); i++) {
-                        TableRow tableRow = new TableRow(tableCam.getContext());
-                        tableRow.setLayoutParams(new TableRow.LayoutParams(
-                                TableRow.LayoutParams.MATCH_PARENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
-                        Cam cam = cams.get(i);
-                        // 为每行添加单元格
-                        for (int j = 0; j < 6; j++) {
-                            TextView textView = new TextView(tableRow.getContext());
-                            textView.setPadding(5, 5, 5, 5);
-                            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(layoutParams);
-                            switch (j) {
-                                case 0:
-                                    textView.setText(String.valueOf(cam.getNumber()));
-                                    break;
-                                case 1:
-                                    textView.setText(cam.getName());
-                                    break;
-                                case 2:
-                                    textView.setText(cam.getIp());
-                                    break;
-                                case 3:
-                                    int in_out = cam.getIn_out();
-                                    textView.setText(in_out == 0 ? getString(R.string.entrance) : getString(R.string.exit));
-                                    break;
-                                case 4:
-                                    int pay = cam.getPay();
-                                    textView.setText(pay == 0 ? getString(R.string.no) : getString(R.string.yes));
-                                    break;
-                                case 5:
-                                    int open = cam.getOpen();
-                                    textView.setText(open == 0 ? getString(R.string.no) : getString(R.string.yes));
-                                    break;
-                                default:
-                                    break;
-                            }
-                            tableRow.addView(textView);
-                            tableRow.setOnClickListener(v -> {
-                                if (selectedRow.get() != null) {
-                                    selectedRow.get().setBackground(null);
-                                }
-                                v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                                selectedRow.set((TableRow) v);
-                            });
-                        }
-                        // 将 TableRow 添加到 TableLayout
-                        tableCam.addView(tableRow);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }).start();
-    }
-
-    private Vector<Cam> getCams() {
+        getCams();
         try {
-            String json = ApacheServerReqeust.getCams();
-            JSONArray array = new JSONArray(json);
-            if (array.length() > 0) {
-                cams.clear();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    cams.add(new Cam(obj.getInt("number"), obj.getString("ip"),
-                            obj.getString("name"), obj.getInt("in_out"), obj.getInt("pay"), obj.getInt("open")));
-
+            // 遍历数据列表并为每行创建 TableRow
+            for (int i = 0; i < cams.size(); i++) {
+                TableRow tableRow = new TableRow(tableCam.getContext());
+                tableRow.setLayoutParams(new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT));
+                Cam cam = cams.get(i);
+                // 为每行添加单元格
+                for (int j = 0; j < 6; j++) {
+                    TextView textView = new TextView(tableRow.getContext());
+                    textView.setPadding(5, 5, 5, 5);
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(layoutParams);
+                    switch (j) {
+                        case 0:
+                            textView.setText(String.valueOf(cam.getNumber()));
+                            break;
+                        case 1:
+                            textView.setText(cam.getName());
+                            break;
+                        case 2:
+                            textView.setText(cam.getIp());
+                            break;
+                        case 3:
+                            int in_out = cam.getIn_out();
+                            textView.setText(in_out == 0 ? getString(R.string.entrance) : getString(R.string.exit));
+                            break;
+                        case 4:
+                            int pay = cam.getPay();
+                            textView.setText(pay == 0 ? getString(R.string.no) : getString(R.string.yes));
+                            break;
+                        case 5:
+                            int open = cam.getOpen();
+                            textView.setText(open == 0 ? getString(R.string.no) : getString(R.string.yes));
+                            break;
+                        default:
+                            break;
+                    }
+                    tableRow.addView(textView);
+                    tableRow.setOnClickListener(v -> {
+                        if (selectedRow.get() != null) {
+                            selectedRow.get().setBackground(null);
+                        }
+                        v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                        selectedRow.set((TableRow) v);
+                    });
                 }
-                return cams;
+                // 将 TableRow 添加到 TableLayout
+                tableCam.addView(tableRow);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    private void getCams() {
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerReqeust.getCams();
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    cams.clear();
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        cams.add(new Cam(obj.getInt("number"), obj.getString("ip"),
+                                obj.getString("name"), obj.getInt("in_out"), obj.getInt("pay"), obj.getInt("read_gio")));
+
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean checkCamExist(String ip) {

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.R;
+import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentDataSearchBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -56,6 +57,12 @@ public class DataSearchFragment extends Fragment {
                 return false;
             }
         });
+        Bundle bundle = this.getArguments();
+        if(bundle !=null){
+            if(bundle.getBoolean(ConfigurationString.abnormal)){
+                navigation.setSelectedItemId(R.id.history_license);
+            }
+        }
         return root;
     }
 

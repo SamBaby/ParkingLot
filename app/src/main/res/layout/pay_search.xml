@@ -53,8 +53,8 @@
 
                 <ToggleButton
                     android:id="@+id/toggleButton_day"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_margin="2dp"
                     android:background="@drawable/custom_toggle_background"
                     android:textOff=""
@@ -68,8 +68,8 @@
 
                 <ToggleButton
                     android:id="@+id/toggleButton_week"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_margin="2dp"
                     android:background="@drawable/custom_toggle_background"
                     android:textOff=""
@@ -83,8 +83,8 @@
 
                 <ToggleButton
                     android:id="@+id/toggleButton_month"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_margin="2dp"
                     android:background="@drawable/custom_toggle_background"
                     android:textOff=""
@@ -112,8 +112,8 @@
 
                     <ToggleButton
                         android:id="@+id/toggleButton_self_def"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_margin="2dp"
                         android:background="@drawable/custom_toggle_background"
                         android:textOff=""
@@ -172,8 +172,8 @@
 
                     <ToggleButton
                         android:id="@+id/toggleButton_cash"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_margin="2dp"
                         android:background="@drawable/custom_toggle_background"
                         android:textOff=""
@@ -187,8 +187,8 @@
 
                     <ToggleButton
                         android:id="@+id/toggleButton_EPay"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_margin="2dp"
                         android:background="@drawable/custom_toggle_background"
                         android:textOff=""

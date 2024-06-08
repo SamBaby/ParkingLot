@@ -56,13 +56,13 @@
                 android:text="@string/artificial"
                 android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/textView_photo"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:text="@string/photo"
-                android:textAlignment="center" />
+<!--            <TextView-->
+<!--                android:id="@+id/textView_photo"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="3"-->
+<!--                android:text="@string/photo"-->
+<!--                android:textAlignment="center" />-->
         </TableRow>
     </TableLayout>
 

@@ -165,86 +165,93 @@ public class HistoryEntranceFragment extends Fragment {
     }
 
     private void tableSetting() {
-        tableSetting("", "");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
+        Calendar c = new GregorianCalendar();
+        String start = String.format(formatter.format(c.getTime()) + " 00:00:00");
+        String end = String.format(formatter.format(c.getTime()) + " 23:59:59");
+        tableSetting(start, end);
     }
 
     private void tableSetting(String start, String end) {
         TableLayout tableData = binding.tableEntranceData;
         tableData.removeAllViews();
         selectedRow.set(null);
-        new Thread(() -> {
-            getHistoryWithDates(start, end);
-            getActivity().runOnUiThread(() -> {
-                // 遍历数据列表并为每行创建 TableRow
-                for (int i = 0; i < histories.size(); i++) {
-                    TableRow tableRow = new TableRow(tableData.getContext());
-                    tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                    CarHistory history = histories.get(i);
-                    // 为每行添加单元格
-                    for (int j = 0; j < 6; j++) {
-                        TextView textView = new TextView(tableRow.getContext());
-                        textView.setPadding(5, 5, 5, 5);
-                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(layoutParams);
-                        switch (j) {
-                            case 0:
-                                textView.setText(history.getCar_number());
-                                break;
-                            case 1:
-                                textView.setText(history.getTime_in());
-                                break;
-                            case 2:
-                                textView.setText("小客");
-                                break;
-                            case 3:
-                                textView.setText("白");
-                                break;
-                            case 4:
-                                textView.setText("進");
-                                break;
-                            case 5:
-                                textView.setText(history.getArtificial() == 0 ? "否" : "是");
-                                break;
-                            default:
-                                break;
-                        }
-                        tableRow.addView(textView);
-                        tableRow.setOnClickListener(v -> {
-                            if (selectedRow.get() != null) {
-                                selectedRow.get().setBackground(null);
-                            }
-                            v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                            selectedRow.set((TableRow) v);
-                        });
-                    }
-
-                    // 将 TableRow 添加到 TableLayout
-                    tableData.addView(tableRow);
+        getHistoryWithDates(start, end);
+        // 遍历数据列表并为每行创建 TableRow
+        for (int i = 0; i < histories.size(); i++) {
+            TableRow tableRow = new TableRow(tableData.getContext());
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            CarHistory history = histories.get(i);
+            // 为每行添加单元格
+            for (int j = 0; j < 6; j++) {
+                TextView textView = new TextView(tableRow.getContext());
+                textView.setPadding(5, 5, 5, 5);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                textView.setGravity(Gravity.CENTER);
+                textView.setLayoutParams(layoutParams);
+                switch (j) {
+                    case 0:
+                        textView.setText(history.getCar_number());
+                        break;
+                    case 1:
+                        textView.setText(history.getTime_in());
+                        break;
+                    case 2:
+                        textView.setText("小客");
+                        break;
+                    case 3:
+                        textView.setText("白");
+                        break;
+                    case 4:
+                        textView.setText("進");
+                        break;
+                    case 5:
+                        textView.setText(history.getArtificial() == 0 ? "否" : "是");
+                        break;
+                    default:
+                        break;
                 }
-            });
-        }).start();
+                tableRow.addView(textView);
+                tableRow.setOnClickListener(v -> {
+                    if (selectedRow.get() != null) {
+                        selectedRow.get().setBackground(null);
+                    }
+                    v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                    selectedRow.set((TableRow) v);
+                });
+            }
+
+            // 将 TableRow 添加到 TableLayout
+            tableData.addView(tableRow);
+        }
     }
 
     private void getHistory() {
-        try {
-            String json = ApacheServerReqeust.getHistories();
-            JSONArray array = new JSONArray(json);
-            histories.clear();
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject obj = array.getJSONObject(i);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
-                histories.add(history);
-
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerReqeust.getHistories();
+                JSONArray array = new JSONArray(json);
+                histories.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
+                    histories.add(history);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void getHistoryWithDates(String start, String end) {
-        try {
+        Thread t = new Thread(() -> {
             String json = "";
             if (!start.isEmpty() && !end.isEmpty()) {
                 json = ApacheServerReqeust.getHistoriesWithDates(start, end);
@@ -252,14 +259,22 @@ public class HistoryEntranceFragment extends Fragment {
                 json = ApacheServerReqeust.getHistories();
             }
 
-            JSONArray array = new JSONArray(json);
-            histories.clear();
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject obj = array.getJSONObject(i);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
-                histories.add(history);
+            try {
+                JSONArray array = new JSONArray(json);
+                histories.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
+                    histories.add(history);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -66,7 +66,9 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.carSetting, true);
+                navController.navigate(R.id.action_homeFragment_to_revenueFragment, bundle);
             }
 
         });
@@ -92,7 +94,9 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.todayRevenue, true);
+                navController.navigate(R.id.action_homeFragment_to_revenueFragment, bundle);
             }
 
         });
@@ -100,7 +104,9 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.todayRevenue, true);
+                navController.navigate(R.id.action_homeFragment_to_revenueFragment, bundle);
             }
 
         });
@@ -108,12 +114,16 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_dataSearchFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.abnormal, true);
+                navController.navigate(R.id.action_homeFragment_to_dataSearchFragment, bundle);
             }
-
         });
 //        final TextView textView = binding.textHome;
         homeViewModel.getLots().observe(getViewLifecycleOwner(), txtLots::setText);
+        homeViewModel.getBills().observe(getViewLifecycleOwner(), txtBills::setText);
+        homeViewModel.getDailyRevenue().observe(getViewLifecycleOwner(), txtDay::setText);
+        homeViewModel.getMonthlyRevenue().observe(getViewLifecycleOwner(), txtMonth::setText);
 //        txtBills
 //        txtDay
 //        txtMonth

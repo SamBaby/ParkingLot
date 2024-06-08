@@ -2,8 +2,10 @@ package com.example.parking5.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
 
 public class HTTPGetRequest {
     public static synchronized String get(String url ,String args) {
@@ -40,5 +42,51 @@ public class HTTPGetRequest {
             e.printStackTrace();
         }
         return null;
+    }
+    public static synchronized String post(String url, Map<String, String> parameters) {
+        try {
+            // Create URL object
+            URL urlPass = new URL(url);
+
+            // Create connection
+            HttpURLConnection conn = (HttpURLConnection) urlPass.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            // Construct query string
+            StringBuilder postData = new StringBuilder();
+            for (Map.Entry<String, String> param : parameters.entrySet()) {
+                if (postData.length() != 0) {
+                    postData.append('&');
+                }
+                postData.append(param.getKey());
+                postData.append('=');
+                postData.append(param.getValue());
+            }
+
+            // Write parameters to output stream
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+                os.write(postDataBytes);
+            }
+
+            int responseCode = conn.getResponseCode();
+            // Read response
+            // TODO: Handle response here
+        // 读取响应内容
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+            // Close connection
+            conn.disconnect();
+            return response.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

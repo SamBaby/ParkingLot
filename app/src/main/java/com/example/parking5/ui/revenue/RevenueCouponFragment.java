@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.parking5.R;
+import com.example.parking5.databinding.FragmentHistoryEntranceBinding;
+import com.example.parking5.databinding.FragmentRevenueCouponBinding;
 
 public class RevenueCouponFragment extends Fragment {
 
@@ -21,11 +23,18 @@ public class RevenueCouponFragment extends Fragment {
     public static RevenueCouponFragment newInstance() {
         return new RevenueCouponFragment();
     }
-
+    private FragmentRevenueCouponBinding binding;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_revenue_coupon, container, false);
+        binding = FragmentRevenueCouponBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        tableSetting();
+        return root;
+    }
+
+    private void tableSetting() {
+
     }
 
     @Override

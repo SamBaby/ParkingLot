@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.R;
+import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentSystemSettingBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

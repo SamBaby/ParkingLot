@@ -164,55 +164,51 @@ public class HistoryPayFragment extends Fragment {
     private void tableSetting(String start, String end, String carNumber, String payment) {
         TableLayout tableData = binding.tablePayData;
         tableData.removeAllViews();
-        new Thread(() -> {
-            getHistoryWithDates(start, end, carNumber, payment);
-            getActivity().runOnUiThread(() -> {
-                // 遍历数据列表并为每行创建 TableRow
-                for (int i = 0; i < histories.size(); i++) {
-                    TableRow tableRow = new TableRow(tableData.getContext());
-                    tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                    PayHistory history = histories.get(i);
-                    // 为每行添加单元格
-                    for (int j = 0; j < 6; j++) {
-                        TextView textView = new TextView(tableRow.getContext());
-                        textView.setPadding(5, 5, 5, 5);
-                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                        textView.setGravity(Gravity.CENTER);
-                        textView.setLayoutParams(layoutParams);
-                        switch (j) {
-                            case 0:
-                                textView.setText(history.getCar_number());
-                                break;
-                            case 1:
-                                textView.setText(history.getTime_in());
-                                break;
-                            case 2:
-                                textView.setText(history.getTime_pay());
-                                break;
-                            case 3:
-                                textView.setText(String.valueOf(history.getCost()));
-                                break;
-                            case 4:
-                                textView.setText(history.getBill_number());
-                                break;
-                            case 5:
-                                textView.setText(history.getPayment());
-                                break;
-                            default:
-                                break;
-                        }
-                        tableRow.addView(textView);
-                    }
-
-                    // 将 TableRow 添加到 TableLayout
-                    tableData.addView(tableRow);
+        getHistoryWithDates(start, end, carNumber, payment);
+        // 遍历数据列表并为每行创建 TableRow
+        for (int i = 0; i < histories.size(); i++) {
+            TableRow tableRow = new TableRow(tableData.getContext());
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            PayHistory history = histories.get(i);
+            // 为每行添加单元格
+            for (int j = 0; j < 6; j++) {
+                TextView textView = new TextView(tableRow.getContext());
+                textView.setPadding(5, 5, 5, 5);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                textView.setGravity(Gravity.CENTER);
+                textView.setLayoutParams(layoutParams);
+                switch (j) {
+                    case 0:
+                        textView.setText(history.getCar_number());
+                        break;
+                    case 1:
+                        textView.setText(history.getTime_in());
+                        break;
+                    case 2:
+                        textView.setText(history.getTime_pay());
+                        break;
+                    case 3:
+                        textView.setText(String.valueOf(history.getCost()));
+                        break;
+                    case 4:
+                        textView.setText(history.getBill_number());
+                        break;
+                    case 5:
+                        textView.setText(history.getPayment());
+                        break;
+                    default:
+                        break;
                 }
-            });
-        }).start();
+                tableRow.addView(textView);
+            }
+
+            // 将 TableRow 添加到 TableLayout
+            tableData.addView(tableRow);
+        }
     }
 
     private void getHistoryWithDates(String start, String end, String carNumber, String payment) {
-        try {
+        Thread t = new Thread(() -> {
             String json = "";
             if (!start.isEmpty() || !carNumber.isEmpty() || !payment.isEmpty()) {
                 json = ApacheServerReqeust.getPayHistoryWithDates(start, end, carNumber, payment);
@@ -220,14 +216,22 @@ public class HistoryPayFragment extends Fragment {
                 json = ApacheServerReqeust.getPayHistory();
             }
 
-            JSONArray array = new JSONArray(json);
-            histories.clear();
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject obj = array.getJSONObject(i);
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                PayHistory history = gson.fromJson(obj.toString(), PayHistory.class);
-                histories.add(history);
+            try {
+                JSONArray array = new JSONArray(json);
+                histories.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    PayHistory history = gson.fromJson(obj.toString(), PayHistory.class);
+                    histories.add(history);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,8 +3,11 @@ package com.example.parking5.util;
 import com.example.parking5.datamodel.BasicFee;
 import com.example.parking5.datamodel.BasicSetting;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ApacheServerReqeust {
-    public static final String url = "localhost:8080/function.php";
+    public static final String url = "http://localhost:8080/function.php";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -54,12 +57,12 @@ public class ApacheServerReqeust {
         return HTTPGetRequest.get(url, String.format("func=cam_single_search&ip=%s", ip));
     }
 
-    public static String updateCam(int number, String name, int inOut, int pay, int open, String oldIp, String newIp) {
-        return HTTPGetRequest.get(url, String.format("func=cam_update&number=%d&name=%s&in_out=%d&pay=%d&read_gio=%d&old_ip=%s&new_ip=%s", number, name, inOut, pay, open, oldIp, newIp));
+    public static String updateCam(int number, String name, int inOut, int pay, int read_gio, String oldIp, String newIp) {
+        return HTTPGetRequest.get(url, String.format("func=cam_update&number=%d&name=%s&in_out=%d&pay=%d&read_gio=%d&old_ip=%s&new_ip=%s", number, name, inOut, pay, read_gio, oldIp, newIp));
     }
 
-    public static String addCam(int number, String name, String ip, int inOut, int pay, int open) {
-        return HTTPGetRequest.get(url, String.format("func=cam_add&number=%d&name=%s&ip=%s&in_out=%d&pay=%d&open=%d", number, name, ip, inOut, pay, open));
+    public static String addCam(int number, String name, String ip, int inOut, int pay, int read_gio) {
+        return HTTPGetRequest.get(url, String.format("func=cam_add&number=%d&name=%s&ip=%s&in_out=%d&pay=%d&read_gio=%d", number, name, ip, inOut, pay, read_gio));
     }
 
     public static String deleteCam(String ip) {
@@ -111,7 +114,12 @@ public class ApacheServerReqeust {
     }
 
     public static String getPayHistoryWithDates(String start, String end, String carNumber, String payment) {
-        return HTTPGetRequest.get(url, String.format("func=pay_dates_search&start=%s&end=%s&car_number=%s&payment=%s", start, end, carNumber, payment));
+        Map<String, String> map = new HashMap<>();
+        map.put("car_number", carNumber);
+        map.put("start", start);
+        map.put("end", end);
+        map.put("payment", payment);
+        return HTTPGetRequest.post(url+"?func=pay_dates_search", map);
     }
 
     public static String getCompanyInformation() {

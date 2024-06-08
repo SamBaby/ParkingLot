@@ -59,10 +59,10 @@
                     android:text="@string/allow_exit_time" />
 
                 <TextView
+                    android:id="@+id/textView_exit_time"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/border"
-                    android:id="@+id/textView_exit_time"/>
+                    android:background="@drawable/border" />
 
             </LinearLayout>
         </LinearLayout>

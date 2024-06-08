@@ -38,7 +38,7 @@ public class AccountSettingFragment extends Fragment {
     private AccountSettingViewModel mViewModel;
     private FragmentAccountSettingBinding binding;
 
-    private Vector<User> users ;
+    private Vector<User> users;
 
     public static AccountSettingFragment newInstance() {
         return new AccountSettingFragment();
@@ -80,58 +80,53 @@ public class AccountSettingFragment extends Fragment {
         TableLayout tableUser = binding.tableUser;
         tableUser.removeAllViews();
         selectedRow.set(null);
-        new Thread(()->{
-            getUsers();
-            getActivity().runOnUiThread(()->{
-                // 遍历数据列表并为每行创建 TableRow
-                for (int i = 0; i < users.size(); i++) {
-                    TableRow tableRow = new TableRow(tableUser.getContext());
-                    tableRow.setLayoutParams(new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT));
-                    // 将 TableRow 添加到 TableLayout
-                    tableUser.addView(tableRow);
+        getUsers();
+        // 遍历数据列表并为每行创建 TableRow
+        for (int i = 0; i < users.size(); i++) {
+            TableRow tableRow = new TableRow(tableUser.getContext());
+            tableRow.setLayoutParams(new TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT));
+            // 将 TableRow 添加到 TableLayout
+            tableUser.addView(tableRow);
 
-                    User user = users.get(i);
-                    // 为每行添加单元格
-                    for (int j = 0; j < 5; j++) {
-                        TextView textView = new TextView(tableRow.getContext());
-                        textView.setPadding(5, 5, 5, 5);
-                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                        textView.setGravity(Gravity.CENTER);
-                        switch (j) {
-                            case 0:
-                                textView.setText(user.getAccount());
-                                break;
-                            case 1:
-                                textView.setText(user.getPassword());
-                                break;
-                            case 2:
-                                textView.setText(user.getName());
-                                break;
-                            case 3:
-                                textView.setText(user.getPhone());
-                                break;
-                            case 4:
-                                textView.setText(user.getPermission());
-                                break;
-                            default:
-                                break;
-                        }
-                        tableRow.addView(textView, layoutParams);
-                        tableRow.setOnClickListener(v -> {
-                            if (selectedRow.get() != null) {
-                                selectedRow.get().setBackground(null);
-                            }
-                            v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                            selectedRow.set((TableRow) v);
-                        });
-                    }
-
+            User user = users.get(i);
+            // 为每行添加单元格
+            for (int j = 0; j < 5; j++) {
+                TextView textView = new TextView(tableRow.getContext());
+                textView.setPadding(5, 5, 5, 5);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                textView.setGravity(Gravity.CENTER);
+                switch (j) {
+                    case 0:
+                        textView.setText(user.getAccount());
+                        break;
+                    case 1:
+                        textView.setText(user.getPassword());
+                        break;
+                    case 2:
+                        textView.setText(user.getName());
+                        break;
+                    case 3:
+                        textView.setText(user.getPhone());
+                        break;
+                    case 4:
+                        textView.setText(user.getPermission());
+                        break;
+                    default:
+                        break;
                 }
-            });
+                tableRow.addView(textView, layoutParams);
+                tableRow.setOnClickListener(v -> {
+                    if (selectedRow.get() != null) {
+                        selectedRow.get().setBackground(null);
+                    }
+                    v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                    selectedRow.set((TableRow) v);
+                });
+            }
 
-        }).start();
+        }
     }
 
     @Override
@@ -313,7 +308,7 @@ public class AccountSettingFragment extends Fragment {
         }
     }
 
-    private void getUsers(){
+    private void getUsers() {
         try {
             String json = ApacheServerReqeust.getUsers();
             JSONArray array = new JSONArray(json);
@@ -326,7 +321,7 @@ public class AccountSettingFragment extends Fragment {
 
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

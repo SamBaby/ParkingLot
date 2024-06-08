@@ -58,7 +58,8 @@
                     android:layout_margin="2dp"
                     android:background="@drawable/custom_toggle_background"
                     android:textOff=""
-                    android:textOn="" />
+                    android:textOn=""
+                    android:checked="true"/>
 
                 <TextView
                     android:layout_width="0dp"

@@ -168,7 +168,7 @@ public class HistoryPayFragment extends Fragment {
         // 遍历数据列表并为每行创建 TableRow
         for (int i = 0; i < histories.size(); i++) {
             TableRow tableRow = new TableRow(tableData.getContext());
-            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             PayHistory history = histories.get(i);
             // 为每行添加单元格
             for (int j = 0; j < 6; j++) {

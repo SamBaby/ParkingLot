@@ -42,6 +42,8 @@ public class CarSettingFragment extends Fragment {
     private EditText pregnantSlotLeftSetting;
     private EditText chargingSlotLeftSetting;
     private EditText disabledSlotLeftSetting;
+    private Button btnRefresh;
+    private Button btnModify;
 
     public static CarSettingFragment newInstance() {
         return new CarSettingFragment();
@@ -79,6 +81,28 @@ public class CarSettingFragment extends Fragment {
         disabledSlotLeftSetting = binding.editTextDisabledLeftSetting;
         chargingSlotLeftSetting = binding.editTextChargingLeftSetting;
 
+
+        displayCarLeft();
+
+        carSlotLeftSetting.setText("0");
+        pregnantSlotLeftSetting.setText("0");
+        disabledSlotLeftSetting.setText("0");
+        chargingSlotLeftSetting.setText("0");
+
+        btnRefresh = binding.buttonRefresh;
+        btnRefresh.setOnClickListener(v -> {
+            displayCarLeft();
+        });
+
+        btnModify = binding.buttonModify;
+        btnModify.setOnClickListener(v -> {
+            setCarSlot();
+            displayCarLeft();
+        });
+        return root;
+    }
+
+    private void displayCarLeft() {
         getCarSlotWithThreadJoin();
         if (carSlot.get() != null) {
             carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside));
@@ -92,34 +116,12 @@ public class CarSettingFragment extends Fragment {
             disabledSlotSetting.setText(String.valueOf(carSlot.get().getDisabled_slot()));
             chargingSlotSetting.setText(String.valueOf(carSlot.get().getCharging_slot()));
             reservedSlotSetting.setText(String.valueOf(carSlot.get().getReserved_slot()));
+
+            carSlotLeftSetting.setText(String.valueOf(carSlot.get().getCar_left()));
+            pregnantSlotLeftSetting.setText(String.valueOf(carSlot.get().getPregnant_left()));
+            disabledSlotLeftSetting.setText(String.valueOf(carSlot.get().getDisabled_left()));
+            chargingSlotLeftSetting.setText(String.valueOf(carSlot.get().getCharging_left()));
         }
-
-        carSlotLeftSetting.setText("0");
-        pregnantSlotLeftSetting.setText("0");
-        disabledSlotLeftSetting.setText("0");
-        chargingSlotLeftSetting.setText("0");
-
-        Button btnRefresh = binding.buttonRefresh;
-        btnRefresh.setOnClickListener(v -> {
-            Thread t = new Thread(()->{
-                getCarSlot();
-            });
-            try {
-                t.start();
-                t.join();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            if(carSlot.get() == null){
-                return;
-            }
-            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside));
-            pregnantSlotCondition.setText(String.valueOf(carSlot.get().getPregnant_slot()));
-            chargingSlotCondition.setText(String.valueOf(carSlot.get().getDisabled_slot()));
-            disabledSlotCondition.setText(String.valueOf(carSlot.get().getCharging_slot()));
-            reservedSlotCondition.setText(String.valueOf(carSlot.get().getReserved_slot()));
-        });
-        return root;
     }
 
     private void getCarSlot() {
@@ -148,6 +150,28 @@ public class CarSettingFragment extends Fragment {
 
     private void getCarSlotWithThreadJoin() {
         Thread t = new Thread(this::getCarSlot);
+        t.start();
+        try {
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCarSlot() {
+        Thread t = new Thread(() -> {
+            String carSlot = carSlotSetting.getText().toString();
+            String pregnantSlot = pregnantSlotSetting.getText().toString();
+            String disabledSlot = disabledSlotSetting.getText().toString();
+            String chargingSlot = chargingSlotSetting.getText().toString();
+            String reservedSlot = reservedSlotSetting.getText().toString();
+            String carLeft = carSlotLeftSetting.getText().toString();
+            String pregnantLeft = pregnantSlotLeftSetting.getText().toString();
+            String disabledLeft = disabledSlotLeftSetting.getText().toString();
+            String chargingLeft = chargingSlotLeftSetting.getText().toString();
+            ApacheServerReqeust.carSlotUpdate(carSlot, pregnantSlot, disabledSlot, chargingSlot, reservedSlot,
+                    carLeft, pregnantLeft, disabledLeft, chargingLeft);
+        });
         t.start();
         try {
             t.join();

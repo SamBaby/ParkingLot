@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApacheServerReqeust {
-    public static final String url = "http://localhost:8080/function.php";
+    public static final String url = "http://192.168.1.200:8080/function.php";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -37,6 +37,12 @@ public class ApacheServerReqeust {
         return HTTPGetRequest.get(url, "func=slot_search");
     }
 
+    public static String carSlotUpdate(String car, String pregnant, String disabled, String charging, String reserved,
+                                       String car_left, String pregnant_left, String disabled_left, String charging_left) {
+        return HTTPGetRequest.get(url, String.format("func=slot_update&car=%s&pregnant=%s&disabled=%s&charging=%s&reserved=%s&car_left=%s&pregnant_left=%s&disabled_left=%s&charging_left=%s"
+                , car, pregnant, disabled, charging, reserved, car_left, pregnant_left, disabled_left, charging_left));
+    }
+
     public static String getCarInsideCount() {
         return HTTPGetRequest.get(url, "func=cars_inside_count");
     }
@@ -46,7 +52,45 @@ public class ApacheServerReqeust {
     }
 
     public static String getCarInsideWithDates(String start, String end) {
-        return HTTPGetRequest.get(url, "func=cars_inside");
+        Map<String, String> map = new HashMap<>();
+        map.put("start", start);
+        map.put("end", end);
+        return HTTPGetRequest.post(url + "?func=cars_inside_dates_inside", map);
+    }
+
+    public static String getCarInsideWithCarNumber(String number) {
+        return HTTPGetRequest.get(url, String.format("func=cars_inside_with_car_number&car_number=%s", number));
+    }
+
+    public static String addCarInsideWithCarNumber(String number, String start) {
+        Map<String, String> map = new HashMap<>();
+        map.put("car_number", number);
+        map.put("time_in", start);
+        map.put("gate", "N");
+        map.put("picture_url", "");
+        map.put("type", "0");
+        map.put("color", "0");
+        return HTTPGetRequest.post(url + "?func=cars_inside_add", map);
+    }
+
+    public static String deleteCarInside(String carNumber) {
+        return HTTPGetRequest.get(url, String.format("func=cars_inside_delete&car_number=%s", carNumber));
+    }
+
+    public static String getCarInsideWithDatesAndCarNumber(String number, String start, String end) {
+        Map<String, String> map = new HashMap<>();
+        map.put("car_number", number);
+        map.put("start", start);
+        map.put("end", end);
+        return HTTPGetRequest.post(url + "?func=cars_inside_with_number_and_dates", map);
+    }
+
+    public static String updateCarInsideNumber(String old_number, String new_number, String timeIn) {
+        Map<String, String> map = new HashMap<>();
+        map.put("old_number", old_number);
+        map.put("new_number", new_number);
+        map.put("time_in", timeIn);
+        return HTTPGetRequest.post(url + "?func=cars_inside_update_number", map);
     }
 
     public static String getCams() {
@@ -102,7 +146,10 @@ public class ApacheServerReqeust {
     }
 
     public static String getHistoriesWithDates(String start, String end) {
-        return HTTPGetRequest.get(url, String.format("func=history_date_search&start=%s&end=%s", start, end));
+        Map<String, String> map = new HashMap<>();
+        map.put("start", start);
+        map.put("end", end);
+        return HTTPGetRequest.post(url + "?func=history_date_search", map);
     }
 
     public static String deleteHistory(long id) {
@@ -119,7 +166,18 @@ public class ApacheServerReqeust {
         map.put("start", start);
         map.put("end", end);
         map.put("payment", payment);
-        return HTTPGetRequest.post(url+"?func=pay_dates_search", map);
+        return HTTPGetRequest.post(url + "?func=pay_dates_search", map);
+    }
+
+    public static String setCarInsidePay(String carNumber, String payTime, int cost, int discount, String billNumber, String payment) {
+        Map<String, String> map = new HashMap<>();
+        map.put("car_number", carNumber);
+        map.put("time_pay", payTime);
+        map.put("cost", String.valueOf(cost));
+        map.put("discount", String.valueOf(discount));
+        map.put("bill_number", billNumber);
+        map.put("payment", payment);
+        return HTTPGetRequest.post(url + "?func=cars_inside_update", map);
     }
 
     public static String getCompanyInformation() {
@@ -162,6 +220,10 @@ public class ApacheServerReqeust {
         HTTPGetRequest.get(url, String.format("func=cam_update_open&ip=%s&open=1", ip));
     }
 
+    public static void setCamGateClose(String ip) {
+        HTTPGetRequest.get(url, String.format("func=cam_update_close&ip=%s&close=1", ip));
+    }
+
     public static String getDayHoliday() {
         return HTTPGetRequest.get(url, "func=day_holiday_search");
     }
@@ -171,4 +233,78 @@ public class ApacheServerReqeust {
                 sunday, monday, tuesday, wednesday, thursday, friday, saturday));
     }
 
+    public static String getPrintSettings() {
+        return HTTPGetRequest.get(url, "func=print_search");
+    }
+
+    public static String updatePrintSettings(String newRoll, String warning, String invoice, String revenue, String coupon) {
+        return HTTPGetRequest.get(url, String.format("func=print_update&new_roll=%s&warning=%s&print_invoice=%s&print_revenue=%s&print_coupon=%s",
+                newRoll, warning, invoice, revenue, coupon));
+    }
+
+    public static String getCouponHistory() {
+        return HTTPGetRequest.get(url, "func=coupon_history_search");
+    }
+
+    public static String addCouponHistory(String time_fee, String amount, String count, String deadline, String user, String mark) {
+        Map<String, String> map = new HashMap<>();
+        map.put("time_fee", time_fee);
+        map.put("amount", amount);
+        map.put("count", count);
+        map.put("deadline", deadline);
+        map.put("user", user);
+        map.put("mark", mark);
+        return HTTPGetRequest.post(url + "?func=coupon_history_add", map);
+    }
+
+    public static String updateCouponSetting(String time_fee, String amount, String count, String deadline, String code) {
+        Map<String, String> map = new HashMap<>();
+        map.put("time_fee", time_fee);
+        map.put("amount", amount);
+        map.put("paper", count);
+        map.put("deadline", deadline);
+        map.put("code", code);
+        map.put("print", "1");
+        return HTTPGetRequest.post(url + "?func=coupon_setting_update", map);
+    }
+
+    public static String addCouponList(String code, String deadline, int time_fee, String amount) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", code);
+        map.put("deadline", deadline);
+        map.put("time_fee", String.valueOf(time_fee));
+        map.put("amount", amount);
+        return HTTPGetRequest.post(url + "?func=coupon_list_add", map);
+    }
+
+    public static String moneyCountSearch() {
+        return HTTPGetRequest.get(url, "func=money_count_search");
+    }
+
+    public static String moneyCountUpdate(int five, int ten, int fifty, int hundred) {
+        return HTTPGetRequest.get(url, String.format("func=money_count_update&five=%d&ten=%d&fifty=%d&hundred=%d", five, ten, fifty, hundred));
+    }
+
+    public static String moneyBasicSearch() {
+        return HTTPGetRequest.get(url, "func=money_basic_search");
+    }
+
+    public static String moneyBasicUpdate(String five_basic, String ten_basic, String fifty_basic, String five_alert, String ten_alert, String fifty_alert) {
+        return HTTPGetRequest.get(url, String.format("func=money_basic_update&five_basic=%s&ten_basic=%s&fifty_basic=%s&five_alert=%s&ten_alert=%s&fifty_alert=%s",
+                five_basic, ten_basic, fifty_basic, five_alert, ten_alert, fifty_alert));
+    }
+
+    public static String moneyRefundStart(String five, String ten, String fifty) {
+        return HTTPGetRequest.get(url, String.format("func=money_refund_update&five=%s&ten=%s&fifty=%s",
+                five, ten, fifty));
+    }
+
+    public static String moneySupplyStart(String five, String ten, String fifty) {
+        return HTTPGetRequest.get(url, String.format("func=money_supply_start&five=%s&ten=%s&fifty=%s",
+                five, ten, fifty));
+    }
+
+    public static String moneySupplySearch() {
+        return HTTPGetRequest.get(url, "func=money_supply_search");
+    }
 }

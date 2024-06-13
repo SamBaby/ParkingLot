@@ -90,7 +90,16 @@
                 android:text="@string/revenue_extract"
                 android:textColor="@android:color/darker_gray" />
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
 
+            <TextView
+                android:id="@+id/text_ip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"

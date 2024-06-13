@@ -334,80 +334,83 @@ public class HolidayFragment extends Fragment {
     private void tableSetting() {
         TableLayout tableHoliday = binding.tableHolidayData;
         tableHoliday.removeAllViews();
-        selectedRow.set(null);
-        new Thread(() -> {
-            getHolidays();
-            getActivity().runOnUiThread(() -> {
-                try {
-                    // 遍历数据列表并为每行创建 TableRow
-                    for (int i = 0; i < holidays.size(); i++) {
-                        TableRow tableRow = new TableRow(tableHoliday.getContext());
-                        tableRow.setLayoutParams(new TableRow.LayoutParams(
-                                TableRow.LayoutParams.WRAP_CONTENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
-                        Holiday holiday = holidays.get(i);
-                        // 为每行添加单元格
-                        for (int j = 0; j < 6; j++) {
-                            TextView textView = new TextView(tableRow.getContext());
-                            textView.setPadding(5, 5, 5, 5);
-                            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-                            textView.setGravity(Gravity.CENTER);
-                            textView.setLayoutParams(layoutParams);
-                            switch (j) {
-                                case 0:
-                                    textView.setText(String.valueOf(holiday.getNumber()));
-                                    break;
-                                case 1:
-                                    textView.setText(holiday.getDate());
-                                    break;
-                                case 2:
-                                    textView.setText(weekdays[holiday.getWeekday()]);
-                                    break;
-                                case 3:
-                                    textView.setText(holiday.getDescription());
-                                    break;
-                                case 4:
-                                    textView.setText(holiday.getUpdateDate());
-                                    break;
-                                case 5:
-                                    textView.setText(holiday.getAccount());
-                                    break;
-                                default:
-                                    break;
-                            }
-                            tableRow.addView(textView);
-                            tableRow.setOnClickListener(v -> {
-                                if (selectedRow.get() != null) {
-                                    selectedRow.get().setBackground(null);
-                                }
-                                v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                                selectedRow.set((TableRow) v);
-                            });
-                        }
-                        // 将 TableRow 添加到 TableLayout
-                        tableHoliday.addView(tableRow);
+        selectedRow.set(null);getHolidays();
+        try {
+            // 遍历数据列表并为每行创建 TableRow
+            for (int i = 0; i < holidays.size(); i++) {
+                TableRow tableRow = new TableRow(tableHoliday.getContext());
+                tableRow.setLayoutParams(new TableRow.LayoutParams(
+                        TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.WRAP_CONTENT));
+                Holiday holiday = holidays.get(i);
+                // 为每行添加单元格
+                for (int j = 0; j < 6; j++) {
+                    TextView textView = new TextView(tableRow.getContext());
+                    textView.setPadding(5, 5, 5, 5);
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setLayoutParams(layoutParams);
+                    switch (j) {
+                        case 0:
+                            textView.setText(String.valueOf(holiday.getNumber()));
+                            break;
+                        case 1:
+                            textView.setText(holiday.getDate());
+                            break;
+                        case 2:
+                            textView.setText(weekdays[holiday.getWeekday()]);
+                            break;
+                        case 3:
+                            textView.setText(holiday.getDescription());
+                            break;
+                        case 4:
+                            textView.setText(holiday.getUpdateDate());
+                            break;
+                        case 5:
+                            textView.setText(holiday.getAccount());
+                            break;
+                        default:
+                            break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    tableRow.addView(textView);
+                    tableRow.setOnClickListener(v -> {
+                        if (selectedRow.get() != null) {
+                            selectedRow.get().setBackground(null);
+                        }
+                        v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                        selectedRow.set((TableRow) v);
+                    });
                 }
-            });
-        }).start();
+                // 将 TableRow 添加到 TableLayout
+                tableHoliday.addView(tableRow);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getHolidays() {
-        try {
-            String json = ApacheServerReqeust.getHolidays();
-            JSONArray array = new JSONArray(json);
-            if (array.length() > 0) {
-                holidays.clear();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    holidays.add(new Holiday(obj.getInt("number"), obj.getString("date"),
-                            obj.getInt("weekday"), obj.getString("update_date"), obj.getString("account"), obj.getString("description")));
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerReqeust.getHolidays();
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    holidays.clear();
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        holidays.add(new Holiday(obj.getInt("number"), obj.getString("date"),
+                                obj.getInt("weekday"), obj.getString("update_date"), obj.getString("account"), obj.getString("description")));
 
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
+        });
+        try {
+            t.start();
+            t.join();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

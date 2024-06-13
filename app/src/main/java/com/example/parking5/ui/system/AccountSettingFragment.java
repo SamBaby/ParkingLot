@@ -309,18 +309,26 @@ public class AccountSettingFragment extends Fragment {
     }
 
     private void getUsers() {
-        try {
-            String json = ApacheServerReqeust.getUsers();
-            JSONArray array = new JSONArray(json);
-            if (array.length() > 0) {
-                users.clear();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    users.add(new User(obj.getString("account"), obj.getString("password"),
-                            obj.getString("name"), obj.getString("phone"), obj.getString("permission")));
+        Thread t = new Thread(()->{
+            try {
+                String json = ApacheServerReqeust.getUsers();
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    users.clear();
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        users.add(new User(obj.getString("account"), obj.getString("password"),
+                                obj.getString("name"), obj.getString("phone"), obj.getString("permission")));
 
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
         } catch (Exception e) {
             e.printStackTrace();
         }

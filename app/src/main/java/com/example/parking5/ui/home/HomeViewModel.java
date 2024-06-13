@@ -106,7 +106,7 @@ public class HomeViewModel extends ViewModel {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, null, null);
+                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {
@@ -143,7 +143,7 @@ public class HomeViewModel extends ViewModel {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, null, null);
+                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {

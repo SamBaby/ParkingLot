@@ -4,6 +4,8 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -48,7 +51,7 @@ public class HistoryEntranceFragment extends Fragment {
     private Button btnAdd;
     private Button btnSearch;
     private Button btnDelete;
-    Var<TableRow> selectedRow;
+    Var<TableRow> selectedRow = new Var<>();
     Vector<CarHistory> histories;
     private String startDate;
     private String endDate;
@@ -66,19 +69,25 @@ public class HistoryEntranceFragment extends Fragment {
         selectedRow = new Var<>();
         histories = new Vector<>();
 
-        btnAdd = root.findViewById(R.id.button_add);
+//        btnAdd = root.findViewById(R.id.button_add);
         btnDelete = root.findViewById(R.id.button_delete);
         btnSearch = root.findViewById(R.id.button_search);
-        btnAdd.setOnClickListener(v -> {
-//            addHistory();
-        });
+//        btnAdd.setOnClickListener(v -> {
+////            addHistory();
+//        });
         btnDelete.setOnClickListener(v -> {
             deleteHistory();
         });
         btnSearch.setOnClickListener(v -> {
             searchHistory();
         });
-        tableSetting();
+        String start = "";
+        String end = "";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
+        Calendar c = new GregorianCalendar();
+        start = String.format(formatter.format(c.getTime()) + " 00:00:00");
+        end = String.format(formatter.format(c.getTime()) + " 23:59:59");
+        tableSetting(start ,end);
         return root;
     }
 
@@ -104,24 +113,41 @@ public class HistoryEntranceFragment extends Fragment {
         ToggleButton buttonDef = dialogView.findViewById(R.id.toggleButton_self_def);
         buttonDay.setChecked(true);
         buttonDay.setOnClickListener((v) -> {
-            buttonWeek.setChecked(false);
-            buttonMonth.setChecked(false);
-            buttonDef.setChecked(false);
+            if (buttonWeek.isChecked() || buttonMonth.isChecked() || buttonDef.isChecked()) {
+                buttonWeek.setChecked(false);
+                buttonMonth.setChecked(false);
+                buttonDef.setChecked(false);
+            } else {
+                buttonDay.setChecked(true);
+            }
         });
         buttonWeek.setOnClickListener((v) -> {
-            buttonDay.setChecked(false);
-            buttonMonth.setChecked(false);
-            buttonDef.setChecked(false);
+            if (buttonDay.isChecked() || buttonMonth.isChecked() || buttonDef.isChecked()) {
+                buttonDay.setChecked(false);
+                buttonMonth.setChecked(false);
+                buttonDef.setChecked(false);
+            } else {
+                buttonWeek.setChecked(true);
+            }
+
         });
         buttonMonth.setOnClickListener((v) -> {
-            buttonDay.setChecked(false);
-            buttonWeek.setChecked(false);
-            buttonDef.setChecked(false);
+            if (buttonDay.isChecked() || buttonWeek.isChecked() || buttonDef.isChecked()) {
+                buttonDay.setChecked(false);
+                buttonWeek.setChecked(false);
+                buttonDef.setChecked(false);
+            } else {
+                buttonMonth.setChecked(true);
+            }
         });
         buttonDef.setOnClickListener((v) -> {
-            buttonDay.setChecked(false);
-            buttonWeek.setChecked(false);
-            buttonMonth.setChecked(false);
+            if (buttonDay.isChecked() || buttonWeek.isChecked() || buttonMonth.isChecked()) {
+                buttonDay.setChecked(false);
+                buttonWeek.setChecked(false);
+                buttonMonth.setChecked(false);
+            } else {
+                buttonDef.setChecked(true);
+            }
         });
         txtStart.setOnClickListener(v -> {
             Util.showDateTimeDialog(getActivity(), txtStart);
@@ -180,7 +206,7 @@ public class HistoryEntranceFragment extends Fragment {
         // 遍历数据列表并为每行创建 TableRow
         for (int i = 0; i < histories.size(); i++) {
             TableRow tableRow = new TableRow(tableData.getContext());
-            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             CarHistory history = histories.get(i);
             // 为每行添加单元格
             for (int j = 0; j < 6; j++) {
@@ -212,18 +238,39 @@ public class HistoryEntranceFragment extends Fragment {
                         break;
                 }
                 tableRow.addView(textView);
-                tableRow.setOnClickListener(v -> {
-                    if (selectedRow.get() != null) {
-                        selectedRow.get().setBackground(null);
-                    }
-                    v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-                    selectedRow.set((TableRow) v);
-                });
-            }
 
+            }
+            tableRow.setOnClickListener(v -> {
+                if (selectedRow.get() != null) {
+                    selectedRow.get().setBackground(null);
+                }
+                v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                selectedRow.set((TableRow) v);
+            });
+            tableRow.setOnLongClickListener(v -> {
+                // Load the image and set it to the ImageView
+                Bitmap bitmap = BitmapFactory.decodeFile(history.getPicture_url());
+                showImageDialog(bitmap);
+                return false;
+            });
             // 将 TableRow 添加到 TableLayout
             tableData.addView(tableRow);
         }
+    }
+
+    private void showImageDialog(Bitmap bitmap) {
+        Dialog imageDialog = new Dialog(this.getContext());
+        imageDialog.setContentView(R.layout.dialog_image);
+        ImageView imageView = imageDialog.findViewById(R.id.imageView);
+        imageView.setImageBitmap(bitmap);// Set your image here
+
+        imageDialog.setOnDismissListener(dialog -> {
+            // Handle the dialog dismissing
+        });
+
+        imageDialog.setCanceledOnTouchOutside(true);
+
+        imageDialog.show();
     }
 
     private void getHistory() {

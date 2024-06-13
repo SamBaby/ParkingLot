@@ -46,7 +46,7 @@
                     android:text="@string/new_print_piece" />
 
                 <EditText
-                    android:id="@+id/editText_bill_title"
+                    android:id="@+id/editText_bill_total"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
@@ -172,6 +172,24 @@
                     android:gravity="center|start"
                     android:text="@string/piece" />
             </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></View>
+
+                <Button
+                    android:id="@+id/button_modify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="@string/modify_confirm" />
+            </TableRow>
         </TableLayout>
 
         <TableLayout
@@ -197,7 +215,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -225,7 +244,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:textSize="30sp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -237,6 +257,7 @@
         </TableLayout>
 
         <Button
+            android:id="@+id/button_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

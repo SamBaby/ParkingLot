@@ -40,11 +40,13 @@ public class HomeFragment extends Fragment {
     private TextView txtBills;
     private TextView txtDay;
     private TextView txtMonth;
+    private TextView textIP;
     private Button btnAbnormalCar;
     private Button btnExtract;
     private Vector<Cam> cams;
     private Vector<ToggleButton> channelButtons = new Vector<>();
     private VideoView videoView;
+    private Cam selectedCam;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class HomeFragment extends Fragment {
         txtBills = binding.textViewBillLeft;
         txtDay = binding.textViewRevenueDay;
         txtMonth = binding.textViewRevenueMonth;
+        textIP = binding.textIp;
         btnAbnormalCar = binding.buttonAbnormalLicense;
         btnExtract = binding.buttonRevenueExtract;
         videoView = binding.videoView;
@@ -137,18 +140,14 @@ public class HomeFragment extends Fragment {
         Button in = binding.remoteOpenIn;
         Button out = binding.remoteOpenOut;
         in.setOnClickListener(v -> {
-            for (Cam cam : cams) {
-                if (cam.getIn_out() == 0) {
-                    new Thread(() -> ApacheServerReqeust.setCamGateOpen(cam.getIp())).start();
-                }
-            }
+            new Thread(() -> {
+                ApacheServerReqeust.setCamGateOpen(selectedCam.getIp());
+            }).start();
         });
         out.setOnClickListener(v -> {
-            for (Cam cam : cams) {
-                if (cam.getIn_out() == 1) {
-                    new Thread(() -> ApacheServerReqeust.setCamGateOpen(cam.getIp())).start();
-                }
-            }
+            new Thread(() -> {
+                ApacheServerReqeust.setCamGateClose(selectedCam.getIp());
+            }).start();
         });
     }
 
@@ -175,6 +174,8 @@ public class HomeFragment extends Fragment {
                     toggleButton.setChecked(true);
                     toggleButton.setTextColor(Color.BLACK);
                     playRTSP(ip);
+                    selectedCam = cam;
+                    textIP.setText(cam.getIp());
                 } else {
                     toggleButton.setTextColor(Color.GRAY);
                 }
@@ -187,6 +188,8 @@ public class HomeFragment extends Fragment {
                             btn.setTextColor(Color.GRAY);
                         }
                     }
+                    selectedCam = cam;
+                    textIP.setText(cam.getIp());
                 });
                 // 添加 ToggleButton 到 TableRow
                 tableRow.addView(toggleButton);

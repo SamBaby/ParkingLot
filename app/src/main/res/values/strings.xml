@@ -258,4 +258,40 @@
 
     <string name="remote_open_in">遠端開啟IN</string>
     <string name="remote_open_out">遠端開啟OUT</string>
+
+    <string name="revenue">營收</string>
+    <string name="revenue_description">註 : 不同期間營收可⾄ 表列資料 查詢 </string>
+    <string name="revenue_day_title">當日</string>
+    <string name="revenue_month_title">當月</string>
+    <string name="revenue_cash">現金支付</string>
+    <string name="revenue_ecpay">電子支付</string>
+    <string name="revenue_total">總計</string>
+    <string name="revenue_cash_left">現金存額</string>
+    <string name="revenue_amount">存量</string>
+    <string name="revenue_count">小計</string>
+    <string name="revenue_take_money">提取收益</string>
+    <string name="cash_setting">現金存量設定</string>
+    <string name="five_left">5 元 存量</string>
+    <string name="ten_left">10元 存量</string>
+    <string name="fifty_left">50元 存量</string>
+    <string name="left_description">註:存量為提取收益後存留退幣機內數量</string>
+    <string name="reminder">不足提示</string>
+    <string name="coin_take">退補幣</string>
+    <string name="five_input_amount">5 元  補充量</string>
+    <string name="ten_input_amount">10元  補充量</string>
+    <string name="fifty_input_amount">50元  補充量</string>
+    <string name="coin_refund">退幣 </string>
+    <string name="coin_input">補充錢幣</string>
+
+    <string name="attention">注意</string>
+    <string name="take_bill_warning">\n提取收益 時請確認相關⼈員是否有再現場\n\n請問是否確定 提取收益 ? \n</string>
+    <string name="check_take_bill">百元紙鈔 已從紙鈔機現⾦盒中取出</string>
+    <string name="take_coin_warning">\n退幣 時請確認相關⼈員是否有再現場\n\n請問是否確定 退幣 ? \n</string>
+    <string name="supply_choose">請選擇補充方式</string>
+    <string name="coin_pour">補充錢幣 已開機櫃投入錢幣盒內</string>
+    <string name="coin_insert">確定後 由投幣⼝投入</string>
+    <string name="please_insert">請投入</string>
+    <string name="already_insert">已投入</string>
+
+    <string name="car_inside_add">場內車輛新增</string>
 </resources>

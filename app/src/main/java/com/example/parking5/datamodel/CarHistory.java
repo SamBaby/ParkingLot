@@ -12,6 +12,7 @@ public class CarHistory {
     private int artificial;
     private String type;
     private String color;
+    private String picture_url;
     public CarHistory(long id, String carNumber, String timeIn, String timeOut, String timePay, int cost, String billNumber, String payment, int artificial, String type, String color) {
         this.setType(type);
         this.setColor(color);
@@ -112,5 +113,13 @@ public class CarHistory {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getPicture_url() {
+        return picture_url;
+    }
+
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
     }
 }

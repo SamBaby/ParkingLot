@@ -25,13 +25,18 @@ import com.example.parking5.databinding.FragmentHistoryLicenseBinding;
 import com.example.parking5.datamodel.CarInside;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Vector;
 
 public class HistoryLicenseFragment extends Fragment {
@@ -57,25 +62,167 @@ public class HistoryLicenseFragment extends Fragment {
         buttonSetting();
         return root;
     }
+
     private void buttonSetting() {
         Button btnModify = binding.buttonModify;
+        Button btnAdd = binding.buttonAdd;
         Button btnDelete = binding.buttonDelete;
         Button btnSearch = binding.buttonSearch;
         btnModify.setOnClickListener(v -> {
+            showModifyDialog();
+        });
+        btnAdd.setOnClickListener(v -> {
+            showAddDialog();
         });
         btnDelete.setOnClickListener(v -> {
+            deleteCarInside();
         });
         btnSearch.setOnClickListener(v -> {
+            showSearchDialog();
         });
     }
-    private void tableSetting() {
-        tableSetting("", "");
+
+    private void showAddDialog() {
+        final View dialogView = View.inflate(getActivity(), R.layout.allow_exit_add, null);
+        Dialog dialog = new Dialog(getActivity());
+        TextView txtCarNumber = dialogView.findViewById(R.id.car_number_edittext);
+        TextView txtExitTime = dialogView.findViewById(R.id.textView_exit_time);
+        txtExitTime.setOnClickListener(v -> {
+            Util.showDateTimeDialog(getActivity(), txtExitTime);
+        });
+        dialogView.findViewById(R.id.cancel_button).setOnClickListener((v) -> dialog.dismiss());
+        dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
+            if (!txtCarNumber.getText().toString().isEmpty() && !txtExitTime.getText().toString().isEmpty()) {
+                String number = txtCarNumber.getText().toString();
+                String time = txtExitTime.getText().toString();
+                boolean isCarInside = isCarInside(number);
+                if (!isCarInside) {
+                    addCarInside(number, time);
+                }
+                tableSetting();
+                dialog.dismiss();
+            }
+        });
+        dialog.setContentView(dialogView);
+        dialog.show();
+
     }
 
-    private void tableSetting(String start, String end) {
+    private void addCarInside(String number, String start) {
+        Thread t = new Thread(() -> {
+            ApacheServerReqeust.addCarInsideWithCarNumber(number, start);
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean isCarInside(String number) {
+        Var<Boolean> ret = new Var<>(false);
+        Thread t = new Thread(() -> {
+            String res = ApacheServerReqeust.getCarInsideWithCarNumber(number);
+            try {
+                JSONArray array = new JSONArray(res);
+                if (array.length() > 0) {
+                    ret.set(true);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret.get();
+    }
+
+    private void showSearchDialog() {
+        final View dialogView = View.inflate(getActivity(), R.layout.car_number_modify_search, null);
+        Dialog dialog = new Dialog(getActivity());
+        TextView txtCarNumber = dialogView.findViewById(R.id.car_number_edittext);
+        TextView txtStart = dialogView.findViewById(R.id.textView_start);
+        TextView txtEnd = dialogView.findViewById(R.id.textView_end);
+        txtStart.setOnClickListener(v -> {
+            Util.showDateTimeDialog(getActivity(), txtStart);
+        });
+        txtEnd.setOnClickListener(v -> {
+            Util.showDateTimeDialog(getActivity(), txtEnd);
+        });
+        dialogView.findViewById(R.id.cancel_button).setOnClickListener((v) -> dialog.dismiss());
+        dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
+            if (!txtCarNumber.getText().toString().isEmpty() && !txtStart.getText().toString().isEmpty() && !txtEnd.getText().toString().isEmpty()) {
+                String number = txtCarNumber.getText().toString();
+                String start = txtStart.getText().toString();
+                String end = txtEnd.getText().toString();
+                searchCars(number, start, end);
+            }
+
+        });
+        dialog.setContentView(dialogView);
+        dialog.show();
+    }
+
+    private void searchCars(String number, String start, String end) {
+        tableSetting(number, start, end);
+    }
+
+    private void showModifyDialog() {
+        if (selectedRow.get() != null) {
+            final View dialogView = View.inflate(getActivity(), R.layout.car_number_modify, null);
+            Dialog dialog = new Dialog(getActivity());
+            TextView txtCarNumber = dialogView.findViewById(R.id.car_number_edittext);
+            TextView txtStart = dialogView.findViewById(R.id.textView_entrance_time);
+            ImageView imageView = dialogView.findViewById(R.id.imageView_car_number);
+            TableLayout table = binding.tableCarData;
+            int index = table.indexOfChild(selectedRow.get());
+            Bitmap bitmap = BitmapFactory.decodeFile(cars.get(index).getPicture_url());
+            imageView.setImageBitmap(bitmap);
+            txtCarNumber.setText(cars.get(index).getCar_number());
+            txtStart.setText(cars.get(index).getTime_in());
+            txtStart.setOnClickListener(v -> {
+                Util.showDateTimeDialog(getActivity(), txtStart);
+            });
+            dialogView.findViewById(R.id.cancel_button).setOnClickListener((v) -> dialog.dismiss());
+            dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
+                if (!txtCarNumber.getText().toString().isEmpty() && !txtStart.getText().toString().isEmpty()) {
+                    String old_number = cars.get(index).getCar_number();
+                    String number = txtCarNumber.getText().toString();
+                    String start = txtStart.getText().toString();
+                    updateCarInsideNumber(old_number, number, start);
+                    tableSetting();
+                    dialog.dismiss();
+                }
+
+            });
+            dialog.setContentView(dialogView);
+            dialog.show();
+        }
+    }
+
+    private void deleteCarInside() {
+        if (selectedRow.get() != null) {
+            TableLayout table = binding.tableCarData;
+            int index = table.indexOfChild(selectedRow.get());
+            deleteCarInsideData(cars.get(index).getCar_number());
+            tableSetting();
+        }
+    }
+
+    private void tableSetting() {
+        tableSetting("", "", "");
+    }
+
+    private void tableSetting(String carNumber, String start, String end) {
         TableLayout tableData = binding.tableCarData;
         tableData.removeAllViews();
-        getCarsWithDates(start, end);
+        selectedRow.set(null);
+        getCarsWithDates(carNumber, start, end);
         // 遍历数据列表并为每行创建 TableRow
         for (int i = 0; i < cars.size(); i++) {
             TableRow tableRow = new TableRow(tableData.getContext());
@@ -142,11 +289,15 @@ public class HistoryLicenseFragment extends Fragment {
         imageDialog.show();
     }
 
-    private void getCarsWithDates(String start, String end) {
+    private void getCarsWithDates(String carNumber, String start, String end) {
         Thread t = new Thread(() -> {
             String json = "";
-            if (!start.isEmpty()) {
+            if (!carNumber.isEmpty() && !start.isEmpty()) {
+                json = ApacheServerReqeust.getCarInsideWithDatesAndCarNumber(carNumber, start, end);
+            } else if (!start.isEmpty()) {
                 json = ApacheServerReqeust.getCarInsideWithDates(start, end);
+            } else if (!carNumber.isEmpty()) {
+                json = ApacheServerReqeust.getCarInsideWithCarNumber(carNumber);
             } else {
                 json = ApacheServerReqeust.getCarInside();
             }
@@ -163,6 +314,30 @@ public class HistoryLicenseFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteCarInsideData(String carNumber) {
+        Thread t = new Thread(() -> {
+            ApacheServerReqeust.deleteCarInside(carNumber);
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateCarInsideNumber(String old_number, String new_number, String timeIn) {
+        Thread t = new Thread(() -> {
+            ApacheServerReqeust.updateCarInsideNumber(old_number, new_number, timeIn);
         });
         try {
             t.start();

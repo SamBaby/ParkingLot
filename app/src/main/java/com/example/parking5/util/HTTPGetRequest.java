@@ -8,10 +8,10 @@ import java.net.URL;
 import java.util.Map;
 
 public class HTTPGetRequest {
-    public static synchronized String get(String url ,String args) {
+    public static synchronized String get(String url, String args) {
         try {
             // 创建 URL 对象
-            URL urlPass = new URL("http://localhost:8080/function.php/?" + args);
+            URL urlPass = new URL(url + "/?" + args);
 
             // 创建 HttpURLConnection 对象
             HttpURLConnection connection = (HttpURLConnection) urlPass.openConnection();
@@ -43,6 +43,7 @@ public class HTTPGetRequest {
         }
         return null;
     }
+
     public static synchronized String post(String url, Map<String, String> parameters) {
         try {
             // Create URL object
@@ -73,7 +74,7 @@ public class HTTPGetRequest {
             int responseCode = conn.getResponseCode();
             // Read response
             // TODO: Handle response here
-        // 读取响应内容
+            // 读取响应内容
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder response = new StringBuilder();
             String line;

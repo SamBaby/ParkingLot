@@ -75,6 +75,7 @@ public class BillFragment extends Fragment {
             binding.editTextCompanyId.setText(data.get().getCompanyID());
             binding.editTextHashKey.setText(data.get().getHashKey());
             binding.editTextHashIV.setText(data.get().getHashIV());
+            binding.switchTestVersion.setChecked(data.get().getTest() == 1);
         }
     }
 
@@ -123,7 +124,7 @@ public class BillFragment extends Fragment {
                     for (int i = 0; i < 1; i++) {
                         JSONObject obj = array.getJSONObject(i);
                         data.set(new ECPayData(obj.getInt("print_status"), obj.getInt("plus_car_number"), obj.getString("merchant_id"),
-                                obj.getString("company_id"), obj.getString("hash_key"), obj.getString("hash_iv"), obj.getString("machine_id")));
+                                obj.getString("company_id"), obj.getString("hash_key"), obj.getString("hash_iv"), obj.getString("machine_id"), obj.getInt("test")));
 
                     }
                 }
@@ -146,7 +147,8 @@ public class BillFragment extends Fragment {
                     binding.editTextCompanyId.getText().toString(),
                     binding.editTextHashKey.getText().toString(),
                     binding.editTextHashIV.getText().toString(),
-                    binding.editTextMachineId.getText().toString());
+                    binding.editTextMachineId.getText().toString(),
+                    binding.switchTestVersion.isChecked() ? 1 : 0);
         });
         try {
             t.start();

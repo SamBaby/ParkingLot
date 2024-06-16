@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApacheServerReqeust {
-    public static final String url = "http://192.168.1.200:8080/function.php";
+    public static final String url = "http://localhost:8080/function.php";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -117,8 +117,9 @@ public class ApacheServerReqeust {
         return HTTPGetRequest.get(url, "func=ecpay_search");
     }
 
-    public static String updateECPay(int printStatus, int plusCarNumber, String merchantID, String CompanyID, String key, String IV, String machineID) {
-        return HTTPGetRequest.get(url, String.format("func=ecpay_update&print_status=%d&plus_car_number=%d&merchant_id=%s&company_id=%s&hash_key=%s&hash_iv=%s", printStatus, plusCarNumber, merchantID, CompanyID, key, IV));
+    public static String updateECPay(int printStatus, int plusCarNumber, String merchantID, String CompanyID, String key, String IV, String machineID, int test) {
+        return HTTPGetRequest.get(url, String.format("func=ecpay_update&print_status=%d&plus_car_number=%d&merchant_id=%s&company_id=%s&hash_key=%s&hash_iv=%s&machine_id=%s&test=%d",
+                printStatus, plusCarNumber, merchantID, CompanyID, key, IV, machineID, test));
     }
 
     public static String getHolidays() {

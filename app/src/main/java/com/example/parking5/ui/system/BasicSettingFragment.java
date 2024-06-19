@@ -14,15 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 
-import com.example.parking5.R;
-import com.example.parking5.databinding.FragmentAccountSettingBinding;
 import com.example.parking5.databinding.FragmentBasicSettingBinding;
 import com.example.parking5.datamodel.BasicSetting;
-import com.example.parking5.datamodel.PayHistory;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -86,7 +82,7 @@ public class BasicSettingFragment extends Fragment {
 
     private void updateInfo(BasicSetting setting) {
         try {
-            Thread t = new Thread(() -> ApacheServerReqeust.setCompanyInformation(setting));
+            Thread t = new Thread(() -> ApacheServerRequest.setCompanyInformation(setting));
             t.start();
             t.join();
         } catch (Exception e) {
@@ -97,7 +93,7 @@ public class BasicSettingFragment extends Fragment {
     private BasicSetting getInformationFromServer() {
         Var<BasicSetting> setting = new Var<>();
         Thread t = new Thread(() -> {
-            String json = ApacheServerReqeust.getCompanyInformation();
+            String json = ApacheServerRequest.getCompanyInformation();
             try {
                 if (json != null) {
                     JSONArray jsonArray = new JSONArray(json);

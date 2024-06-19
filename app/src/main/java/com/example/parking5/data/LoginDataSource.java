@@ -1,9 +1,8 @@
 package com.example.parking5.data;
 
-import com.example.parking5.data.model.LoggedInUser;
 import com.example.parking5.datamodel.User;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +21,7 @@ public class LoginDataSource {
 
             Thread t = new Thread(() -> {
                 try {
-                    String json = ApacheServerReqeust.getUser(username, password);
+                    String json = ApacheServerRequest.getUser(username, password);
                     if (json != null) {
                         JSONArray array = new JSONArray(json);
                         if (array.length() > 0) {

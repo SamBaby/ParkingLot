@@ -1,22 +1,15 @@
 package com.example.parking5;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -28,7 +21,7 @@ import com.example.parking5.data.LoginRepository;
 import com.example.parking5.databinding.ActivityMainBinding;
 import com.example.parking5.datamodel.User;
 import com.example.parking5.ui.login.LoginActivity;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -147,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Thread t = new Thread(() -> {
-                ApacheServerReqeust.changeUserPassword(account, password);
+                ApacheServerRequest.changeUserPassword(account, password);
             });
             t.start();
             t.join();

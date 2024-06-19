@@ -1,10 +1,7 @@
 package com.example.parking5.ui.revenue;
 
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,13 +21,11 @@ import android.widget.ToggleButton;
 
 import com.example.parking5.R;
 import com.example.parking5.data.LoginRepository;
-import com.example.parking5.databinding.FragmentHistoryEntranceBinding;
 import com.example.parking5.databinding.FragmentRevenueCouponBinding;
-import com.example.parking5.datamodel.CarHistory;
 import com.example.parking5.datamodel.CouponHistory;
 import com.example.parking5.datamodel.User;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -199,7 +194,7 @@ public class RevenueCouponFragment extends Fragment {
     private void getCouponData() {
         histories.clear();
         Thread t = new Thread(() -> {
-            String json = ApacheServerReqeust.getCouponHistory();
+            String json = ApacheServerRequest.getCouponHistory();
 
             try {
                 JSONArray array = new JSONArray(json);
@@ -225,7 +220,7 @@ public class RevenueCouponFragment extends Fragment {
     private void addCouponHistory(int timeOrFee, String amount, String count, String deadline) {
         Thread t = new Thread(() -> {
             User user = LoginRepository.getInstance().getLoggedInUser();
-            ApacheServerReqeust.addCouponHistory(String.valueOf(timeOrFee), amount, count, deadline, user.getName(), "");
+            ApacheServerRequest.addCouponHistory(String.valueOf(timeOrFee), amount, count, deadline, user.getName(), "");
         });
         try {
             t.start();
@@ -237,7 +232,7 @@ public class RevenueCouponFragment extends Fragment {
 
     private void updateCouponSetting(int timeOrFee, String amount, String count, String deadline, String timeCode) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.updateCouponSetting(String.valueOf(timeOrFee), amount, count, deadline, timeCode);
+            ApacheServerRequest.updateCouponSetting(String.valueOf(timeOrFee), amount, count, deadline, timeCode);
         });
         try {
             t.start();
@@ -251,7 +246,7 @@ public class RevenueCouponFragment extends Fragment {
         Thread t = new Thread(() -> {
             int len = Integer.parseInt(count);
             for (int i = 0; i < len; i++) {
-                ApacheServerReqeust.addCouponList(String.format("%s_%s", timeCode, count), deadline, timeOrFee, amount);
+                ApacheServerRequest.addCouponList(String.format("%s_%s", timeCode, count), deadline, timeOrFee, amount);
             }
         });
         try {

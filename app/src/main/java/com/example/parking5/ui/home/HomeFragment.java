@@ -16,7 +16,6 @@ import android.widget.ToggleButton;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -26,7 +25,7 @@ import com.example.parking5.R;
 import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentHomeBinding;
 import com.example.parking5.datamodel.Cam;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -141,12 +140,12 @@ public class HomeFragment extends Fragment {
         Button out = binding.remoteOpenOut;
         in.setOnClickListener(v -> {
             new Thread(() -> {
-                ApacheServerReqeust.setCamGateOpen(selectedCam.getIp());
+                ApacheServerRequest.setCamGateOpen(selectedCam.getIp());
             }).start();
         });
         out.setOnClickListener(v -> {
             new Thread(() -> {
-                ApacheServerReqeust.setCamGateClose(selectedCam.getIp());
+                ApacheServerRequest.setCamGateClose(selectedCam.getIp());
             }).start();
         });
     }
@@ -213,7 +212,7 @@ public class HomeFragment extends Fragment {
         Vector<Cam> cams = new Vector<>();
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerReqeust.getCams();
+                String json = ApacheServerRequest.getCams();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     cams.clear();

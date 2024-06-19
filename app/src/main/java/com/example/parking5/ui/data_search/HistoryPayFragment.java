@@ -22,7 +22,7 @@ import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryPayBinding;
 import com.example.parking5.datamodel.PayHistory;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -211,9 +211,9 @@ public class HistoryPayFragment extends Fragment {
         Thread t = new Thread(() -> {
             String json = "";
             if (!start.isEmpty() || !carNumber.isEmpty() || !payment.isEmpty()) {
-                json = ApacheServerReqeust.getPayHistoryWithDates(start, end, carNumber, payment);
+                json = ApacheServerRequest.getPayHistoryWithDates(start, end, carNumber, payment);
             } else {
-                json = ApacheServerReqeust.getPayHistory();
+                json = ApacheServerRequest.getPayHistory();
             }
 
             try {

@@ -6,8 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.parking5.util.ApacheServerReqeust;
-import com.example.parking5.util.HTTPGetRequest;
+import com.example.parking5.util.ApacheServerRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +38,7 @@ public class HomeViewModel extends ViewModel {
         new Thread(() -> {
             int total = 0;
             try {
-                String slot = ApacheServerReqeust.getLeftLot();
+                String slot = ApacheServerRequest.getLeftLot();
                 if (slot != null && !slot.isEmpty()) {
                     JSONObject obj = new JSONArray(slot).getJSONObject(0);
                     total += obj.getInt("car_slot");
@@ -49,7 +48,7 @@ public class HomeViewModel extends ViewModel {
                     total += obj.getInt("reserved_slot");
                 }
 
-                String cars = ApacheServerReqeust.getCarInsideCount();
+                String cars = ApacheServerRequest.getCarInsideCount();
                 if (cars != null && !cars.isEmpty()) {
                     JSONObject obj = new JSONArray(cars).getJSONObject(0);
                     total -= obj.getInt("COUNT(*)");
@@ -106,7 +105,7 @@ public class HomeViewModel extends ViewModel {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
+                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {
@@ -143,7 +142,7 @@ public class HomeViewModel extends ViewModel {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
+                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {

@@ -3,7 +3,7 @@ package com.example.parking5.ui.system;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.datamodel.User;
 
 import org.json.JSONArray;
@@ -22,7 +22,7 @@ public class AccountSettingViewModel extends ViewModel {
     public void refreshUsers() {
         Thread t = new Thread(()->{
             try {
-                String json = ApacheServerReqeust.getUsers();
+                String json = ApacheServerRequest.getUsers();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     users.getValue().clear();

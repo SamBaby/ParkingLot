@@ -39,27 +39,27 @@
                 android:text="@string/coin_pour"
                 android:textSize="22sp" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="8dp">-->
 
 
-            <ToggleButton
-                android:id="@+id/toggleButton_insert"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:background="@drawable/custom_toggle_background"
-                android:textOff=""
-                android:textOn="" />
+<!--            <ToggleButton-->
+<!--                android:id="@+id/toggleButton_insert"-->
+<!--                android:layout_width="22dp"-->
+<!--                android:layout_height="22dp"-->
+<!--                android:background="@drawable/custom_toggle_background"-->
+<!--                android:textOff=""-->
+<!--                android:textOn="" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/coin_insert"
-                android:textSize="22sp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/coin_insert"-->
+<!--                android:textSize="22sp" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/layout_buttons"

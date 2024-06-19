@@ -15,18 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.parking5.R;
-import com.example.parking5.databinding.FragmentCarSettingBinding;
 import com.example.parking5.databinding.FragmentPrintSettingBinding;
-import com.example.parking5.datamodel.CarSlot;
 import com.example.parking5.datamodel.PrintSetting;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 public class PrintSettingFragment extends Fragment {
     private FragmentPrintSettingBinding binding;
@@ -77,7 +73,8 @@ public class PrintSettingFragment extends Fragment {
                 String invoice = txtInvoice.getText().toString();
                 String revenue = txtRevenue.getText().toString();
                 String coupon = txtCoupon.getText().toString();
-                ApacheServerReqeust.updatePrintSettings(total, warning, invoice, revenue, coupon);
+                ApacheServerRequest.updatePrintSettings(total, warning, invoice, revenue, coupon);
+                ApacheServerRequest.updatePrintPaperLeft(total);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -106,7 +103,7 @@ public class PrintSettingFragment extends Fragment {
     private void getPrintSetting() {
         Thread t = new Thread(() -> {
             try {
-                String res = ApacheServerReqeust.getPrintSettings();
+                String res = ApacheServerRequest.getPrintSettings();
                 if (res != null && !res.isEmpty()) {
                     JSONObject obj = new JSONArray(res).getJSONObject(0);
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();

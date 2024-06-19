@@ -6,8 +6,8 @@ import com.example.parking5.datamodel.BasicSetting;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ApacheServerReqeust {
-    public static final String url = "http://localhost:8080/function.php";
+public class ApacheServerRequest {
+    public static final String url = "http://192.168.0.252:8080/function.php/";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -242,7 +242,9 @@ public class ApacheServerReqeust {
         return HTTPGetRequest.get(url, String.format("func=print_update&new_roll=%s&warning=%s&print_invoice=%s&print_revenue=%s&print_coupon=%s",
                 newRoll, warning, invoice, revenue, coupon));
     }
-
+    public static String updatePrintPaperLeft(String newRoll) {
+        return HTTPGetRequest.get(url, String.format("func=print_update_paper_left&pay_left=%s",newRoll));
+    }
     public static String getCouponHistory() {
         return HTTPGetRequest.get(url, "func=coupon_history_search");
     }

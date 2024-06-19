@@ -16,18 +16,12 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.ToggleButton;
 
-import com.example.parking5.R;
-import com.example.parking5.databinding.FragmentAccountSettingBinding;
 import com.example.parking5.databinding.FragmentBasicFeeBinding;
 import com.example.parking5.datamodel.BasicFee;
-import com.example.parking5.datamodel.BasicSetting;
-import com.example.parking5.datamodel.CarHistory;
 import com.example.parking5.event.Var;
-import com.example.parking5.ui.system.AccountSettingViewModel;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -111,7 +105,7 @@ public class BasicFeeFragment extends Fragment {
 
     private void getData() {
         Thread t = new Thread(() -> {
-            String json = ApacheServerReqeust.getBasicFee();
+            String json = ApacheServerRequest.getBasicFee();
             if (json != null) {
                 try {
                     JSONArray array = new JSONArray(json);
@@ -136,7 +130,7 @@ public class BasicFeeFragment extends Fragment {
 
     private void updateFee(BasicFee fee) {
         try {
-            Thread t = new Thread(() -> ApacheServerReqeust.setBasicFee(fee));
+            Thread t = new Thread(() -> ApacheServerRequest.setBasicFee(fee));
             t.start();
             t.join();
         } catch (Exception e) {

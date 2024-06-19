@@ -24,7 +24,7 @@ import android.widget.ToggleButton;
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentAccountSettingBinding;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.datamodel.User;
 
 import org.json.JSONArray;
@@ -271,7 +271,7 @@ public class AccountSettingFragment extends Fragment {
 
     private void addAccount(String account, String password, String name, String phone, String permission) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.addUser(account, password, name, phone, permission);
+            ApacheServerRequest.addUser(account, password, name, phone, permission);
         });
         try {
             t.start();
@@ -284,7 +284,7 @@ public class AccountSettingFragment extends Fragment {
 
     private void updateAccount(String account, String password, String name, String phone, String permission) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.updateUser(account, password, name, phone, permission);
+            ApacheServerRequest.updateUser(account, password, name, phone, permission);
         });
         try {
             t.start();
@@ -297,7 +297,7 @@ public class AccountSettingFragment extends Fragment {
 
     private void deleteAccount(String account) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteUser(account);
+            ApacheServerRequest.deleteUser(account);
         });
         try {
             t.start();
@@ -311,7 +311,7 @@ public class AccountSettingFragment extends Fragment {
     private void getUsers() {
         Thread t = new Thread(()->{
             try {
-                String json = ApacheServerReqeust.getUsers();
+                String json = ApacheServerRequest.getUsers();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     users.clear();

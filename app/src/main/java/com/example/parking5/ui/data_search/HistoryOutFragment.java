@@ -1,16 +1,9 @@
 package com.example.parking5.ui.data_search;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,26 +13,19 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.parking5.MainActivity;
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryOutBinding;
 import com.example.parking5.datamodel.CarInside;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,11 +33,7 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -245,9 +227,9 @@ public class HistoryOutFragment extends Fragment {
         Thread t = new Thread(() -> {
             String json = "";
             if (!number.isEmpty()) {
-                json = ApacheServerReqeust.getCarInsideWithCarNumber(number);
+                json = ApacheServerRequest.getCarInsideWithCarNumber(number);
             } else {
-                json = ApacheServerReqeust.getCarInside();
+                json = ApacheServerRequest.getCarInside();
             }
 
             try {
@@ -288,7 +270,7 @@ public class HistoryOutFragment extends Fragment {
     private boolean isCarInside(String number) {
         Var<Boolean> ret = new Var<>(false);
         Thread t = new Thread(() -> {
-            String res = ApacheServerReqeust.getCarInsideWithCarNumber(number);
+            String res = ApacheServerRequest.getCarInsideWithCarNumber(number);
             try {
                 JSONArray array = new JSONArray(res);
                 if (array.length() > 0) {
@@ -313,7 +295,7 @@ public class HistoryOutFragment extends Fragment {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
             Calendar c = new GregorianCalendar();
             String start = formatter.format(c.getTime());
-            ApacheServerReqeust.addCarInsideWithCarNumber(number, start);
+            ApacheServerRequest.addCarInsideWithCarNumber(number, start);
         });
         try {
             t.start();
@@ -327,7 +309,7 @@ public class HistoryOutFragment extends Fragment {
     private boolean addCarInsidePay(String number, String payTime) {
         Var<Boolean> ret = new Var<>(false);
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.setCarInsidePay(number, payTime, 0,
+            ApacheServerRequest.setCarInsidePay(number, payTime, 0,
                     0, "", "A");
         });
         try {
@@ -341,7 +323,7 @@ public class HistoryOutFragment extends Fragment {
 
     private void deleteCarInsideData(String carNumber) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteCarInside(carNumber);
+            ApacheServerRequest.deleteCarInside(carNumber);
         });
         try {
             t.start();

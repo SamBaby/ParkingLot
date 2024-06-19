@@ -11,7 +11,7 @@ public class HTTPGetRequest {
     public static synchronized String get(String url, String args) {
         try {
             // 创建 URL 对象
-            URL urlPass = new URL(url + "/?" + args);
+            URL urlPass = new URL(url + "?" + args);
 
             // 创建 HttpURLConnection 对象
             HttpURLConnection connection = (HttpURLConnection) urlPass.openConnection();

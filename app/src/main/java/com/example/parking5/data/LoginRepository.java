@@ -1,9 +1,6 @@
 package com.example.parking5.data;
 
-import com.example.parking5.data.model.LoggedInUser;
 import com.example.parking5.datamodel.User;
-import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
 
 /**
  * Class that requests authentication and user information from the remote data source and

@@ -24,7 +24,7 @@ import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryLicenseBinding;
 import com.example.parking5.datamodel.CarInside;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,11 +32,6 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.Vector;
 
 public class HistoryLicenseFragment extends Fragment {
@@ -110,7 +105,7 @@ public class HistoryLicenseFragment extends Fragment {
 
     private void addCarInside(String number, String start) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.addCarInsideWithCarNumber(number, start);
+            ApacheServerRequest.addCarInsideWithCarNumber(number, start);
         });
         try {
             t.start();
@@ -123,7 +118,7 @@ public class HistoryLicenseFragment extends Fragment {
     private boolean isCarInside(String number) {
         Var<Boolean> ret = new Var<>(false);
         Thread t = new Thread(() -> {
-            String res = ApacheServerReqeust.getCarInsideWithCarNumber(number);
+            String res = ApacheServerRequest.getCarInsideWithCarNumber(number);
             try {
                 JSONArray array = new JSONArray(res);
                 if (array.length() > 0) {
@@ -293,13 +288,13 @@ public class HistoryLicenseFragment extends Fragment {
         Thread t = new Thread(() -> {
             String json = "";
             if (!carNumber.isEmpty() && !start.isEmpty()) {
-                json = ApacheServerReqeust.getCarInsideWithDatesAndCarNumber(carNumber, start, end);
+                json = ApacheServerRequest.getCarInsideWithDatesAndCarNumber(carNumber, start, end);
             } else if (!start.isEmpty()) {
-                json = ApacheServerReqeust.getCarInsideWithDates(start, end);
+                json = ApacheServerRequest.getCarInsideWithDates(start, end);
             } else if (!carNumber.isEmpty()) {
-                json = ApacheServerReqeust.getCarInsideWithCarNumber(carNumber);
+                json = ApacheServerRequest.getCarInsideWithCarNumber(carNumber);
             } else {
-                json = ApacheServerReqeust.getCarInside();
+                json = ApacheServerRequest.getCarInside();
             }
 
             try {
@@ -325,7 +320,7 @@ public class HistoryLicenseFragment extends Fragment {
 
     private void deleteCarInsideData(String carNumber) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteCarInside(carNumber);
+            ApacheServerRequest.deleteCarInside(carNumber);
         });
         try {
             t.start();
@@ -337,7 +332,7 @@ public class HistoryLicenseFragment extends Fragment {
 
     private void updateCarInsideNumber(String old_number, String new_number, String timeIn) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.updateCarInsideNumber(old_number, new_number, timeIn);
+            ApacheServerRequest.updateCarInsideNumber(old_number, new_number, timeIn);
         });
         try {
             t.start();

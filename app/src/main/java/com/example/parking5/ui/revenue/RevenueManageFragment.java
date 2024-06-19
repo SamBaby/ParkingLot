@@ -18,15 +18,12 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.parking5.R;
-import com.example.parking5.databinding.FragmentRevenueCouponBinding;
 import com.example.parking5.databinding.FragmentRevenueManageBinding;
-import com.example.parking5.datamodel.CouponHistory;
 import com.example.parking5.datamodel.MoneyBasic;
 import com.example.parking5.datamodel.MoneyCount;
 import com.example.parking5.datamodel.MoneySupply;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
-import com.example.parking5.util.Util;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -114,7 +111,7 @@ public class RevenueManageFragment extends Fragment {
         dialogView.findViewById(R.id.cancel_button).setOnClickListener((v) -> dialog.dismiss());
         dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
             Thread t = new Thread(() -> {
-                ApacheServerReqeust.moneyRefundStart(refund5.getText().toString(), refund10.getText().toString(), refund50.getText().toString());
+                ApacheServerRequest.moneyRefundStart(refund5.getText().toString(), refund10.getText().toString(), refund50.getText().toString());
             });
             try {
                 t.start();
@@ -133,22 +130,22 @@ public class RevenueManageFragment extends Fragment {
         final View dialogView = View.inflate(getActivity(), R.layout.supply_choose, null);
         Dialog dialog = new Dialog(getActivity());
         ToggleButton btnPour = dialogView.findViewById(R.id.toggleButton_pour);
-        ToggleButton btnInsert = dialogView.findViewById(R.id.toggleButton_insert);
+//        ToggleButton btnInsert = dialogView.findViewById(R.id.toggleButton_insert);
         btnPour.setChecked(true);
-        btnPour.setOnClickListener(v -> {
-            if (btnInsert.isChecked()) {
-                btnInsert.setChecked(false);
-            } else {
-                btnPour.setChecked(true);
-            }
-        });
-        btnInsert.setOnClickListener(v -> {
-            if (btnPour.isChecked()) {
-                btnPour.setChecked(false);
-            } else {
-                btnInsert.setChecked(true);
-            }
-        });
+//        btnPour.setOnClickListener(v -> {
+//            if (btnInsert.isChecked()) {
+//                btnInsert.setChecked(false);
+//            } else {
+//                btnPour.setChecked(true);
+//            }
+//        });
+//        btnInsert.setOnClickListener(v -> {
+//            if (btnPour.isChecked()) {
+//                btnPour.setChecked(false);
+//            } else {
+//                btnInsert.setChecked(true);
+//            }
+//        });
         dialogView.findViewById(R.id.cancel_button).setOnClickListener((v) -> dialog.dismiss());
         dialogView.findViewById(R.id.confirm_button).setOnClickListener((v) -> {
             MoneyCount moneyCount = getMoneyCount();
@@ -158,7 +155,7 @@ public class RevenueManageFragment extends Fragment {
                 int fiftyInput = Integer.parseInt(input50.getText().toString());
                 if (btnPour.isChecked()) {
                     Thread t = new Thread(() -> {
-                        ApacheServerReqeust.moneyCountUpdate(
+                        ApacheServerRequest.moneyCountUpdate(
                                 moneyCount.getFive() + fiveInput, moneyCount.getTen() + tenInput, moneyCount.getFifty() + fiftyInput, moneyCount.getHundred());
                     });
                     try {
@@ -181,7 +178,7 @@ public class RevenueManageFragment extends Fragment {
 
     private void showCoinInsertDialog(String input5, String input10, String input50) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.moneySupplyStart(input5, input10, input50);
+            ApacheServerRequest.moneySupplyStart(input5, input10, input50);
         });
         try {
             t.start();
@@ -237,7 +234,7 @@ public class RevenueManageFragment extends Fragment {
         setMoneyBasic();
         btnBasicSetting.setOnClickListener(v -> {
             Thread t = new Thread(() -> {
-                ApacheServerReqeust.moneyBasicUpdate(basic5.getText().toString(), basic10.getText().toString(), basic50.getText().toString(),
+                ApacheServerRequest.moneyBasicUpdate(basic5.getText().toString(), basic10.getText().toString(), basic50.getText().toString(),
                         reminder5.getText().toString(), reminder10.getText().toString(), reminder50.getText().toString());
             });
             try {
@@ -253,7 +250,7 @@ public class RevenueManageFragment extends Fragment {
         Var<MoneySupply> moneySupply = new Var<>();
         Thread t = new Thread(() -> {
             try {
-                String res = ApacheServerReqeust.moneySupplySearch();
+                String res = ApacheServerRequest.moneySupplySearch();
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     if (array.length() > 0) {
@@ -280,7 +277,7 @@ public class RevenueManageFragment extends Fragment {
         Var<MoneyBasic> moneyBasic = new Var<>();
         Thread t = new Thread(() -> {
             try {
-                String res = ApacheServerReqeust.moneyBasicSearch();
+                String res = ApacheServerRequest.moneyBasicSearch();
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     if (array.length() > 0) {
@@ -343,7 +340,7 @@ public class RevenueManageFragment extends Fragment {
             if (moneyCount != null && moneyBasic != null) {
                 Thread t = new Thread(() -> {
                     if (isBillTaken.isChecked()) {
-                        ApacheServerReqeust.moneyCountUpdate(moneyCount.getFive(), moneyCount.getTen(), moneyCount.getFifty(), 0);
+                        ApacheServerRequest.moneyCountUpdate(moneyCount.getFive(), moneyCount.getTen(), moneyCount.getFifty(), 0);
                     }
                     int refundFive = moneyCount.getFive() - moneyBasic.getFive_basic();
                     int refundTen = moneyCount.getTen() - moneyBasic.getTen_basic();
@@ -357,7 +354,7 @@ public class RevenueManageFragment extends Fragment {
                     if (refundFifty < 0) {
                         refundFifty = 0;
                     }
-                    ApacheServerReqeust.moneyRefundStart(String.valueOf(refundFive), String.valueOf(refundTen), String.valueOf(refundFifty));
+                    ApacheServerRequest.moneyRefundStart(String.valueOf(refundFive), String.valueOf(refundTen), String.valueOf(refundFifty));
                 });
                 try {
                     t.start();
@@ -378,7 +375,7 @@ public class RevenueManageFragment extends Fragment {
         Var<MoneyCount> moneyCount = new Var<>();
         Thread t = new Thread(() -> {
             try {
-                String res = ApacheServerReqeust.moneyCountSearch();
+                String res = ApacheServerRequest.moneyCountSearch();
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     if (array.length() > 0) {
@@ -446,7 +443,7 @@ public class RevenueManageFragment extends Fragment {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
+                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {
@@ -498,7 +495,7 @@ public class RevenueManageFragment extends Fragment {
             String startDate = formatter.format(start);
             String endDate = formatter.format(end);
             try {
-                String res = ApacheServerReqeust.getPayHistoryWithDates(startDate, endDate, "", "");
+                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
                 if (!res.isEmpty()) {
                     JSONArray array = new JSONArray(res);
                     for (int i = 0; i < array.length(); i++) {

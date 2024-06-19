@@ -28,7 +28,7 @@ import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryEntranceBinding;
 import com.example.parking5.datamodel.CarHistory;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,9 +37,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.YearMonth;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Vector;
@@ -276,7 +274,7 @@ public class HistoryEntranceFragment extends Fragment {
     private void getHistory() {
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerReqeust.getHistories();
+                String json = ApacheServerRequest.getHistories();
                 JSONArray array = new JSONArray(json);
                 histories.clear();
                 for (int i = 0; i < array.length(); i++) {
@@ -301,9 +299,9 @@ public class HistoryEntranceFragment extends Fragment {
         Thread t = new Thread(() -> {
             String json = "";
             if (!start.isEmpty() && !end.isEmpty()) {
-                json = ApacheServerReqeust.getHistoriesWithDates(start, end);
+                json = ApacheServerRequest.getHistoriesWithDates(start, end);
             } else {
-                json = ApacheServerReqeust.getHistories();
+                json = ApacheServerRequest.getHistories();
             }
 
             try {
@@ -329,7 +327,7 @@ public class HistoryEntranceFragment extends Fragment {
 
     private void deleteHistoryData(long id) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteHistory(id);
+            ApacheServerRequest.deleteHistory(id);
         });
         try {
             t.start();

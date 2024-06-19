@@ -25,7 +25,7 @@ import android.widget.TextView;
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentCameraSettingBinding;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.datamodel.Cam;
 
 import org.json.JSONArray;
@@ -78,7 +78,7 @@ public class CameraSettingFragment extends Fragment {
 
     private void deleteCam(String ip) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteCam(ip);
+            ApacheServerRequest.deleteCam(ip);
         });
         t.start();
         try {
@@ -129,7 +129,7 @@ public class CameraSettingFragment extends Fragment {
     private void updateCam(int number, String name, String inOut, boolean pay, boolean open, String oldIp, String newIp) {
         Thread t = new Thread(() -> {
             if (oldIp.equals(newIp) || !checkCamExist(newIp)) {
-                ApacheServerReqeust.updateCam(number, name, "入口".equals(inOut) ? 0 : 1, pay ? 1 : 0, open ? 1 : 0, oldIp, newIp);
+                ApacheServerRequest.updateCam(number, name, "入口".equals(inOut) ? 0 : 1, pay ? 1 : 0, open ? 1 : 0, oldIp, newIp);
             }
         });
         t.start();
@@ -170,7 +170,7 @@ public class CameraSettingFragment extends Fragment {
     private void addCam(int number, String name, String ip, String inOut, boolean pay, boolean open) {
         Thread t = new Thread(() -> {
             if (!checkCamExist(ip)) {
-                ApacheServerReqeust.addCam(number, name, ip, "入口".equals(inOut) ? 0 : 1, pay ? 0 : 1, open ? 0 : 1);
+                ApacheServerRequest.addCam(number, name, ip, "入口".equals(inOut) ? 0 : 1, pay ? 0 : 1, open ? 0 : 1);
             }
         });
         t.start();
@@ -247,7 +247,7 @@ public class CameraSettingFragment extends Fragment {
     private void getCams() {
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerReqeust.getCams();
+                String json = ApacheServerRequest.getCams();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     cams.clear();
@@ -272,7 +272,7 @@ public class CameraSettingFragment extends Fragment {
 
     private boolean checkCamExist(String ip) {
         try {
-            String json = ApacheServerReqeust.getCam(ip);
+            String json = ApacheServerRequest.getCam(ip);
             JSONArray array = new JSONArray(json);
             if (array.length() > 0) {
                 return true;

@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -26,7 +23,7 @@ import com.example.parking5.databinding.FragmentHolidayBinding;
 import com.example.parking5.datamodel.DayHoliday;
 import com.example.parking5.datamodel.Holiday;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,9 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -160,7 +154,7 @@ public class HolidayFragment extends Fragment {
 
     private void setDayHoliday() {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.setDayHoliday(
+            ApacheServerRequest.setDayHoliday(
                     btnSunday.isChecked() ? 1 : 0,
                     btnMonday.isChecked() ? 1 : 0,
                     btnTuesday.isChecked() ? 1 : 0,
@@ -181,7 +175,7 @@ public class HolidayFragment extends Fragment {
     private Map<Integer, Boolean> getDayHoliday() {
         Var<DayHoliday> holiday = new Var<>(null);
         Thread t = new Thread(() -> {
-            String json = ApacheServerReqeust.getDayHoliday();
+            String json = ApacheServerRequest.getDayHoliday();
             if (json != null) {
                 try {
                     JSONArray array = new JSONArray(json);
@@ -217,7 +211,7 @@ public class HolidayFragment extends Fragment {
 
     private void deleteHoliday(String date) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.deleteHoliday(date);
+            ApacheServerRequest.deleteHoliday(date);
         });
         try {
             t.start();
@@ -274,7 +268,7 @@ public class HolidayFragment extends Fragment {
 
     private void updateHoliday(int number, String oldDate, String newDate, String desc, int weekday, String updateDate, String account) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.updateHoliday(number, oldDate, newDate, weekday, desc, updateDate, account);
+            ApacheServerRequest.updateHoliday(number, oldDate, newDate, weekday, desc, updateDate, account);
         });
         try {
             t.start();
@@ -320,7 +314,7 @@ public class HolidayFragment extends Fragment {
 
     private void addHoliday(int number, String date, String desc, int weekday, String updateDate, String account) {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.addHoliday(number, date, weekday, desc, updateDate, account);
+            ApacheServerRequest.addHoliday(number, date, weekday, desc, updateDate, account);
         });
         try {
             t.start();
@@ -392,7 +386,7 @@ public class HolidayFragment extends Fragment {
     private void getHolidays() {
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerReqeust.getHolidays();
+                String json = ApacheServerRequest.getHolidays();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     holidays.clear();

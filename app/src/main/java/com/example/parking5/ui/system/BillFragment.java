@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.databinding.FragmentBillBinding;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.datamodel.ECPayData;
 
 import org.json.JSONArray;
@@ -118,7 +118,7 @@ public class BillFragment extends Fragment {
     private void getECPayData() {
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerReqeust.getECPay();
+                String json = ApacheServerRequest.getECPay();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
                     for (int i = 0; i < 1; i++) {
@@ -142,7 +142,7 @@ public class BillFragment extends Fragment {
 
     private void updateECPayData() {
         Thread t = new Thread(() -> {
-            ApacheServerReqeust.updateECPay(printStatus, binding.switchPrintCarNumber.isChecked() ? 1 : 0,
+            ApacheServerRequest.updateECPay(printStatus, binding.switchPrintCarNumber.isChecked() ? 1 : 0,
                     binding.editTextMerchantId.getText().toString(),
                     binding.editTextCompanyId.getText().toString(),
                     binding.editTextHashKey.getText().toString(),

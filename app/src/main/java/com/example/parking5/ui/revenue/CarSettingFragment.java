@@ -1,7 +1,6 @@
 package com.example.parking5.ui.revenue;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.databinding.FragmentCarSettingBinding;
-import com.example.parking5.datamodel.BasicFee;
 import com.example.parking5.datamodel.CarSlot;
 import com.example.parking5.event.Var;
-import com.example.parking5.util.ApacheServerReqeust;
+import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -126,14 +124,14 @@ public class CarSettingFragment extends Fragment {
 
     private void getCarSlot() {
         try {
-            String slot = ApacheServerReqeust.getLeftLot();
+            String slot = ApacheServerRequest.getLeftLot();
             if (slot != null && !slot.isEmpty()) {
                 JSONObject obj = new JSONArray(slot).getJSONObject(0);
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 carSlot.set(gson.fromJson(obj.toString(), CarSlot.class));
             }
 
-            String cars = ApacheServerReqeust.getCarInsideCount();
+            String cars = ApacheServerRequest.getCarInsideCount();
             if (cars != null && !cars.isEmpty()) {
                 JSONObject obj = new JSONArray(cars).getJSONObject(0);
                 carInside = obj.getInt("COUNT(*)");
@@ -169,7 +167,7 @@ public class CarSettingFragment extends Fragment {
             String pregnantLeft = pregnantSlotLeftSetting.getText().toString();
             String disabledLeft = disabledSlotLeftSetting.getText().toString();
             String chargingLeft = chargingSlotLeftSetting.getText().toString();
-            ApacheServerReqeust.carSlotUpdate(carSlot, pregnantSlot, disabledSlot, chargingSlot, reservedSlot,
+            ApacheServerRequest.carSlotUpdate(carSlot, pregnantSlot, disabledSlot, chargingSlot, reservedSlot,
                     carLeft, pregnantLeft, disabledLeft, chargingLeft);
         });
         t.start();

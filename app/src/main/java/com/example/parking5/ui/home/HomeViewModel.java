@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.parking5.datamodel.PrintSetting;
 import com.example.parking5.util.ApacheServerRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,6 +49,7 @@ public class HomeViewModel extends ViewModel {
                     total += obj.getInt("disabled_slot");
                     total += obj.getInt("charging_slot");
                     total += obj.getInt("reserved_slot");
+                    total += obj.getInt("car_left");
                 }
 
                 String cars = ApacheServerRequest.getCarInsideCount();
@@ -61,30 +65,21 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void setBillNumber() {
-//        new Thread(() -> {
-//            int total = 0;
-//            try {
-//                String slot = ApacheServerReqeust.getLeftLot();
-//                if (slot != null && !slot.isEmpty()) {
-//                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
-//                    total += obj.getInt("car_slot");
-//                    total += obj.getInt("pregnant_slot");
-//                    total += obj.getInt("disabled_slot");
-//                    total += obj.getInt("charging_slot");
-//                    total += obj.getInt("reserved_slot");
-//                }
-//
-//                String cars = ApacheServerReqeust.getCarInsideCount();
-//                if (cars != null && !cars.isEmpty()) {
-//                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
-//                    total -= obj.getInt("COUNT(*)");
-//                }
-//                lotLeft.postValue("剩餘車位:" + String.valueOf(total));
-//            } catch (Exception e) {
-//                Log.d("getLeftLots", "getLeftLots");
-//            }
-//        }).start();
-        billLeft.postValue("發票剩餘: 0");
+        Thread t = new Thread(() -> {
+            try {
+                String res = ApacheServerRequest.getPrintSettings();
+                if (res != null && !res.isEmpty()) {
+                    JSONObject obj = new JSONArray(res).getJSONObject(0);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    PrintSetting printSetting = gson.fromJson(obj.toString(), PrintSetting.class);
+                    billLeft.postValue("發票剩餘: " + printSetting.getPay_left());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                billLeft.postValue("發票剩餘: 0");
+            }
+        });
+        t.start();
     }
 
     private void setRevenueDay() {

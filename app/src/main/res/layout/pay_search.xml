@@ -39,6 +39,7 @@
                     android:id="@+id/car_number_edittext"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/border" />
 
@@ -142,6 +143,7 @@
                         android:id="@+id/textView_start"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
                         android:background="@drawable/border" />
                 </LinearLayout>
 
@@ -161,6 +163,7 @@
                         android:id="@+id/textView_end"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
                         android:background="@drawable/border" />
                 </LinearLayout>
 

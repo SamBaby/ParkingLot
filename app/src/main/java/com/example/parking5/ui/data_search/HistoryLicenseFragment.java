@@ -78,8 +78,9 @@ public class HistoryLicenseFragment extends Fragment {
     }
 
     private void showAddDialog() {
-        final View dialogView = View.inflate(getActivity(), R.layout.allow_exit_add, null);
+        final View dialogView = View.inflate(getActivity(), R.layout.car_inside_add, null);
         Dialog dialog = new Dialog(getActivity());
+        TextView txtTitle = dialogView.findViewById(R.id.textView_title);
         TextView txtCarNumber = dialogView.findViewById(R.id.car_number_edittext);
         TextView txtExitTime = dialogView.findViewById(R.id.textView_exit_time);
         txtExitTime.setOnClickListener(v -> {

@@ -93,10 +93,12 @@
                 android:id="@+id/switch_print_car_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:text=""
                 android:track="@drawable/switch_states_track" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -114,12 +116,14 @@
                 android:id="@+id/editText_machine_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
                 android:text=""
                 android:textAlignment="textStart" />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -137,6 +141,7 @@
                 android:id="@+id/editText_merchant_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -161,6 +166,7 @@
                 android:id="@+id/editText_company_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -190,6 +196,7 @@
                 android:id="@+id/editText_hash_key"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -219,6 +226,7 @@
                 android:id="@+id/editText_hash_IV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -244,6 +252,7 @@
                 android:id="@+id/editText_bill_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -269,6 +278,7 @@
                 android:id="@+id/editText_header_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -294,6 +304,7 @@
                 android:id="@+id/editText_header_image_position"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -319,6 +330,7 @@
                 android:id="@+id/editText_bill_bottom_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -344,6 +356,7 @@
                 android:id="@+id/editText_bill_bottom_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -369,6 +382,7 @@
                 android:id="@+id/editText_bill_bottom_image_position"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -394,6 +408,7 @@
                 android:id="@+id/switch_test_version"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
                 android:layout_weight="2"
                 android:text=""
                 android:track="@drawable/switch_states_track" />

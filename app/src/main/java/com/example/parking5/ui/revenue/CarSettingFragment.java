@@ -82,11 +82,6 @@ public class CarSettingFragment extends Fragment {
 
         displayCarLeft();
 
-        carSlotLeftSetting.setText("0");
-        pregnantSlotLeftSetting.setText("0");
-        disabledSlotLeftSetting.setText("0");
-        chargingSlotLeftSetting.setText("0");
-
         btnRefresh = binding.buttonRefresh;
         btnRefresh.setOnClickListener(v -> {
             displayCarLeft();
@@ -103,7 +98,7 @@ public class CarSettingFragment extends Fragment {
     private void displayCarLeft() {
         getCarSlotWithThreadJoin();
         if (carSlot.get() != null) {
-            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside));
+            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside + carSlot.get().getCar_left()));
             pregnantSlotCondition.setText(String.valueOf(carSlot.get().getPregnant_slot()));
             chargingSlotCondition.setText(String.valueOf(carSlot.get().getDisabled_slot()));
             disabledSlotCondition.setText(String.valueOf(carSlot.get().getCharging_slot()));

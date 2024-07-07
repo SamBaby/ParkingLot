@@ -2,6 +2,7 @@ package com.example.parking5.data;
 
 public class ConfigurationString {
     public static final String todayRevenue = "todayRevenue";
+    public static final String billLeft = "billLeft";
     public static final String carSetting = "carSetting";
     public static final String abnormal = "abnormal";
     public static final String currentPasswordNull = "目前密碼是空的";

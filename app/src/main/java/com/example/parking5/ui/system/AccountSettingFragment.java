@@ -35,10 +35,10 @@ import java.util.Vector;
 public class AccountSettingFragment extends Fragment {
     private static final int[] tableWeight = new int[]{2, 2, 2, 4, 1};
     Var<TableRow> selectedRow;
+    private Vector<User> users;
     private AccountSettingViewModel mViewModel;
     private FragmentAccountSettingBinding binding;
 
-    private Vector<User> users;
 
     public static AccountSettingFragment newInstance() {
         return new AccountSettingFragment();

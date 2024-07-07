@@ -8,12 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.parking5.databinding.FragmentBasicFeeBinding;
@@ -53,10 +56,12 @@ public class BasicFeeFragment extends Fragment {
         EditText weekdayMostFee = binding.editTextMostFeeADayWeekday;
         EditText weekendFee = binding.editTextWeekendHourDollar;
         EditText weekendMostFee = binding.editTextMostFeeADayWeekend;
+        EditText selfDefText = binding.editTextSelfDef;
         Switch switchBeforeOneHour = binding.switchBeforeOneHour;
         Switch switchWeekdayWeekendCross = binding.switchCrossWeekdayWeekend;
         ToggleButton button30 = binding.toggleButtonThirtyMinuteCount;
         ToggleButton button60 = binding.toggleButtonOneHourCount;
+        ToggleButton buttonSelf = binding.toggleButtonSelfDef;
         Button buttonSave = binding.buttonSave;
         if (basicFee.get() != null) {
             not_count_minute.setText(String.valueOf(basicFee.get().getEnter_time_not_count()));
@@ -68,6 +73,10 @@ public class BasicFeeFragment extends Fragment {
             switchWeekdayWeekendCross.setChecked(basicFee.get().getWeekday_holiday_cross() == 1);
             button30.setChecked(basicFee.get().getAfter_one_hour_unit() == 0);
             button60.setChecked(basicFee.get().getAfter_one_hour_unit() == 1);
+            buttonSelf.setChecked(basicFee.get().getAfter_one_hour_unit() > 1);
+            if (basicFee.get().getAfter_one_hour_unit() > 1) {
+                selfDefText.setText(String.valueOf(basicFee.get().getAfter_one_hour_unit()));
+            }
         }
         button30.setOnClickListener(v -> {
             if (oneHourUnit == 0 && !button30.isChecked()) {
@@ -76,6 +85,7 @@ public class BasicFeeFragment extends Fragment {
             }
             if (button30.isChecked()) {
                 button60.setChecked(false);
+                buttonSelf.setChecked(false);
                 oneHourUnit = 0;
             }
         });
@@ -86,7 +96,42 @@ public class BasicFeeFragment extends Fragment {
             }
             if (button60.isChecked()) {
                 button30.setChecked(false);
+                buttonSelf.setChecked(false);
                 oneHourUnit = 1;
+            }
+        });
+        buttonSelf.setOnClickListener(v -> {
+            if (oneHourUnit > 1 && !buttonSelf.isChecked()) {
+                buttonSelf.setChecked(true);
+                return;
+            }
+            if (buttonSelf.isChecked()) {
+                button30.setChecked(false);
+                button60.setChecked(false);
+                if (!selfDefText.getText().toString().isEmpty()) {
+                    oneHourUnit = Integer.parseInt(selfDefText.getText().toString());
+                }
+            }
+        });
+        selfDefText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(buttonSelf.isChecked() && !s.toString().isEmpty()){
+                    int unit = Integer.parseInt(s.toString());
+                    if(unit > 1){
+                        oneHourUnit = unit;
+                    }else{
+                        Toast.makeText(getActivity(), "Must greater than 1", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
         buttonSave.setOnClickListener(v -> {

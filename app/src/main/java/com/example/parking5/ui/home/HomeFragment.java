@@ -78,7 +78,9 @@ public class HomeFragment extends Fragment {
             Activity activity = getActivity();
             if (activity != null) {
                 NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_homeFragment_to_revenueFragment);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(ConfigurationString.billLeft, true);
+                navController.navigate(R.id.action_homeFragment_to_revenueFragment, bundle);
             }
 
         });

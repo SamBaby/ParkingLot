@@ -257,7 +257,7 @@
     <string name="confirm_password">確認密碼</string>
 
     <string name="remote_open_in">遠端開啟</string>
-    <string name="remote_open_out">遠端開啟</string>
+    <string name="remote_open_out">遠端關閉</string>
 
     <string name="revenue">營收</string>
     <string name="revenue_description">註 : 不同期間營收可⾄ 表列資料 查詢 </string>

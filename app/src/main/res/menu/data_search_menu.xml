@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_history_view"
-            android:title="@string/history_view" />
+            android:title="@string/history_view"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_history_pay"
-            android:title="@string/history_pay" />
+            android:title="@string/history_pay"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_history_out"
-            android:title="@string/history_out" />
+            android:title="@string/history_out"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/history_license"
-            android:title="@string/history_license" />
+            android:title="@string/history_license"
+            app:actionViewClass="android.widget.TextView" />
     </group>
 </menu>

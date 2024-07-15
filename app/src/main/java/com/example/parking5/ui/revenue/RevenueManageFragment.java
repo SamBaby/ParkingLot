@@ -84,6 +84,7 @@ public class RevenueManageFragment extends Fragment {
         moneyConditionSetting();
         moneyBasicSetting();
         moneyRefundSetting();
+        refreshRevenue();
         return root;
     }
 
@@ -116,11 +117,11 @@ public class RevenueManageFragment extends Fragment {
             try {
                 t.start();
                 t.join();
-                Thread.sleep(5000);
                 setMoneyCondition();
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            dialog.dismiss();
         });
         dialog.setContentView(dialogView);
         dialog.show();
@@ -308,7 +309,7 @@ public class RevenueManageFragment extends Fragment {
             basic50.setText(String.valueOf(moneyBasic.getFifty_basic()));
             reminder5.setText(String.valueOf(moneyBasic.getFive_alert()));
             reminder10.setText(String.valueOf(moneyBasic.getTen_alert()));
-            reminder50.setText(String.valueOf(moneyBasic.getFifty_basic()));
+            reminder50.setText(String.valueOf(moneyBasic.getFifty_alert()));
         }
     }
 
@@ -359,7 +360,6 @@ public class RevenueManageFragment extends Fragment {
                 try {
                     t.start();
                     t.join();
-                    Thread.sleep(5000);
                     setMoneyCondition();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -524,6 +524,23 @@ public class RevenueManageFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void refreshRevenue() {
+        new Thread(() -> {
+            while(getActivity() != null){
+                getActivity().runOnUiThread(()->{
+                    setRevenueDay();
+                    setRevenueMonth();
+                    setMoneyCondition();
+                });
+                try {
+                    Thread.sleep(1000);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Override

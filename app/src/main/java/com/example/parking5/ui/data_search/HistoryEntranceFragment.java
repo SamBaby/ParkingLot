@@ -43,7 +43,7 @@ import java.util.Locale;
 import java.util.Vector;
 
 public class HistoryEntranceFragment extends Fragment {
-    private static final int[] tableWeight = new int[]{2, 3, 1, 1, 1, 1};
+    private static final int[] tableWeight = new int[]{2, 3, 3, 1, 1, 1};
     private HistoryEntranceViewModel mViewModel;
     private FragmentHistoryEntranceBinding binding;
     private Button btnAdd;
@@ -221,13 +221,13 @@ public class HistoryEntranceFragment extends Fragment {
                         textView.setText(history.getTime_in());
                         break;
                     case 2:
-                        textView.setText("小客");
+                        textView.setText(history.getTime_out());
                         break;
                     case 3:
-                        textView.setText("白");
+                        textView.setText("小客");
                         break;
                     case 4:
-                        textView.setText("進");
+                        textView.setText("白");
                         break;
                     case 5:
                         textView.setText(history.getArtificial() == 0 ? "否" : "是");

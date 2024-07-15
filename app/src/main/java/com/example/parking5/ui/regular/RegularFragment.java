@@ -247,18 +247,17 @@ public class RegularFragment extends Fragment {
     }
 
     private void getUsers() {
+        passes.clear();
         Thread t = new Thread(() -> {
             try {
                 String json = ApacheServerRequest.regularPassSearch();
                 JSONArray array = new JSONArray(json);
                 if (array.length() > 0) {
-                    passes.clear();
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject obj = array.getJSONObject(i);
                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
                         RegularPass pass = gson.fromJson(obj.toString(), RegularPass.class);
                         passes.add(pass);
-
                     }
                 }
             } catch (Exception e) {

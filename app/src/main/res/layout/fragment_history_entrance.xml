@@ -30,9 +30,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:text="@string/in_out_time"
+                android:text="@string/in_time"
                 android:textAlignment="center" />
-
+            <TextView
+                android:id="@+id/textView_out_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/out_time"
+                android:textAlignment="center" />
             <TextView
                 android:id="@+id/textView_type"
                 android:layout_width="0dp"
@@ -49,13 +55,13 @@
                 android:text="@string/color"
                 android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/textView_in_or_out"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/in_or_out"
-                android:textAlignment="center" />
+<!--            <TextView-->
+<!--                android:id="@+id/textView_in_or_out"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/in_or_out"-->
+<!--                android:textAlignment="center" />-->
 
             <TextView
                 android:id="@+id/textView_artificial"

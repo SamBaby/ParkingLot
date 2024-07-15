@@ -209,6 +209,7 @@
 
     <string name="search">查詢</string>
     <string name="in_time">進場時間</string>
+    <string name="out_time">出場時間</string>
     <string name="pay_time">繳費時間</string>
     <string name="pay_amount">繳費金額</string>
     <string name="bill_number">發票</string>

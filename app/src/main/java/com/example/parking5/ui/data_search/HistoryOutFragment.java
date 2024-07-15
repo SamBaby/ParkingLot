@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryOutBinding;
+import com.example.parking5.datamodel.BasicFee;
 import com.example.parking5.datamodel.CarInside;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Vector;
@@ -224,6 +226,8 @@ public class HistoryOutFragment extends Fragment {
     }
 
     private void getCarsWithNumber(String number, int type) {
+        Var<BasicFee> basicFee = new Var<>();
+        basicFee.set(getBasicFee());
         Thread t = new Thread(() -> {
             String json = "";
             if (!number.isEmpty()) {
@@ -239,7 +243,7 @@ public class HistoryOutFragment extends Fragment {
                     JSONObject obj = array.getJSONObject(i);
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     CarInside car = gson.fromJson(obj.toString(), CarInside.class);
-                    if (car.getTime_pay() != null && !car.getTime_pay().isEmpty()) {
+                    if (checkTime(car, basicFee.get())) {
                         if (type == 0) {
                             cars.add(car);
                         } else {
@@ -260,6 +264,25 @@ public class HistoryOutFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkTime(CarInside car, BasicFee fee) {
+        boolean ret = false;
+        if (car != null && car.getTime_pay() != null && !car.getTime_pay().isEmpty() && fee != null) {
+            String timePay = car.getTime_pay();
+            int timeDiscount = fee.getEnter_time_not_count();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
+            try {
+                Date datePay = formatter.parse(timePay);
+                Date dateNow = new Date();
+                if (datePay != null && datePay.getTime() + (long) timeDiscount * 1000 * 60 >= dateNow.getTime()) {
+                    ret = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return ret;
     }
 
     private int getCarType(CarInside car) {
@@ -323,7 +346,7 @@ public class HistoryOutFragment extends Fragment {
 
     private void deleteCarInsideData(String carNumber) {
         Thread t = new Thread(() -> {
-            ApacheServerRequest.deleteCarInside(carNumber);
+            ApacheServerRequest.deleteCarInsidePay(carNumber);
         });
         try {
             t.start();
@@ -331,6 +354,33 @@ public class HistoryOutFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private BasicFee getBasicFee() {
+        Var<BasicFee> basicFee = new Var<>(null);
+        Thread t = new Thread(() -> {
+            String json = ApacheServerRequest.getBasicFee();
+            if (json != null) {
+                try {
+                    JSONArray array = new JSONArray(json);
+                    if (array.length() > 0) {
+                        JSONObject obj = array.getJSONObject(0);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        BasicFee fee = gson.fromJson(obj.toString(), BasicFee.class);
+                        basicFee.set(fee);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return basicFee.get();
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.example.parking5.ui.system;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,10 +37,6 @@ public class SystemSettingFragment extends Fragment {
         binding = FragmentSystemSettingBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_system);
-        // Set the default fragment
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout_system_setting, new BasicSettingFragment())
-                .commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -60,6 +59,9 @@ public class SystemSettingFragment extends Fragment {
                 return false;
             }
         });
+        if(getChildFragmentManager().getFragments().isEmpty()){
+            navigation.setSelectedItemId(R.id.nav_basic_setting);
+        }
         return root;
     }
 

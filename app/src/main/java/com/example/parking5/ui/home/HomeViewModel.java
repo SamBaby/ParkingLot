@@ -39,44 +39,57 @@ public class HomeViewModel extends ViewModel {
 
     private void setLeftLots() {
         new Thread(() -> {
-            int total = 0;
-            try {
-                String slot = ApacheServerRequest.getLeftLot();
-                if (slot != null && !slot.isEmpty()) {
-                    JSONObject obj = new JSONArray(slot).getJSONObject(0);
-                    total += obj.getInt("car_slot");
-                    total += obj.getInt("pregnant_slot");
-                    total += obj.getInt("disabled_slot");
-                    total += obj.getInt("charging_slot");
-                    total += obj.getInt("reserved_slot");
-                    total += obj.getInt("car_left");
-                }
+            while (!cleared) {
+                int total = 0;
+                try {
+                    String slot = ApacheServerRequest.getLeftLot();
+                    if (slot != null && !slot.isEmpty()) {
+                        JSONObject obj = new JSONArray(slot).getJSONObject(0);
+                        total += obj.getInt("car_slot");
+                        total += obj.getInt("pregnant_slot");
+                        total += obj.getInt("disabled_slot");
+                        total += obj.getInt("charging_slot");
+                        total -= obj.getInt("reserved_slot");
+                        total += obj.getInt("car_left");
+                        total += obj.getInt("pregnant_left");
+                        total += obj.getInt("charging_left");
+                        total += obj.getInt("disabled_left");
+                    }
 
-                String cars = ApacheServerRequest.getCarInsideCount();
-                if (cars != null && !cars.isEmpty()) {
-                    JSONObject obj = new JSONArray(cars).getJSONObject(0);
-                    total -= obj.getInt("COUNT(*)");
+                    String cars = ApacheServerRequest.getCarInsideCount();
+                    if (cars != null && !cars.isEmpty()) {
+                        JSONObject obj = new JSONArray(cars).getJSONObject(0);
+                        total -= obj.getInt("COUNT(*)");
+                    }
+                    lotLeft.postValue("剩餘車位:" + String.valueOf(total));
+                } catch (Exception e) {
+                    Log.d("getLeftLots", "getLeftLots");
                 }
-                lotLeft.postValue("剩餘車位:" + String.valueOf(total));
-            } catch (Exception e) {
-                Log.d("getLeftLots", "getLeftLots");
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
 
     private void setBillNumber() {
         Thread t = new Thread(() -> {
-            try {
-                String res = ApacheServerRequest.getPrintSettings();
-                if (res != null && !res.isEmpty()) {
-                    JSONObject obj = new JSONArray(res).getJSONObject(0);
-                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    PrintSetting printSetting = gson.fromJson(obj.toString(), PrintSetting.class);
-                    billLeft.postValue("發票剩餘: " + printSetting.getPay_left());
+            while (!cleared) {
+                try {
+                    String res = ApacheServerRequest.getPrintSettings();
+                    if (res != null && !res.isEmpty()) {
+                        JSONObject obj = new JSONArray(res).getJSONObject(0);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        PrintSetting printSetting = gson.fromJson(obj.toString(), PrintSetting.class);
+                        billLeft.postValue("發票剩餘: " + printSetting.getPay_left());
+                    }
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    billLeft.postValue("發票剩餘: 0");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                billLeft.postValue("發票剩餘: 0");
             }
         });
         t.start();
@@ -84,73 +97,88 @@ public class HomeViewModel extends ViewModel {
 
     private void setRevenueDay() {
         new Thread(() -> {
-            int total = 0;
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            Date start = calendar.getTime();
-            calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            calendar.set(Calendar.MILLISECOND, 999);
-            Date end = calendar.getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
-            String startDate = formatter.format(start);
-            String endDate = formatter.format(end);
-            try {
-                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
-                if (!res.isEmpty()) {
-                    JSONArray array = new JSONArray(res);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject pay = array.getJSONObject(0);
-                        if (pay.has("cost")) {
-                            total += pay.getInt("cost");
+            while (!cleared) {
+                int total = 0;
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                Date start = calendar.getTime();
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MILLISECOND, 999);
+                Date end = calendar.getTime();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
+                String startDate = formatter.format(start);
+                String endDate = formatter.format(end);
+                try {
+                    String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
+                    if (!res.isEmpty()) {
+                        JSONArray array = new JSONArray(res);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject pay = array.getJSONObject(i);
+                            if (pay.has("cost")) {
+                                total += pay.getInt("cost");
+                            }
                         }
                     }
+                    revenueDay.postValue("當日營收:" + total);
+                } catch (Exception e) {
+                    Log.d("getLeftLots", "getLeftLots");
                 }
-                revenueDay.postValue("當日營收:" + total);
-            } catch (Exception e) {
-                Log.d("getLeftLots", "getLeftLots");
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
         }).start();
     }
 
     private void setRevenueMonth() {
         new Thread(() -> {
-            int total = 0;
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DAY_OF_MONTH, 1);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            Date start = calendar.getTime();
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-            calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            calendar.set(Calendar.MILLISECOND, 999);
-            Date end = calendar.getTime();
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
-            String startDate = formatter.format(start);
-            String endDate = formatter.format(end);
-            try {
-                String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
-                if (!res.isEmpty()) {
-                    JSONArray array = new JSONArray(res);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject pay = array.getJSONObject(0);
-                        if (pay.has("cost")) {
-                            total += pay.getInt("cost");
+            while (!cleared) {
+                int total = 0;
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.DAY_OF_MONTH, 1);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                Date start = calendar.getTime();
+                calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MILLISECOND, 999);
+                Date end = calendar.getTime();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.TAIWAN);
+                String startDate = formatter.format(start);
+                String endDate = formatter.format(end);
+                try {
+                    String res = ApacheServerRequest.getPayHistoryWithDates(startDate, endDate, "", "");
+                    if (!res.isEmpty()) {
+                        JSONArray array = new JSONArray(res);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject pay = array.getJSONObject(i);
+                            if (pay.has("cost")) {
+                                total += pay.getInt("cost");
+                            }
                         }
                     }
-                }
 
-                revenueMonth.postValue("當月營收:" + total);
-            } catch (Exception e) {
-                Log.d("getLeftLots", "getLeftLots");
+                    revenueMonth.postValue("當月營收:" + total);
+                } catch (Exception e) {
+                    Log.d("getLeftLots", "getLeftLots");
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
@@ -169,5 +197,13 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<String> getMonthlyRevenue() {
         return revenueMonth;
+    }
+
+    private boolean cleared = false;
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        cleared = true;
     }
 }

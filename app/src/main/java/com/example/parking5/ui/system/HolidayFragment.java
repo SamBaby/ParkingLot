@@ -19,9 +19,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.R;
+import com.example.parking5.data.LoginRepository;
 import com.example.parking5.databinding.FragmentHolidayBinding;
 import com.example.parking5.datamodel.DayHoliday;
 import com.example.parking5.datamodel.Holiday;
+import com.example.parking5.datamodel.User;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
@@ -250,10 +252,10 @@ public class HolidayFragment extends Fragment {
 
                     Calendar calendar = new GregorianCalendar();
                     calendar.setTime(formatter.parse(date));
-                    int weekday = calendar.get(Calendar.DAY_OF_WEEK);
+                    int weekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
                     if (!number.isEmpty() && !date.isEmpty() && !desc.isEmpty()) {
-                        updateHoliday(Integer.parseInt(number), oldDate, date, desc, weekday, updateDate, "parkjohn");
+                        updateHoliday(Integer.parseInt(number), oldDate, date, desc, weekday, updateDate);
                         dialog.dismiss();
                     }
                 } catch (Exception e) {
@@ -266,9 +268,10 @@ public class HolidayFragment extends Fragment {
         }
     }
 
-    private void updateHoliday(int number, String oldDate, String newDate, String desc, int weekday, String updateDate, String account) {
+    private void updateHoliday(int number, String oldDate, String newDate, String desc, int weekday, String updateDate) {
         Thread t = new Thread(() -> {
-            ApacheServerRequest.updateHoliday(number, oldDate, newDate, weekday, desc, updateDate, account);
+            User user = LoginRepository.getInstance().getLoggedInUser();
+            ApacheServerRequest.updateHoliday(number, oldDate, newDate, weekday, desc, updateDate, user.getAccount());
         });
         try {
             t.start();
@@ -297,10 +300,10 @@ public class HolidayFragment extends Fragment {
 
                 Calendar calendar = new GregorianCalendar();
                 calendar.setTime(formatter.parse(date));
-                int weekday = calendar.get(Calendar.DAY_OF_WEEK);
+                int weekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
                 if (!number.isEmpty() && !date.isEmpty() && !desc.isEmpty()) {
-                    addHoliday(Integer.parseInt(number), date, desc, weekday, updateDate, "parkjohn");
+                    addHoliday(Integer.parseInt(number), date, desc, weekday, updateDate);
                     dialog.dismiss();
                 }
             } catch (Exception e) {
@@ -312,9 +315,10 @@ public class HolidayFragment extends Fragment {
         dialog.show();
     }
 
-    private void addHoliday(int number, String date, String desc, int weekday, String updateDate, String account) {
+    private void addHoliday(int number, String date, String desc, int weekday, String updateDate) {
         Thread t = new Thread(() -> {
-            ApacheServerRequest.addHoliday(number, date, weekday, desc, updateDate, account);
+            User user = LoginRepository.getInstance().getLoggedInUser();
+            ApacheServerRequest.addHoliday(number, date, weekday, desc, updateDate, user.getAccount());
         });
         try {
             t.start();
@@ -328,13 +332,14 @@ public class HolidayFragment extends Fragment {
     private void tableSetting() {
         TableLayout tableHoliday = binding.tableHolidayData;
         tableHoliday.removeAllViews();
-        selectedRow.set(null);getHolidays();
+        selectedRow.set(null);
+        getHolidays();
         try {
             // 遍历数据列表并为每行创建 TableRow
             for (int i = 0; i < holidays.size(); i++) {
                 TableRow tableRow = new TableRow(tableHoliday.getContext());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(
-                        TableRow.LayoutParams.WRAP_CONTENT,
+                        TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
                 Holiday holiday = holidays.get(i);
                 // 为每行添加单元格
@@ -404,7 +409,7 @@ public class HolidayFragment extends Fragment {
         try {
             t.start();
             t.join();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

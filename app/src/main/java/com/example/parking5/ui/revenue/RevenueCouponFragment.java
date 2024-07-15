@@ -53,9 +53,9 @@ public class RevenueCouponFragment extends Fragment {
     private ToggleButton btnTime;
     private ToggleButton btnMoney;
     private EditText txtDiscountHour;
-    private EditText txtDeadlineHour;
+    private TextView txtDeadlineHour;
     private EditText txtDiscountMoney;
-    private EditText txtDeadlineMoney;
+    private TextView txtDeadlineMoney;
     private EditText txtPiece;
 
     @Override

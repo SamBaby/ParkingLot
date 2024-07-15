@@ -170,7 +170,7 @@ public class CameraSettingFragment extends Fragment {
     private void addCam(int number, String name, String ip, String inOut, boolean pay, boolean open) {
         Thread t = new Thread(() -> {
             if (!checkCamExist(ip)) {
-                ApacheServerRequest.addCam(number, name, ip, "入口".equals(inOut) ? 0 : 1, pay ? 0 : 1, open ? 0 : 1);
+                ApacheServerRequest.addCam(number, name, ip, "入口".equals(inOut) ? 0 : 1, pay ? 1 : 0, open ? 1 : 0);
             }
         });
         t.start();

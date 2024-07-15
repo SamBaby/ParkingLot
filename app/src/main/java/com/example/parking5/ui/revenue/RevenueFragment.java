@@ -1,10 +1,13 @@
 package com.example.parking5.ui.revenue;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.parking5.R;
 import com.example.parking5.data.ConfigurationString;
 import com.example.parking5.databinding.FragmentRevenueBinding;
+import com.example.parking5.ui.data_search.HistoryEntranceFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class RevenueFragment extends Fragment {
@@ -28,9 +32,6 @@ public class RevenueFragment extends Fragment {
         binding = FragmentRevenueBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_revenue);
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout_revenue, new BasicFeeFragment())
-                .commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -54,14 +55,16 @@ public class RevenueFragment extends Fragment {
             }
         });
         Bundle bundle = this.getArguments();
-        if(bundle !=null){
-            if(bundle.getBoolean(ConfigurationString.todayRevenue)){
+        if (bundle != null) {
+            if (bundle.getBoolean(ConfigurationString.todayRevenue)) {
                 navigation.setSelectedItemId(R.id.nav_revenue_manage);
-            }else if(bundle.getBoolean(ConfigurationString.carSetting)){
+            } else if (bundle.getBoolean(ConfigurationString.carSetting)) {
                 navigation.setSelectedItemId(R.id.nav_car_setting);
-            }else if(bundle.getBoolean(ConfigurationString.billLeft)){
+            } else if (bundle.getBoolean(ConfigurationString.billLeft)) {
                 navigation.setSelectedItemId(R.id.nav_print_setting);
             }
+        }else if(getChildFragmentManager().getFragments().isEmpty()){
+            navigation.setSelectedItemId(R.id.nav_basic_fee);
         }
         return root;
     }

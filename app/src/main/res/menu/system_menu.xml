@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_basic_setting"
-            android:title="@string/system_basic_setting" />
+            android:title="@string/system_basic_setting"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_account_setting"
-            android:title="@string/system_account_setting" />
+            android:title="@string/system_account_setting"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_camera_setting"
-            android:title="@string/system_camera_setting" />
+            android:title="@string/system_camera_setting"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_bill_setting"
-            android:title="@string/system_bill_setting" />
+            android:title="@string/system_bill_setting"
+            app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_holiday_setting"
-            android:title="@string/system_holiday_setting" />
-<!--        <item-->
-<!--            android:id="@+id/nav_subtitle_setting"-->
-<!--            android:title="@string/system_subtitle_setting" />-->
+            android:title="@string/system_holiday_setting"
+            app:actionViewClass="android.widget.TextView" />
+        <!--        <item-->
+        <!--            android:id="@+id/nav_subtitle_setting"-->
+        <!--            android:title="@string/system_subtitle_setting" />-->
     </group>
 </menu>

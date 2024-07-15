@@ -98,7 +98,7 @@ public class CarSettingFragment extends Fragment {
     private void displayCarLeft() {
         getCarSlotWithThreadJoin();
         if (carSlot.get() != null) {
-            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside + carSlot.get().getCar_left()));
+            carSlotCondition.setText(String.valueOf(carSlot.get().getCar_slot() - carInside + carSlot.get().getCar_left() - carSlot.get().getReserved_slot()));
             pregnantSlotCondition.setText(String.valueOf(carSlot.get().getPregnant_slot()));
             chargingSlotCondition.setText(String.valueOf(carSlot.get().getDisabled_slot()));
             disabledSlotCondition.setText(String.valueOf(carSlot.get().getCharging_slot()));

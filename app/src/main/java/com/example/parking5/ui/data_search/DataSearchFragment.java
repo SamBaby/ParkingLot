@@ -1,10 +1,14 @@
 package com.example.parking5.ui.data_search;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,10 +38,6 @@ public class DataSearchFragment extends Fragment {
         binding = FragmentDataSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         BottomNavigationView navigation = (BottomNavigationView) root.findViewById(R.id.navigation_data_search);
-        // Set the default fragment
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.frameLayout, new HistoryEntranceFragment())
-                .commit();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,10 +58,12 @@ public class DataSearchFragment extends Fragment {
             }
         });
         Bundle bundle = this.getArguments();
-        if(bundle !=null){
-            if(bundle.getBoolean(ConfigurationString.abnormal)){
+        if (bundle != null) {
+            if (bundle.getBoolean(ConfigurationString.abnormal)) {
                 navigation.setSelectedItemId(R.id.history_license);
             }
+        }else if(getChildFragmentManager().getFragments().isEmpty()){
+            navigation.setSelectedItemId(R.id.nav_history_view);
         }
         return root;
     }
@@ -72,5 +74,4 @@ public class DataSearchFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(DataSearchViewModel.class);
         // TODO: Use the ViewModel
     }
-
 }

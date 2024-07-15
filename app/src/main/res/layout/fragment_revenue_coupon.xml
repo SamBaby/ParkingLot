@@ -95,7 +95,7 @@
                     android:gravity="center"
                     android:text="@string/deadline" />
 
-                <EditText
+                <TextView
                     android:id="@+id/editText_discount_time_deadline"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                     android:gravity="center"
                     android:text="@string/deadline" />
 
-                <EditText
+                <TextView
                     android:id="@+id/editText_discount_fee_deadline"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/border"
                     android:inputType="number"
-                    android:text="500"
+                    android:text="1"
                     android:textAlignment="textEnd" />
 
                 <TextView

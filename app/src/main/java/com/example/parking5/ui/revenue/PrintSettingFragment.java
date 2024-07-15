@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.parking5.databinding.FragmentPrintSettingBinding;
 import com.example.parking5.datamodel.PrintSetting;
+import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,6 +39,7 @@ public class PrintSettingFragment extends Fragment {
     private PrintSetting printSetting;
     private Button btnModify;
     private Button btnRefresh;
+
     public static PrintSettingFragment newInstance() {
         return new PrintSettingFragment();
     }
@@ -56,12 +58,13 @@ public class PrintSettingFragment extends Fragment {
         txtOutLeft = binding.textViewOutPieceLeft;
 
         btnModify = binding.buttonModify;
-        btnRefresh= binding.buttonRefresh;
+        btnRefresh = binding.buttonRefresh;
 
-        btnModify.setOnClickListener(v->updateDatabase());
-        btnRefresh.setOnClickListener(v->setText());
+        btnModify.setOnClickListener(v -> updateDatabase());
+        btnRefresh.setOnClickListener(v -> setText());
 
         setText();
+        refreshPrintLeft();
         return root;
     }
 
@@ -87,6 +90,25 @@ public class PrintSettingFragment extends Fragment {
         }
     }
 
+    private void refreshPrintLeft() {
+        new Thread(() -> {
+            while (getActivity() != null) {
+                try {
+                    Thread.sleep(1000);
+                    PrintSetting setting = getPrintSettingRet();
+                    if (setting != null && getActivity() != null) {
+                        getActivity().runOnUiThread(() -> {
+                            txtPayLeft.setText(String.valueOf(setting.getPay_left()));
+                            txtOutLeft.setText(String.valueOf(setting.getExit_left()));
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
     private void setText() {
         getPrintSetting();
         if (printSetting != null) {
@@ -98,6 +120,29 @@ public class PrintSettingFragment extends Fragment {
             txtPayLeft.setText(String.valueOf(printSetting.getPay_left()));
             txtOutLeft.setText(String.valueOf(printSetting.getExit_left()));
         }
+    }
+
+    private PrintSetting getPrintSettingRet() {
+        Var<PrintSetting> ret = new Var<>();
+        Thread t = new Thread(() -> {
+            try {
+                String res = ApacheServerRequest.getPrintSettings();
+                if (res != null && !res.isEmpty()) {
+                    JSONObject obj = new JSONArray(res).getJSONObject(0);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    ret.set(gson.fromJson(obj.toString(), PrintSetting.class));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        t.start();
+        try {
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret.get();
     }
 
     private void getPrintSetting() {

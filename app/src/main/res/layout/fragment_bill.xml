@@ -199,9 +199,9 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_weight="1"
                 android:background="@drawable/border"
+                android:gravity="center|start"
                 android:inputType="text"
-                android:text=""
-                android:textAlignment="textEnd" />
+                android:text=""/>
         </TableRow>
 
         <TableRow

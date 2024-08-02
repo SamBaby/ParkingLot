@@ -1,7 +1,11 @@
 package com.example.parking5.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.example.parking5.datamodel.BasicFee;
 import com.example.parking5.datamodel.BasicSetting;
+import com.example.parking5.event.Var;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -331,5 +335,31 @@ public class ApacheServerRequest {
 
     public static String regularPassDelete(int id) {
         return HTTPGetRequest.get(url, String.format("func=regular_pass_delete&id=%d", id));
+    }
+
+    public static String getBase64Picture(String path) {
+        return HTTPGetRequest.get(url, String.format("func=get_car_image&path=%s", path));
+    }
+
+    public static Bitmap getPictureByPath(String path) {
+        Var<Bitmap> bitmap = new Var<>();
+        Thread t = new Thread(() -> {
+            try {
+                String base = ApacheServerRequest.getBase64Picture(path);
+                if (base != null) {
+                    byte[] bytes = Util.getBase64Decode(base);
+                    bitmap.set(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap.get();
     }
 }

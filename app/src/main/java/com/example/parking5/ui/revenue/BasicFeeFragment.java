@@ -77,6 +77,7 @@ public class BasicFeeFragment extends Fragment {
             if (basicFee.get().getAfter_one_hour_unit() > 1) {
                 selfDefText.setText(String.valueOf(basicFee.get().getAfter_one_hour_unit()));
             }
+            oneHourUnit = basicFee.get().getAfter_one_hour_unit();
         }
         button30.setOnClickListener(v -> {
             if (oneHourUnit == 0 && !button30.isChecked()) {

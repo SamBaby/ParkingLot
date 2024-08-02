@@ -247,8 +247,11 @@ public class HistoryEntranceFragment extends Fragment {
             });
             tableRow.setOnLongClickListener(v -> {
                 // Load the image and set it to the ImageView
-                Bitmap bitmap = BitmapFactory.decodeFile(history.getPicture_url());
-                showImageDialog(bitmap);
+//                Bitmap bitmap = BitmapFactory.decodeFile(history.getPicture_url());
+                Bitmap bitmap = ApacheServerRequest.getPictureByPath(history.getPicture_url());
+                if(bitmap != null){
+                    showImageDialog(bitmap);
+                }
                 return false;
             });
             // 将 TableRow 添加到 TableLayout

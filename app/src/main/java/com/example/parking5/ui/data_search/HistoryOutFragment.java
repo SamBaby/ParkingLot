@@ -194,8 +194,10 @@ public class HistoryOutFragment extends Fragment {
             }
             tableRow.setOnLongClickListener(v -> {
                 // Load the image and set it to the ImageView
-                Bitmap bitmap = BitmapFactory.decodeFile(car.getPicture_url());
-                showImageDialog(bitmap);
+                Bitmap bitmap = ApacheServerRequest.getPictureByPath(car.getPicture_url());
+                if(bitmap != null){
+                    showImageDialog(bitmap);
+                }
                 return false;
             });
             tableRow.setOnClickListener(v -> {

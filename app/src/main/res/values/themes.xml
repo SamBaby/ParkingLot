@@ -22,8 +22,13 @@
 
     <style name="Theme.Parking5.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.Parking5.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="Theme.Parking5.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    </style>
+    <style name="Base.Widget.AppCompat.DrawerArrowToggle" parent="Theme.Parking5.PopupOverlay">
+        <item name="barLength">54dp</item>
+        <item name="gapBetweenBars">3dp</item>
+        <item name="drawableSize">72dp</item>
+    </style>
     <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
         <!-- 按钮背景颜色 -->
         <item name="android:background">@color/gray_light</item>

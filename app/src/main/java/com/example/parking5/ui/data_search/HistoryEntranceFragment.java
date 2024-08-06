@@ -85,7 +85,7 @@ public class HistoryEntranceFragment extends Fragment {
         Calendar c = new GregorianCalendar();
         start = String.format(formatter.format(c.getTime()) + " 00:00:00");
         end = String.format(formatter.format(c.getTime()) + " 23:59:59");
-        tableSetting(start ,end);
+        tableSetting(start, end);
         return root;
     }
 
@@ -248,9 +248,13 @@ public class HistoryEntranceFragment extends Fragment {
             tableRow.setOnLongClickListener(v -> {
                 // Load the image and set it to the ImageView
 //                Bitmap bitmap = BitmapFactory.decodeFile(history.getPicture_url());
-                Bitmap bitmap = ApacheServerRequest.getPictureByPath(history.getPicture_url());
-                if(bitmap != null){
-                    showImageDialog(bitmap);
+                String path = history.getPicture_url();
+                String pathIn = path + "_in.png";
+                String pathOut = path + "_out.png";
+                Bitmap bitmapIn = ApacheServerRequest.getPictureByPath(pathIn);
+                Bitmap bitmapOut = ApacheServerRequest.getPictureByPath(pathOut);
+                if (bitmapIn != null && bitmapOut != null) {
+                    showImageDialog(bitmapIn, bitmapOut);
                 }
                 return false;
             });
@@ -259,11 +263,13 @@ public class HistoryEntranceFragment extends Fragment {
         }
     }
 
-    private void showImageDialog(Bitmap bitmap) {
+    private void showImageDialog(Bitmap bitmapIn,Bitmap bitmapOut) {
         Dialog imageDialog = new Dialog(this.getContext());
-        imageDialog.setContentView(R.layout.dialog_image);
-        ImageView imageView = imageDialog.findViewById(R.id.imageView);
-        imageView.setImageBitmap(bitmap);// Set your image here
+        imageDialog.setContentView(R.layout.dialog_dual_image);
+        ImageView imageViewIn = imageDialog.findViewById(R.id.imageView_in);
+        imageViewIn.setImageBitmap(bitmapIn);// Set your image here
+        ImageView imageViewOut = imageDialog.findViewById(R.id.imageView_out);
+        imageViewOut.setImageBitmap(bitmapOut);// Set your image here
 
         imageDialog.setOnDismissListener(dialog -> {
             // Handle the dialog dismissing

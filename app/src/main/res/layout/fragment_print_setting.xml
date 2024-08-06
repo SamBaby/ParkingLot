@@ -6,265 +6,270 @@
     android:layout_height="match_parent"
     tools:context=".ui.revenue.PrintSettingFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border">
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:paddingRight="5dp"
-                    android:text="@string/bill_list" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/new_print_piece" />
-
-                <EditText
-                    android:id="@+id/editText_bill_total"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    android:padding="5dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:paddingRight="5dp"
+                        android:text="@string/bill_list" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/print_alert" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/editText_print_alert"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    android:padding="5dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/new_print_piece" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/print_bill_minus" />
+                    <EditText
+                        android:id="@+id/editText_bill_total"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
 
-                <EditText
-                    android:id="@+id/editText_print_bill_minus"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="30dp"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
 
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    android:padding="5dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/print_alert" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/print_revenue_minus" />
+                    <EditText
+                        android:id="@+id/editText_print_alert"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
 
-                <EditText
-                    android:id="@+id/editText_print_revenue_minus"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
 
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    android:padding="5dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/print_bill_minus" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/print_coupon_minus" />
+                    <EditText
+                        android:id="@+id/editText_print_bill_minus"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
 
-                <EditText
-                    android:id="@+id/editText_print_coupon_minus"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
 
-                <TextView
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    android:padding="5dp">
 
-            <TableRow
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/print_revenue_minus" />
+
+                    <EditText
+                        android:id="@+id/editText_print_revenue_minus"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/print_coupon_minus" />
+
+                    <EditText
+                        android:id="@+id/editText_print_coupon_minus"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"></View>
+
+                    <Button
+                        android:id="@+id/button_modify"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/modify_confirm" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="5dp">
 
-                <View
-                    android:layout_width="0dp"
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"></View>
+                    android:padding="5dp">
 
-                <Button
-                    android:id="@+id/button_modify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="@string/modify_confirm" />
-            </TableRow>
-        </TableLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/pay_machine_piece_left" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp">
+                    <TextView
+                        android:id="@+id/textView_pay_machine_piece_left"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:textSize="30sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
 
-                <TextView
-                    android:layout_width="0dp"
+                <TableRow
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/pay_machine_piece_left" />
+                    android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/textView_pay_machine_piece_left"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textSize="30sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/out_piece_left" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textView_out_piece_left"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="textEnd"
+                        android:textSize="30sp" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/piece" />
+                </TableRow>
+            </TableLayout>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/out_piece_left" />
+            <Button
+                android:id="@+id/button_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/refresh">
 
-                <TextView
-                    android:id="@+id/textView_out_piece_left"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textSize="30sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/piece" />
-            </TableRow>
-        </TableLayout>
-
-        <Button
-            android:id="@+id/button_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/refresh">
-
-        </Button>
-    </LinearLayout>
-
+            </Button>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

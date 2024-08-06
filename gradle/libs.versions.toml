@@ -14,6 +14,7 @@ legacySupportV4 = "1.0.0"
 preference = "1.2.0"
 gson = "2.10.1"
 annotation = "1.7.1"
+exoplayer = "2.15.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +31,7 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

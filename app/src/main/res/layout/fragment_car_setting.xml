@@ -6,556 +6,561 @@
     android:layout_height="match_parent"
     tools:context=".ui.revenue.CarSettingFragment">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
-            android:padding="10dp">
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/car_slot_display" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/car_setting_blank1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="1"
-                    android:text="" />
-
-                <TextView
-                    android:id="@+id/textView_car_setting_lots_left"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/lots_left"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_regular_reservation_slot_condition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/regular_reservation"
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_car_slot_condition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/car_slot"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_car_slot_condition_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_regular_reservation_slot_condition_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_pregnant_slot_condition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pregnant_slot"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_pregnant_slot_condition_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_disabled_slot_condition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/disabled_slot"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_disabled_slot_condition_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_charging_slot_condition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/charging_slot"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_charging_slot_condition_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <Button
-                        android:id="@+id/button_refresh"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/refresh" />
-                </LinearLayout>
-            </TableRow>
+                        android:text="@string/car_slot_display" />
+                </TableRow>
 
-        </TableLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/car_setting_blank1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:text="" />
 
-            <TableRow
+                    <TextView
+                        android:id="@+id/textView_car_setting_lots_left"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/lots_left"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_regular_reservation_slot_condition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/regular_reservation"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_car_slot_condition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/car_slot"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_car_slot_condition_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_regular_reservation_slot_condition_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_pregnant_slot_condition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pregnant_slot"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_pregnant_slot_condition_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_disabled_slot_condition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/disabled_slot"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_disabled_slot_condition_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_charging_slot_condition"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/charging_slot"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_charging_slot_condition_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/button_refresh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/refresh" />
+                    </LinearLayout>
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textView_car_setting_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/revenue_car_setting"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/car_setting_blank5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/textView_car_setting_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/revenue_car_setting"
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/car_setting_blank6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/car_setting_blank5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/textView_reserved_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/reserved_slot_setting"
-                    android:textAlignment="center" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/car_setting_blank6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
 
-            <TableRow
+                    <TextView
+                        android:id="@+id/textView_reserved_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/reserved_slot_setting"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/car_setting_blank7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_car_slots_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/car_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_car_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_reserved_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/car_setting_blank8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_pregnant_slots_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pregnant_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_pregnant_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/car_setting_blank10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_disabled_slots_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/disabled_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_disabled_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/car_setting_blank12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView_charging_slots_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/charging_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_charging_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank13"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_border"
+                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/car_setting_blank7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/textView_car_slots_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/car_slot"
-                    android:textAlignment="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/left_slot_modify"
+                        android:textAlignment="center" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/editText_car_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_reserved_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/car_setting_blank8"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_pregnant_slots_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pregnant_slot"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_pregnant_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank9"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/car_setting_blank10"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_disabled_slots_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/disabled_slot"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_disabled_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank11"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/car_setting_blank12"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/textView_charging_slots_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/charging_slot"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_charging_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank13"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-        </TableLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border"
-            android:padding="10dp">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/left_slot_modify"
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
 
-                <TextView
-                    android:id="@+id/textView_car_slots_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/car_slot"
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/textView_car_slots_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/car_slot"
+                        android:textAlignment="center" />
 
-                <EditText
-                    android:id="@+id/editText_car_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text=""
-                    android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/editText_car_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:text=""
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/car_setting_blank14"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/car_setting_blank14"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-
-                <TextView
-                    android:id="@+id/textView_pregnant_slots_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/pregnant_slot"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_pregnant_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/car_setting_blank15"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
 
-                <TextView
-                    android:id="@+id/textView_disabled_slots_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/disabled_slot"
-                    android:textAlignment="center" />
+                    <TextView
+                        android:id="@+id/textView_pregnant_slots_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/pregnant_slot"
+                        android:textAlignment="center" />
 
-                <EditText
-                    android:id="@+id/editText_disabled_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text=""
-                    android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/editText_pregnant_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:text=""
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/car_setting_blank16"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textAlignment="center" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/car_setting_blank15"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-
-                <TextView
-                    android:id="@+id/textView_charging_slots_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/charging_slot"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_charging_left_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="numberSigned|numberDecimal"
-                    android:text=""
-                    android:textAlignment="center" />
-
-                <Button
-                    android:id="@+id/button_modify"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:text="@string/modify_confirm" />
-
-            </TableRow>
-        </TableLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView_disabled_slots_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/disabled_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_disabled_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/car_setting_blank16"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+
+                    <TextView
+                        android:id="@+id/textView_charging_slots_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/charging_slot"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_charging_left_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="numberSigned|numberDecimal"
+                        android:text=""
+                        android:textAlignment="center" />
+
+                    <Button
+                        android:id="@+id/button_modify"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:text="@string/modify_confirm" />
+
+                </TableRow>
+            </TableLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

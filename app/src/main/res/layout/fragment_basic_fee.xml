@@ -6,390 +6,402 @@
     android:layout_height="match_parent"
     tools:context=".ui.revenue.BasicFeeFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_fee_setting"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center|start"
-                    android:text="@string/fee_setting" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/textView_car_entrance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/car_entrance"
-                    android:textAlignment="center" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <EditText
-                    android:id="@+id/editText_not_count_minute"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    <TextView
+                        android:id="@+id/textView_fee_setting"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center|start"
+                        android:text="@string/fee_setting" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/textView_not_count_minute"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="center|start"
-                    android:padding="5dp"
-                    android:text="@string/not_count_minute" />
-            </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
-            <TableRow
+                    <TextView
+                        android:id="@+id/textView_car_entrance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/car_entrance"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_not_count_minute"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/textView_not_count_minute"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center|start"
+                        android:padding="5dp"
+                        android:text="@string/not_count_minute" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_one_hour_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_hour_pay"
+                        android:textAlignment="center" />
+
+                    <Switch
+                        android:id="@+id/switch_before_one_hour"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:track="@drawable/switch_states_track"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_one_hour_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_hour_pay"
-                    android:textAlignment="center" />
-
-                <Switch
-                    android:id="@+id/switch_before_one_hour"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:track="@drawable/switch_states_track"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView_pay_count_time_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pay_count_time_unit"
-                    android:textAlignment="center" />
+                    android:text="@string/pay_count_time_unit" />
 
-                <ToggleButton
-                    android:id="@+id/toggleButton_thirty_minute_count"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/custom_toggle_background"
-                    android:textOff=""
-                    android:textOn="" />
-
-                <TextView
-                    android:id="@+id/textView_thirty_minute"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/thirty_minute"
-                    android:textAlignment="center" />
-
-                <ToggleButton
-                    android:id="@+id/toggleButton_one_hour_count"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/custom_toggle_background"
-                    android:textOff=""
-                    android:textOn="" />
-
-                <TextView
-                    android:id="@+id/textView_one_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_hour"
-                    android:textAlignment="center" />
-
-                <ToggleButton
-                    android:id="@+id/toggleButton_self_def"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/custom_toggle_background"
-                    android:textOff=""
-                    android:textOn="" />
-
-                <EditText
-                    android:id="@+id/editText_self_def"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="2dp"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:id="@+id/textView_self_def"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hour"
-                    android:textAlignment="center" />
-            </TableRow>
-        </TableLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_border">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/textView_parking_fee"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:text="@string/parking_fee"
-                    android:textAlignment="textStart" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/textView_weekday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/weekday_fee"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/every"
-                    android:textAlignment="textEnd" />
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/editText_weekday_hour"-->
-                <!--                    android:layout_width="60dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:background="@drawable/border"-->
-                <!--                    android:inputType="number"-->
-                <!--                    android:text=""-->
-                <!--                    android:textAlignment="textEnd" />-->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/hour_fee"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_weekday_hour_dollar"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/dollar"
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/most_fee_a_day"
-                    android:textAlignment="center" />
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/editText_most_fee_a_day_weekday"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
+                    <ToggleButton
+                        android:id="@+id/toggleButton_thirty_minute_count"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/custom_toggle_background"
+                        android:textOff=""
+                        android:textOn="" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/dollar"
-                    android:textAlignment="center" />
-            </TableRow>
+                    <TextView
+                        android:id="@+id/textView_thirty_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/thirty_minute"
+                        android:textAlignment="center" />
 
-            <TableRow
+                    <ToggleButton
+                        android:id="@+id/toggleButton_one_hour_count"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/custom_toggle_background"
+                        android:textOff=""
+                        android:textOn="" />
+
+                    <TextView
+                        android:id="@+id/textView_one_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_hour"
+                        android:textAlignment="center" />
+
+                    <ToggleButton
+                        android:id="@+id/toggleButton_self_def"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/custom_toggle_background"
+                        android:textOff=""
+                        android:textOn="" />
+
+                    <EditText
+                        android:id="@+id/editText_self_def"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:id="@+id/textView_self_def"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hour"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/weekend_fee"
-                    android:textAlignment="center"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/every"
-                    android:textAlignment="textEnd" />
-
-                <!--                <EditText-->
-                <!--                    android:id="@+id/editText_weekend_hour"-->
-                <!--                    android:layout_width="60dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:background="@drawable/border"-->
-                <!--                    android:inputType="number"-->
-                <!--                    android:text=""-->
-                <!--                    android:textAlignment="textEnd" />-->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/hour_fee"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_weekend_hour_dollar"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/dollar"
-                    android:textAlignment="center" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/most_fee_a_day"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/editText_most_fee_a_day_weekend"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:inputType="number"
-                    android:text=""
-                    android:textAlignment="textEnd" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:text="@string/dollar"
-                    android:textAlignment="center" />
-            </TableRow>
-        </TableLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cross_weekday_weekend"
-                    android:textAlignment="center" />
-
-                <Switch
-                    android:id="@+id/switch_cross_weekday_weekend"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:track="@drawable/switch_states_track" />
-            </TableRow>
-        </TableLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/button_save"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save" />
+                android:background="@drawable/rounded_border">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView_parking_fee"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:text="@string/parking_fee"
+                        android:textAlignment="textStart" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/textView_weekday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weekday_fee"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/every"
+                        android:textAlignment="textEnd" />
+
+                    <!--                <EditText-->
+                    <!--                    android:id="@+id/editText_weekday_hour"-->
+                    <!--                    android:layout_width="60dp"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:background="@drawable/border"-->
+                    <!--                    android:inputType="number"-->
+                    <!--                    android:text=""-->
+                    <!--                    android:textAlignment="textEnd" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/hour_fee"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_weekday_hour_dollar"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/dollar"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/most_fee_a_day"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_most_fee_a_day_weekday"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/dollar"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weekend_fee"
+                        android:textAlignment="center"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/every"
+                        android:textAlignment="textEnd" />
+
+                    <!--                <EditText-->
+                    <!--                    android:id="@+id/editText_weekend_hour"-->
+                    <!--                    android:layout_width="60dp"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:background="@drawable/border"-->
+                    <!--                    android:inputType="number"-->
+                    <!--                    android:text=""-->
+                    <!--                    android:textAlignment="textEnd" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/hour_fee"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_weekend_hour_dollar"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/dollar"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/most_fee_a_day"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/editText_most_fee_a_day_weekend"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border"
+                        android:inputType="number"
+                        android:text=""
+                        android:textAlignment="textEnd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/dollar"
+                        android:textAlignment="center" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cross_weekday_weekend"
+                        android:textAlignment="center" />
+
+                    <Switch
+                        android:id="@+id/switch_cross_weekday_weekend"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:track="@drawable/switch_states_track" />
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/button_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save" />
+            </LinearLayout>
+
         </LinearLayout>
-
-    </LinearLayout>
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

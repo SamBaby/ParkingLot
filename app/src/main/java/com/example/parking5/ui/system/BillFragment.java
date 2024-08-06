@@ -12,9 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.parking5.databinding.FragmentBillBinding;
+import com.example.parking5.datamodel.CarHistory;
+import com.example.parking5.datamodel.LinePay;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.datamodel.ECPayData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,6 +33,7 @@ public class BillFragment extends Fragment {
     }
 
     Var<ECPayData> data;
+    Var<LinePay> linePayData;
     int printStatus;
 
     @Override
@@ -40,11 +45,14 @@ public class BillFragment extends Fragment {
         binding = FragmentBillBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         data = new Var<>();
+        linePayData = new Var<>();
         getECPayData();
+        getLinePayData();
         setUi();
         setToggleEvent();
         binding.buttonSave.setOnClickListener(v -> {
             updateECPayData();
+            updateLinePayData();
         });
         return root;
     }
@@ -75,7 +83,13 @@ public class BillFragment extends Fragment {
             binding.editTextCompanyId.setText(data.get().getCompanyID());
             binding.editTextHashKey.setText(data.get().getHashKey());
             binding.editTextHashIV.setText(data.get().getHashIV());
-            binding.switchTestVersion.setChecked(data.get().getTest() == 1);
+            binding.switchInvoiceTestVersion.setChecked(data.get().getTest() == 1);
+        }
+
+        if (linePayData.get() != null) {
+            binding.editTextLinePayId.setText(linePayData.get().getChannelId());
+            binding.editTextLinePaySecret.setText(linePayData.get().getChannelSecret());
+            binding.switchLinePayTestVersion.setChecked(linePayData.get().getTest() == 1);
         }
     }
 
@@ -140,6 +154,31 @@ public class BillFragment extends Fragment {
         }
     }
 
+    private void getLinePayData() {
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerRequest.getLinePay();
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject obj = array.getJSONObject(i);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        LinePay linePay = gson.fromJson(obj.toString(), LinePay.class);
+                        this.linePayData.set(linePay);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateECPayData() {
         Thread t = new Thread(() -> {
             ApacheServerRequest.updateECPay(printStatus, binding.switchPrintCarNumber.isChecked() ? 1 : 0,
@@ -148,7 +187,22 @@ public class BillFragment extends Fragment {
                     binding.editTextHashKey.getText().toString(),
                     binding.editTextHashIV.getText().toString(),
                     binding.editTextMachineId.getText().toString(),
-                    binding.switchTestVersion.isChecked() ? 1 : 0);
+                    binding.switchInvoiceTestVersion.isChecked() ? 1 : 0);
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateLinePayData() {
+        Thread t = new Thread(() -> {
+            ApacheServerRequest.updateLinePay(
+                    binding.editTextLinePayId.getText().toString(),
+                    binding.editTextLinePaySecret.getText().toString(),
+                    binding.switchLinePayTestVersion.isChecked() ? 1 : 0);
         });
         try {
             t.start();

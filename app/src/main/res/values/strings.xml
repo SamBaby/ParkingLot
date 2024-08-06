@@ -114,8 +114,10 @@
     <string name="image_position">圖檔位置</string>
     <string name="bill_bottom_title">發票底端文字</string>
     <string name="bottom_image">底端圖檔</string>
-    <string name="test_version">測試版本</string>
-
+    <string name="invoice_test_version">發票測試版本</string>
+    <string name="line_pay_id">Line Pay ChannelId:</string>
+    <string name="line_pay_secret">Line Pay ChannelSecret:</string>
+    <string name="line_pay_test_version">Line Pay測試版本</string>
     <string name="regular_holiday_setting">常規設定</string>
     <string name="sunday">周日</string>
     <string name="saturday">周六</string>

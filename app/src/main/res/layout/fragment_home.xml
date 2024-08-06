@@ -6,142 +6,156 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TableLayout
-        android:id="@+id/table_home"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView_lots_left"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_border"
-                android:text="@string/lots_left"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/textView_revenue_day"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_border"
-                android:text="@string/revenue_day"
-                android:textColor="@color/black" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/textView_bill_left"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_border"
-                android:text="@string/bill_left"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/textView_revenue_month"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_border"
-                android:text="@string/revenue_month"
-                android:textColor="@color/black" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-
-            <Button
-                android:id="@+id/button_abnormal_license"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray"
-                android:maxLines="1"
-                android:text="@string/abnormal_license"
-                android:textColor="@android:color/darker_gray" />
-
-            <Button
-                android:id="@+id/button_revenue_extract"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="1"
-                android:background="@android:color/darker_gray"
-                android:text="@string/revenue_extract"
-                android:textColor="@android:color/darker_gray" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/text_ip"
+            <TableLayout
+                android:id="@+id/table_home"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <VideoView
-                android:id="@+id/videoView"
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView_lots_left"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_border"
+                        android:text="@string/lots_left"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView_revenue_day"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_border"
+                        android:text="@string/revenue_day"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/textView_bill_left"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_border"
+                        android:text="@string/bill_left"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/textView_revenue_month"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_border"
+                        android:text="@string/revenue_month"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <Button
+                        android:id="@+id/button_abnormal_license"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
+                        android:maxLines="1"
+                        android:text="@string/abnormal_license"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <Button
+                        android:id="@+id/button_revenue_extract"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:background="@android:color/darker_gray"
+                        android:text="@string/revenue_extract"
+                        android:textColor="@android:color/darker_gray" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/text_ip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <VideoView
+                        android:id="@+id/videoView"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+
+                android:id="@+id/table_channel"
                 android:layout_width="match_parent"
-                android:layout_height="350dp" />
-        </TableRow>
-    </TableLayout>
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/layout_buttons"
+                app:layout_constraintTop_toBottomOf="@id/table_home">
 
-    <TableLayout
+            </TableLayout>
 
-        android:id="@+id/table_channel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/layout_buttons"
-        app:layout_constraintTop_toBottomOf="@id/table_home">
+            <LinearLayout
 
-    </TableLayout>
+                android:id="@+id/layout_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/table_channel">
 
-    <LinearLayout
+                <Button
+                    android:id="@+id/remote_open_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="80dp"
+                    android:text="@string/remote_open_in"></Button>
 
-        android:id="@+id/layout_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table_channel">
-
-        <Button
-            android:id="@+id/remote_open_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/remote_open_in"
-            android:layout_marginRight="80dp"></Button>
-
-        <Button
-            android:id="@+id/remote_open_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/remote_open_out"></Button>
-    </LinearLayout>
+                <Button
+                    android:id="@+id/remote_open_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remote_open_out"></Button>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

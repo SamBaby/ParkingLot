@@ -6,9 +6,13 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_in"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="fitCenter" />
-
+    <ImageView
+        android:id="@+id/imageView_out"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter" />
 </LinearLayout>

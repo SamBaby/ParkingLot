@@ -6,420 +6,510 @@
     android:layout_height="match_parent"
     tools:context=".ui.system.BillFragment">
 
-
-    <TableLayout
-        android:id="@+id/table_invoice"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <TableLayout
+               android:id="@+id/table_invoice"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent
 ">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_print_bill"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/print_bill" />
+                   <TextView
+                       android:id="@+id/textView_print_bill"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/print_bill" />
 
-            <ToggleButton
-                android:id="@+id/toggleButton_print_bill"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_toggle_background"
-                android:textOff=""
-                android:textOn="" />
+                   <ToggleButton
+                       android:id="@+id/toggleButton_print_bill"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:layout_margin="2dp"
+                       android:background="@drawable/custom_toggle_background"
+                       android:textOff=""
+                       android:textOn="" />
 
-            <TextView
-                android:id="@+id/textView_print_receipt"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/print_Receipt" />
+                   <TextView
+                       android:id="@+id/textView_print_receipt"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/print_Receipt" />
 
-            <ToggleButton
-                android:id="@+id/toggleButton_print_receipt"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_toggle_background"
-                android:textOff=""
-                android:textOn="" />
+                   <ToggleButton
+                       android:id="@+id/toggleButton_print_receipt"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:layout_margin="2dp"
+                       android:background="@drawable/custom_toggle_background"
+                       android:textOff=""
+                       android:textOn="" />
 
-            <TextView
-                android:id="@+id/textView_print_none"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/print_none" />
+                   <TextView
+                       android:id="@+id/textView_print_none"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/print_none" />
 
-            <ToggleButton
-                android:id="@+id/toggleButton_print_none"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/custom_toggle_background"
-                android:textOff=""
-                android:textOn="" />
+                   <ToggleButton
+                       android:id="@+id/toggleButton_print_none"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"
+                       android:layout_margin="2dp"
+                       android:background="@drawable/custom_toggle_background"
+                       android:textOff=""
+                       android:textOn="" />
 
-        </TableRow>
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_print_car_number"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/print_car_number" />
+                   <TextView
+                       android:id="@+id/textView_print_car_number"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/print_car_number" />
 
-            <Switch
-                android:id="@+id/switch_print_car_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:text=""
-                android:track="@drawable/switch_states_track" />
-        </TableRow>
+                   <Switch
+                       android:id="@+id/switch_print_car_number"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:text=""
+                       android:track="@drawable/switch_states_track" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_machine_id"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/machine_id" />
+                   <TextView
+                       android:id="@+id/textView_machine_id"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/machine_id" />
 
-            <EditText
-                android:id="@+id/editText_machine_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_machine_id"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_cooperate_store"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/cooperate_store_number" />
+                   <TextView
+                       android:id="@+id/textView_cooperate_store"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/cooperate_store_number" />
 
-            <EditText
-                android:id="@+id/editText_merchant_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_merchant_id"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_company_number"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/company_number" />
+                   <TextView
+                       android:id="@+id/textView_company_number"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/company_number" />
 
-            <EditText
-                android:id="@+id/editText_company_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_company_id"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_hash_key"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|start"
-                android:padding="5dp"
-                android:text="@string/connect_hash_key" />
-        </TableRow>
+                   <TextView
+                       android:id="@+id/textView_hash_key"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|start"
+                       android:padding="5dp"
+                       android:text="@string/connect_hash_key" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/editText_hash_key"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:gravity="center|start"
-                android:inputType="text"
-                android:text=""/>
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_hash_key"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="30dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/border"
+                       android:gravity="center|start"
+                       android:inputType="text"
+                       android:text="" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_hash_IV"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|start"
-                android:padding="5dp"
-                android:text="@string/connect_hash_IV" />
-        </TableRow>
+                   <TextView
+                       android:id="@+id/textView_hash_IV"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|start"
+                       android:padding="5dp"
+                       android:text="@string/connect_hash_IV" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/editText_hash_IV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_hash_IV"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="30dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_bill_title"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/bill_title" />
+                   <TextView
+                       android:id="@+id/textView_bill_title"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/bill_title" />
 
-            <EditText
-                android:id="@+id/editText_bill_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_bill_title"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_header_image"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/header_image" />
+                   <TextView
+                       android:id="@+id/textView_header_image"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/header_image" />
 
-            <EditText
-                android:id="@+id/editText_header_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_header_image"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_header_image_position"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/image_position" />
+                   <TextView
+                       android:id="@+id/textView_header_image_position"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/image_position" />
 
-            <EditText
-                android:id="@+id/editText_header_image_position"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_header_image_position"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_bill_bottom_title"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/bill_bottom_title" />
+                   <TextView
+                       android:id="@+id/textView_bill_bottom_title"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/bill_bottom_title" />
 
-            <EditText
-                android:id="@+id/editText_bill_bottom_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_bill_bottom_title"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_bill_bottom_image"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/bottom_image" />
+                   <TextView
+                       android:id="@+id/textView_bill_bottom_image"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/bottom_image" />
 
-            <EditText
-                android:id="@+id/editText_bill_bottom_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_bill_bottom_image"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_bill_bottom_image_position"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|end"
-                android:paddingRight="5dp"
-                android:text="@string/image_position" />
+                   <TextView
+                       android:id="@+id/textView_bill_bottom_image_position"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|end"
+                       android:paddingRight="5dp"
+                       android:text="@string/image_position" />
 
-            <EditText
-                android:id="@+id/editText_bill_bottom_image_position"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:background="@drawable/border"
-                android:inputType="text"
-                android:text=""
-                android:textAlignment="textStart" />
-        </TableRow>
+                   <EditText
+                       android:id="@+id/editText_bill_bottom_image_position"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textView_test_version"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingRight="5dp"
-                android:text="@string/test_version" />
+                   <TextView
+                       android:id="@+id/textView_test_version"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center"
+                       android:paddingRight="5dp"
+                       android:text="@string/invoice_test_version" />
 
-            <Switch
-                android:id="@+id/switch_test_version"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="2"
-                android:text=""
-                android:track="@drawable/switch_states_track" />
-        </TableRow>
-    </TableLayout>
+                   <Switch
+                       android:id="@+id/switch_invoice_test_version"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:text=""
+                       android:track="@drawable/switch_states_track" />
+               </TableRow>
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table_invoice" />
+                   <TextView
+                       android:id="@+id/textView_line_pay_id"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|start"
+                       android:padding="5dp"
+                       android:text="@string/line_pay_id" />
+               </TableRow>
+
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <EditText
+                       android:id="@+id/editText_line_pay_id"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="30dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/border"
+                       android:gravity="center|start"
+                       android:inputType="text"
+                       android:text="" />
+               </TableRow>
+
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <TextView
+                       android:id="@+id/textView_line_pay_secret"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center|start"
+                       android:padding="5dp"
+                       android:text="@string/line_pay_secret" />
+               </TableRow>
+
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <EditText
+                       android:id="@+id/editText_line_pay_secret"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginHorizontal="30dp"
+                       android:layout_weight="1"
+                       android:background="@drawable/border"
+                       android:inputType="text"
+                       android:text=""
+                       android:textAlignment="textStart" />
+               </TableRow>
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="5dp">
+
+                   <TextView
+                       android:id="@+id/textView_line_pay_test_version"
+                       android:layout_width="0dp"
+                       android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:gravity="center"
+                       android:paddingRight="5dp"
+                       android:text="@string/line_pay_test_version" />
+
+                   <Switch
+                       android:id="@+id/switch_line_pay_test_version"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginEnd="30dp"
+                       android:layout_weight="2"
+                       android:text=""
+                       android:track="@drawable/switch_states_track" />
+               </TableRow>
+           </TableLayout>
+           <Button
+               android:id="@+id/button_save"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/save"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/table_invoice" />
+       </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

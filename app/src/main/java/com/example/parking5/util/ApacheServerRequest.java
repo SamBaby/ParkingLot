@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApacheServerRequest {
-    public static final String url = "http://192.168.1.200:8080/function.php/";
+    public static final String url = "http://192.168.0.103:8080/function.php/";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -126,6 +126,15 @@ public class ApacheServerRequest {
                 printStatus, plusCarNumber, merchantID, CompanyID, key, IV, machineID, test));
     }
 
+    public static String getLinePay() {
+        return HTTPGetRequest.get(url, "func=line_pay_search");
+    }
+
+    public static String updateLinePay(String ChannelId, String ChannelSecret, int test) {
+        return HTTPGetRequest.get(url, String.format("func=line_pay_update&ChannelId=%s&ChannelSecret=%s&test=%d",
+                ChannelId, ChannelSecret, test));
+    }
+
     public static String getHolidays() {
         return HTTPGetRequest.get(url, "func=holiday_search");
     }
@@ -184,9 +193,11 @@ public class ApacheServerRequest {
         map.put("payment", payment);
         return HTTPGetRequest.post(url + "?func=cars_inside_update", map);
     }
+
     public static String deleteCarInsidePay(String carNumber) {
         return HTTPGetRequest.get(url, String.format("func=cars_inside_pay_delete&car_number=%s", carNumber));
     }
+
     public static String getCompanyInformation() {
         return HTTPGetRequest.get(url, "func=company_info_search");
     }
@@ -324,13 +335,13 @@ public class ApacheServerRequest {
     }
 
     public static String regularPassAdd(String carNumber, String name, String phone, String start, String end) {
-        return HTTPGetRequest.get(url , String.format("func=regular_pass_add&car_number=%s&customer_name=%s&start_date=%s&due_date=%s&phone_number=%s",
-                carNumber, name,start, end, phone));
+        return HTTPGetRequest.get(url, String.format("func=regular_pass_add&car_number=%s&customer_name=%s&start_date=%s&due_date=%s&phone_number=%s",
+                carNumber, name, start, end, phone));
     }
 
     public static String regularPassUpdate(int id, String carNumber, String name, String phone, String start, String end) {
-        return HTTPGetRequest.get(url , String.format("func=regular_pass_update&car_number=%s&customer_name=%s&start_date=%s&due_date=%s&phone_number=%s&id=%d",
-                carNumber, name,start, end, phone, id));
+        return HTTPGetRequest.get(url, String.format("func=regular_pass_update&car_number=%s&customer_name=%s&start_date=%s&due_date=%s&phone_number=%s&id=%d",
+                carNumber, name, start, end, phone, id));
     }
 
     public static String regularPassDelete(int id) {

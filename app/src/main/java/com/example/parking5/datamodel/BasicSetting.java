@@ -12,8 +12,16 @@ public class BasicSetting {
 
     private int auto_upload_server;
     private int standby_play;
+    private String parking_id;
+    private String parking_area;
+    private String parking_address;
+    private String parking_apikey;
 
-    public BasicSetting(String lotName, String companyName, String companyAddress, String companyPhone, String serverToken, String chtChatId, String standbyPath, int standbySec, int autoUploadServer, int standbyPlay) {
+    public BasicSetting(String lotName, String companyName, String companyAddress, String companyPhone, String serverToken, String chtChatId, String standbyPath, int standbySec, int autoUploadServer, int standbyPlay, String parkingId, String parkingArea, String parkingAddress, String parkingApikey) {
+        setParking_id(parkingId);
+        setParking_area(parkingArea);
+        setParking_address(parkingAddress);
+        setParking_apikey(parkingApikey);
         setAuto_upload_server(autoUploadServer);
         setStandby_play(standbyPlay);
 
@@ -105,5 +113,37 @@ public class BasicSetting {
 
     public void setStandby_play(int standby_play) {
         this.standby_play = standby_play;
+    }
+
+    public String getParking_id() {
+        return parking_id;
+    }
+
+    public void setParking_id(String parking_id) {
+        this.parking_id = parking_id;
+    }
+
+    public String getParking_area() {
+        return parking_area;
+    }
+
+    public void setParking_area(String parking_area) {
+        this.parking_area = parking_area;
+    }
+
+    public String getParking_address() {
+        return parking_address;
+    }
+
+    public void setParking_address(String parking_address) {
+        this.parking_address = parking_address;
+    }
+
+    public String getParking_apikey() {
+        return parking_apikey;
+    }
+
+    public void setParking_apikey(String parking_apikey) {
+        this.parking_apikey = parking_apikey;
     }
 }

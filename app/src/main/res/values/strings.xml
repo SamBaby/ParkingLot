@@ -68,6 +68,10 @@
     <string name="standby_play_interval">待機畫面播放間隔時間</string>
     <string name="standby_setting">待機畫面設置</string>
     <string name="standby_preview">待機畫面預覽</string>
+    <string name="upload_lot_id">車位上傳id:</string>
+    <string name="upload_lot_area">車位上傳區域名稱:</string>
+    <string name="upload_lot_address">車位上傳停車場地址:</string>
+    <string name="upload_lot_apikey">車位上傳API KEY:</string>
 
     <string name="account">帳號</string>
     <string name="password">密碼</string>

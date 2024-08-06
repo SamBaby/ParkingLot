@@ -52,6 +52,11 @@ public class BasicSettingFragment extends Fragment {
         EditText txtStandByInterval = binding.editTextStandbyPlatIntervalSetting;
         Switch switchUploadLot = binding.switchLotsUpdateCHT;
         Switch switchStandByPlay = binding.switchPlayStandby;
+
+        EditText txtParkingId = binding.editTextUploadLotId;
+        EditText txtParkingArea = binding.editTextUploadLotArea;
+        EditText txtParkingAddress = binding.editTextUploadLotAddress;
+        EditText txtParkingApikey = binding.editTextUploadLotApikey;
         if (setting != null) {
             txtLotName.setText(setting.getLot_name());
             txtCompanyName.setText(setting.getCompany_name());
@@ -63,6 +68,10 @@ public class BasicSettingFragment extends Fragment {
             txtStandByInterval.setText(String.valueOf(setting.getStandby_sec()));
             switchUploadLot.setChecked(setting.getAuto_upload_server() == 1);
             switchStandByPlay.setChecked(setting.getStandby_play() == 1);
+            txtParkingId.setText(setting.getParking_id());
+            txtParkingArea.setText(setting.getParking_area());
+            txtParkingAddress.setText(setting.getParking_address());
+            txtParkingApikey.setText(setting.getParking_apikey());
         }
         Button btnSave = binding.buttonSave;
         btnSave.setOnClickListener(v -> {
@@ -75,7 +84,12 @@ public class BasicSettingFragment extends Fragment {
                     txtStandByPath.getText().toString(),
                     Integer.parseInt(txtStandByInterval.getText().toString()),
                     switchUploadLot.isChecked() ? 1 : 0,
-                    switchStandByPlay.isChecked() ? 1 : 0));
+                    switchStandByPlay.isChecked() ? 1 : 0,
+                    txtParkingId.getText().toString(),
+                    txtParkingArea.getText().toString(),
+                    txtParkingAddress.getText().toString(),
+                    txtParkingApikey.getText().toString())
+            );
         });
         return root;
     }

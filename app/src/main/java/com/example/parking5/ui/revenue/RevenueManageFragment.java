@@ -35,6 +35,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/***
+ * shows revenue and all the coins and bills.
+ */
 public class RevenueManageFragment extends Fragment {
 
     private RevenueManageViewModel mViewModel;

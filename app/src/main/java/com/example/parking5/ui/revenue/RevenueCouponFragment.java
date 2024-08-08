@@ -38,6 +38,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Vector;
 
+/***
+ * modification and history of the coupon settings
+ */
 public class RevenueCouponFragment extends Fragment {
     private static final int[] tableWeight = new int[]{1, 1, 1, 2, 1, 1};
     private RevenueCouponViewModel mViewModel;

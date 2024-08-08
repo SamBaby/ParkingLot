@@ -32,6 +32,9 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
+/***
+ * modification of the login accounts
+ */
 public class AccountSettingFragment extends Fragment {
     private static final int[] tableWeight = new int[]{2, 2, 2, 4, 1};
     Var<TableRow> selectedRow;

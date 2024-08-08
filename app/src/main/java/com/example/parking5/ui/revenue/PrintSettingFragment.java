@@ -25,6 +25,9 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/***
+ * modification of the printing machine
+ */
 public class PrintSettingFragment extends Fragment {
     private FragmentPrintSettingBinding binding;
 

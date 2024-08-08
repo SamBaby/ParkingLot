@@ -35,6 +35,9 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
+/***
+ * show all the regular cars and modification
+ */
 public class RegularFragment extends Fragment {
 
     private RegularViewModel mViewModel;

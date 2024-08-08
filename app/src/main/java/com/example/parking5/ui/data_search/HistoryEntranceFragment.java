@@ -42,6 +42,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Vector;
 
+/***
+ * show the history of all car entrance. By default, shows the data today.
+ */
 public class HistoryEntranceFragment extends Fragment {
     private static final int[] tableWeight = new int[]{2, 3, 3, 1, 1, 1};
     private HistoryEntranceViewModel mViewModel;

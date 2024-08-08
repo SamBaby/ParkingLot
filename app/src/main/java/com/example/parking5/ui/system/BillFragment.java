@@ -23,6 +23,9 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/***
+ * data of the EC-pay and line-pay
+ */
 public class BillFragment extends Fragment {
 
     private BillViewModel mViewModel;

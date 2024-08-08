@@ -34,6 +34,9 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
+/***
+ * show all the cars inside the lot
+ */
 public class HistoryLicenseFragment extends Fragment {
     private static final int[] tableWeight = new int[]{2, 3, 1, 1, 1};
     private HistoryLicenseViewModel mViewModel;

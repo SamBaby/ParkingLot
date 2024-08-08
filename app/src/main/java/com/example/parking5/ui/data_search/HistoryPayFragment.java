@@ -36,6 +36,9 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Vector;
 
+/***
+ * shows all the cars already pay and are allowed to out
+ */
 public class HistoryPayFragment extends Fragment {
     private static final int[] tableWeight = new int[]{2, 2, 2, 1, 2, 1};
     private HistoryPayViewModel mViewModel;

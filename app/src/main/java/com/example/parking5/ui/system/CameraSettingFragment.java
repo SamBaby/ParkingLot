@@ -33,6 +33,9 @@ import org.json.JSONObject;
 
 import java.util.Vector;
 
+/***
+ * cams setting page
+ */
 public class CameraSettingFragment extends Fragment {
 
     private CameraSettingViewModel mViewModel;

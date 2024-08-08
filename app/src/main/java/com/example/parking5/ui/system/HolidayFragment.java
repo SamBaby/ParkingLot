@@ -42,6 +42,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
+/***
+ * holiday modification page
+ */
 public class HolidayFragment extends Fragment {
     private static final int[] tableWeight = new int[]{1, 2, 1, 2, 2, 2};
     private static final String[] weekdays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};

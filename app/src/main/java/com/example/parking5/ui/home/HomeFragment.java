@@ -36,6 +36,9 @@ import org.videolan.libvlc.util.VLCVideoLayout;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/***
+ * show the lot status and cams' stream
+ */
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;

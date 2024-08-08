@@ -29,6 +29,9 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/***
+ * basic fee setting of the parking lot
+ */
 public class BasicFeeFragment extends Fragment {
 
     private BasicFeeViewModel mViewModel;

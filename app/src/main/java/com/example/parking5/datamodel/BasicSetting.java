@@ -1,21 +1,21 @@
 package com.example.parking5.datamodel;
 
 public class BasicSetting {
-    private String lot_name;
+    private String lot_name;//parking lot name(shown on the pay app title)
     private String company_name;
     private String company_address;
     private String company_phone;
-    private String server_token;
+    private String server_token;//upload remote server token
     private String cht_chat_id;
     private String standby_path;
     private int standby_sec;
 
     private int auto_upload_server;
     private int standby_play;
-    private String parking_id;
-    private String parking_area;
-    private String parking_address;
-    private String parking_apikey;
+    private String parking_id;//id to upload to government server
+    private String parking_area;//area name to upload to government server
+    private String parking_address;//address to upload to government server
+    private String parking_apikey;//api key to upload to government server
 
     public BasicSetting(String lotName, String companyName, String companyAddress, String companyPhone, String serverToken, String chtChatId, String standbyPath, int standbySec, int autoUploadServer, int standbyPlay, String parkingId, String parkingArea, String parkingAddress, String parkingApikey) {
         setParking_id(parkingId);

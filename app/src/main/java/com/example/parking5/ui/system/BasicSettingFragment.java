@@ -24,6 +24,9 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 
+/***
+ * data and modification of the company basic information
+ */
 public class BasicSettingFragment extends Fragment {
 
     private BasicSettingViewModel mViewModel;

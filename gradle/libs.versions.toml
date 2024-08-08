@@ -15,6 +15,10 @@ preference = "1.2.0"
 gson = "2.10.1"
 annotation = "1.7.1"
 exoplayer = "2.15.0"
+exoplayerVersion = "2.19.1"
+googleExoplayer = "2.18.2"
+exoplayerRtsp = "2.18.2"
+exoplayerRtspVersion = "2.19.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -32,6 +36,10 @@ preference = { group = "androidx.preference", name = "preference", version.ref =
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
+google-exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayerVersion" }
+com-google-android-exoplayer-exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "googleExoplayer" }
+exoplayer-rtsp = { group = "com.google.android.exoplayer", name = "exoplayer-rtsp", version.ref = "exoplayerRtsp" }
+google-exoplayer-rtsp = { group = "com.google.android.exoplayer", name = "exoplayer-rtsp", version.ref = "exoplayerRtspVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

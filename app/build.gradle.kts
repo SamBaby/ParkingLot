@@ -19,7 +19,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -44,8 +47,9 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.gson)
     implementation(libs.annotation)
-    implementation("androidx.media3:media3-exoplayer-rtsp:1.3.1")
-    implementation(libs.exoplayer)
+    implementation("org.videolan.android:libvlc-all:3.1.12")
+    implementation(libs.google.exoplayer)
+    implementation(libs.google.exoplayer.rtsp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

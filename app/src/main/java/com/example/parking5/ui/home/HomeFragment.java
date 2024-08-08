@@ -13,7 +13,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,7 +28,12 @@ import com.example.parking5.util.ApacheServerRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.videolan.libvlc.LibVLC;
+import org.videolan.libvlc.Media;
+import org.videolan.libvlc.MediaPlayer;
+import org.videolan.libvlc.util.VLCVideoLayout;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class HomeFragment extends Fragment {
@@ -44,7 +48,10 @@ public class HomeFragment extends Fragment {
     private Button btnExtract;
     private Vector<Cam> cams;
     private Vector<ToggleButton> channelButtons = new Vector<>();
-    private VideoView videoView;
+    private VLCVideoLayout videoView;
+    private MediaPlayer mMediaPlayer;
+    ;
+    private LibVLC mLibVLC;
     private Cam selectedCam;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,6 +70,13 @@ public class HomeFragment extends Fragment {
         btnAbnormalCar = binding.buttonAbnormalLicense;
         btnExtract = binding.buttonRevenueExtract;
         videoView = binding.videoView;
+        ArrayList<String> list = new ArrayList<>();
+        list.add("--no-drop-late-frames");
+        list.add("--no-skip-frames");
+        list.add("--rtsp-tcp");
+        list.add("-vvv");
+        mLibVLC = new LibVLC(root.getContext(), list);
+        mMediaPlayer = new MediaPlayer(mLibVLC);
 
         txtLots.setOnClickListener(v -> {
             Activity activity = getActivity();
@@ -205,9 +219,21 @@ public class HomeFragment extends Fragment {
 
     private void playRTSP(String ip) {
         Uri url = Uri.parse(ip);
-        videoView.setVideoURI(url);
-        videoView.requestFocus();
-        videoView.start();
+//        videoView.setVideoURI(url);
+//        videoView.requestFocus();
+//        videoView.start();
+        mMediaPlayer.attachViews(videoView, null, true, false);
+
+
+        try {
+            final Media media = new Media(mLibVLC, url);
+            mMediaPlayer.setMedia(media);
+            media.release();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mMediaPlayer.play();
+
     }
 
     private Vector<Cam> getCams() {
@@ -243,8 +269,8 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        if (videoView != null) {
-            videoView.stopPlayback();
-        }
+        mMediaPlayer.release();
+        mLibVLC.release();
+
     }
 }

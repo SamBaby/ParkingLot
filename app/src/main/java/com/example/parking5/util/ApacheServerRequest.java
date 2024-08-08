@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApacheServerRequest {
-    public static final String url = "http://192.168.0.103:8080/function.php/";
+    public static final String url = "http://192.168.1.200:8080/function.php/";
 
     public static String getUsers() {
         return HTTPGetRequest.get(url, "func=user_search");
@@ -204,7 +204,8 @@ public class ApacheServerRequest {
 
     public static String setCompanyInformation(BasicSetting setting) {
         return HTTPGetRequest.get(url,
-                String.format("func=company_info_update&lot_name=%s&company_name=%s&company_address=%s&company_phone=%s&server_token=%s&cht_chat_id=%s&standby_path=%s&standby_sec=%d&auto_upload_server=%d&standby_play=%d",
+                String.format("func=company_info_update&lot_name=%s&company_name=%s&company_address=%s&company_phone=%s&server_token=%s&cht_chat_id=%s&standby_path=%s&standby_sec=%d&auto_upload_server=%d&standby_play=%d" +
+                                "&parking_id=%s&parking_area=%s&parking_address=%s&parking_apikey=%s",
                         setting.getLot_name(),
                         setting.getCompany_name(),
                         setting.getCompany_address(),
@@ -214,7 +215,11 @@ public class ApacheServerRequest {
                         setting.getStandby_path(),
                         setting.getStandby_sec(),
                         setting.getAuto_upload_server(),
-                        setting.getStandby_play()));
+                        setting.getStandby_play(),
+                        setting.getParking_id(),
+                        setting.getParking_area(),
+                        setting.getParking_address(),
+                        setting.getParking_apikey()));
     }
 
     public static String getBasicFee() {

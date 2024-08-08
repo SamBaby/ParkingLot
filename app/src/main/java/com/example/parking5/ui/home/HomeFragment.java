@@ -77,6 +77,7 @@ public class HomeFragment extends Fragment {
         list.add("-vvv");
         mLibVLC = new LibVLC(root.getContext(), list);
         mMediaPlayer = new MediaPlayer(mLibVLC);
+        mMediaPlayer.attachViews(videoView, null, true, false);
 
         txtLots.setOnClickListener(v -> {
             Activity activity = getActivity();
@@ -222,9 +223,6 @@ public class HomeFragment extends Fragment {
 //        videoView.setVideoURI(url);
 //        videoView.requestFocus();
 //        videoView.start();
-        mMediaPlayer.attachViews(videoView, null, true, false);
-
-
         try {
             final Media media = new Media(mLibVLC, url);
             mMediaPlayer.setMedia(media);

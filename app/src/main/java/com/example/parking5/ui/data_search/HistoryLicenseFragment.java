@@ -180,7 +180,7 @@ public class HistoryLicenseFragment extends Fragment {
             ImageView imageView = dialogView.findViewById(R.id.imageView_car_number);
             TableLayout table = binding.tableCarData;
             int index = table.indexOfChild(selectedRow.get());
-            Bitmap bitmap = BitmapFactory.decodeFile(cars.get(index).getPicture_url());
+            Bitmap bitmap = ApacheServerRequest.getPictureByPath(cars.get(index).getPicture_url());
             imageView.setImageBitmap(bitmap);
             txtCarNumber.setText(cars.get(index).getCar_number());
             txtStart.setText(cars.get(index).getTime_in());

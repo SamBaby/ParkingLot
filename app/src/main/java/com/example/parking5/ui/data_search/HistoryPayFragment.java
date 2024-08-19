@@ -24,6 +24,7 @@ import com.example.parking5.datamodel.PayHistory;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
+import com.example.parking5.util.UtilParam;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -45,6 +46,9 @@ public class HistoryPayFragment extends Fragment {
     private FragmentHistoryPayBinding binding;
     Vector<PayHistory> histories;
     private Button btnSearch;
+    private Button btnPrevious;
+    private Button btnNext;
+    private int tableIndex = 0;
 
     public static HistoryPayFragment newInstance() {
         return new HistoryPayFragment();
@@ -61,6 +65,18 @@ public class HistoryPayFragment extends Fragment {
         btnSearch = root.findViewById(R.id.button_search);
         btnSearch.setOnClickListener(v -> {
             searchHistory();
+        });
+        btnPrevious = root.findViewById(R.id.button_previous);
+        btnNext = root.findViewById(R.id.button_next);
+        btnPrevious.setOnClickListener(v -> {
+            tableIndex--;
+            refreshButtons();
+            tableRefresh();
+        });
+        btnNext.setOnClickListener(v -> {
+            tableIndex++;
+            refreshButtons();
+            tableRefresh();
         });
         tableSetting();
         return root;
@@ -165,11 +181,32 @@ public class HistoryPayFragment extends Fragment {
     }
 
     private void tableSetting(String start, String end, String carNumber, String payment) {
+        getHistoryWithDates(start, end, carNumber, payment);
+        tableIndex = 0;
+        refreshButtons();
+        tableRefresh();
+    }
+
+    private void refreshButtons() {
+        if (tableIndex == 0) {
+            btnPrevious.setVisibility(View.INVISIBLE);
+        } else {
+            btnPrevious.setVisibility(View.VISIBLE);
+        }
+        if (tableIndex * UtilParam.tableItemCount + UtilParam.tableItemCount >= histories.size()) {
+            btnNext.setVisibility(View.INVISIBLE);
+        } else {
+            btnNext.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void tableRefresh() {
         TableLayout tableData = binding.tablePayData;
         tableData.removeAllViews();
-        getHistoryWithDates(start, end, carNumber, payment);
         // 遍历数据列表并为每行创建 TableRow
-        for (int i = 0; i < histories.size(); i++) {
+        int max = tableIndex * UtilParam.tableItemCount + UtilParam.tableItemCount;
+        max = Math.min(max, histories.size());
+        for (int i = tableIndex * UtilParam.tableItemCount; i < max; i++) {
             TableRow tableRow = new TableRow(tableData.getContext());
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             PayHistory history = histories.get(i);

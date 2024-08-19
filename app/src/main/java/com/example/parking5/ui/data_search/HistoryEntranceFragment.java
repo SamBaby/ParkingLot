@@ -30,6 +30,7 @@ import com.example.parking5.datamodel.CarHistory;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
+import com.example.parking5.util.UtilParam;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,6 +53,9 @@ public class HistoryEntranceFragment extends Fragment {
     private Button btnAdd;
     private Button btnSearch;
     private Button btnDelete;
+    private Button btnPrevious;
+    private Button btnNext;
+    private int tableIndex = 0;
     Var<TableRow> selectedRow = new Var<>();
     Vector<CarHistory> histories;
     private String startDate;
@@ -73,6 +77,18 @@ public class HistoryEntranceFragment extends Fragment {
 //        btnAdd = root.findViewById(R.id.button_add);
         btnDelete = root.findViewById(R.id.button_delete);
         btnSearch = root.findViewById(R.id.button_search);
+        btnPrevious = root.findViewById(R.id.button_previous);
+        btnNext = root.findViewById(R.id.button_next);
+        btnPrevious.setOnClickListener(v -> {
+            tableIndex--;
+            refreshButtons();
+            tableRefresh();
+        });
+        btnNext.setOnClickListener(v -> {
+            tableIndex++;
+            refreshButtons();
+            tableRefresh();
+        });
 //        btnAdd.setOnClickListener(v -> {
 ////            addHistory();
 //        });
@@ -82,6 +98,7 @@ public class HistoryEntranceFragment extends Fragment {
         btnSearch.setOnClickListener(v -> {
             searchHistory();
         });
+
         String start = "";
         String end = "";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
@@ -200,12 +217,33 @@ public class HistoryEntranceFragment extends Fragment {
     }
 
     private void tableSetting(String start, String end) {
+        getHistoryWithDates(start, end);
+        tableIndex = 0;
+        refreshButtons();
+        tableRefresh();
+    }
+
+    private void refreshButtons() {
+        if (tableIndex == 0) {
+            btnPrevious.setVisibility(View.INVISIBLE);
+        } else {
+            btnPrevious.setVisibility(View.VISIBLE);
+        }
+        if (tableIndex * UtilParam.tableItemCount + UtilParam.tableItemCount >= histories.size()) {
+            btnNext.setVisibility(View.INVISIBLE);
+        } else {
+            btnNext.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void tableRefresh() {
         TableLayout tableData = binding.tableEntranceData;
         tableData.removeAllViews();
         selectedRow.set(null);
-        getHistoryWithDates(start, end);
         // 遍历数据列表并为每行创建 TableRow
-        for (int i = 0; i < histories.size(); i++) {
+        int max = tableIndex * UtilParam.tableItemCount + UtilParam.tableItemCount;
+        max = Math.min(max, histories.size());
+        for (int i = tableIndex * UtilParam.tableItemCount; i < max; i++) {
             TableRow tableRow = new TableRow(tableData.getContext());
             tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             CarHistory history = histories.get(i);
@@ -266,7 +304,7 @@ public class HistoryEntranceFragment extends Fragment {
         }
     }
 
-    private void showImageDialog(Bitmap bitmapIn,Bitmap bitmapOut) {
+    private void showImageDialog(Bitmap bitmapIn, Bitmap bitmapOut) {
         Dialog imageDialog = new Dialog(this.getContext());
         imageDialog.setContentView(R.layout.dialog_dual_image);
         ImageView imageViewIn = imageDialog.findViewById(R.id.imageView_in);

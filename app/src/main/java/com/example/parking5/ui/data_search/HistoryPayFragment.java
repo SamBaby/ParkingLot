@@ -78,7 +78,13 @@ public class HistoryPayFragment extends Fragment {
             refreshButtons();
             tableRefresh();
         });
-        tableSetting();
+        String start = "";
+        String end = "";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
+        Calendar c = new GregorianCalendar();
+        start = String.format(formatter.format(c.getTime()) + " 00:00:00");
+        end = String.format(formatter.format(c.getTime()) + " 23:59:59");
+        tableSetting(start, end, "", "");
         return root;
     }
 

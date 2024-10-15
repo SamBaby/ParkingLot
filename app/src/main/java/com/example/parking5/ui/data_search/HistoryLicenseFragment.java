@@ -3,6 +3,7 @@ package com.example.parking5.ui.data_search;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -236,7 +237,14 @@ public class HistoryLicenseFragment extends Fragment {
                 textView.setLayoutParams(layoutParams);
                 switch (j) {
                     case 0:
-                        textView.setText(car.getCar_number());
+                        String number = car.getCar_number();
+                        if (Util.getRegularCar(number) != null) {
+                            number += "(月租)";
+                        }
+                        textView.setText(number);
+                        if (!number.matches(".*\\d{4}.*")) {
+                            textView.setTextColor(Color.RED);
+                        }
                         break;
                     case 1:
                         textView.setText(car.getTime_in());
@@ -266,7 +274,7 @@ public class HistoryLicenseFragment extends Fragment {
             tableRow.setOnLongClickListener(v -> {
                 // Load the image and set it to the ImageView
                 Bitmap bitmap = ApacheServerRequest.getPictureByPath(car.getPicture_url());
-                if(bitmap != null){
+                if (bitmap != null) {
                     showImageDialog(bitmap);
                 }
                 return false;

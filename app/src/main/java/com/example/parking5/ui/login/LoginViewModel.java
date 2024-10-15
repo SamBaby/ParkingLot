@@ -12,6 +12,7 @@ import com.example.parking5.data.Result;
 import com.example.parking5.data.model.LoggedInUser;
 import com.example.parking5.R;
 import com.example.parking5.datamodel.User;
+import com.example.parking5.util.IP;
 
 public class LoginViewModel extends ViewModel {
 
@@ -31,8 +32,9 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password, String ip) {
         // can be launched in a separate asynchronous job
+        IP.getInstance().setIp(ip);
         Result<User> result = loginRepository.login(username, password);
 
         if (result instanceof Result.Success) {
@@ -69,4 +71,5 @@ public class LoginViewModel extends ViewModel {
     private boolean isPasswordValid(String password) {
         return password != null && !password.trim().isEmpty();
     }
+
 }

@@ -205,6 +205,7 @@
     <string name="history_pay">繳費紀錄</string>
     <string name="history_out">允許出場</string>
     <string name="history_license">車牌修改</string>
+    <string name="history_log">Log</string>
 
     <string name="car_number">車號</string>
     <string name="in_out_time">進出場時間</string>
@@ -307,4 +308,11 @@
 
     <string name="previous_page">上一頁</string>
     <string name="next_page">下一頁</string>
+    <string name="IP">IP</string>
+    <string name="time">時間</string>
+    <string name="log">事件說明</string>
+
+    <string name="preference_ip_add">IP新增</string>
+    <string name="preference_ip_list">IP列表</string>
+    <string name="preference_ip_router">使用router</string>
 </resources>

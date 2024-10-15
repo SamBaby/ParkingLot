@@ -53,6 +53,9 @@ public class DataSearchFragment extends Fragment {
                 } else if (menuItem.getItemId() == R.id.history_license) {
                     getChildFragmentManager().beginTransaction().replace(R.id.frameLayout, new HistoryLicenseFragment(), null).commit();
                     return true;
+                }else if (menuItem.getItemId() == R.id.history_log) {
+                    getChildFragmentManager().beginTransaction().replace(R.id.frameLayout, new HistoryLogFragment(), null).commit();
+                    return true;
                 }
                 return false;
             }

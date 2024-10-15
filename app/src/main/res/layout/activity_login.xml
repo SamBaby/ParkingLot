@@ -22,16 +22,26 @@
 
     </ImageView>
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/ip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
+        android:hint="@string/IP"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/park_john_icon" />
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="@string/account"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/park_john_icon"  />
+        app:layout_constraintTop_toBottomOf="@+id/ip"  />
 
     <EditText
         android:id="@+id/password"
@@ -46,7 +56,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
-
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"

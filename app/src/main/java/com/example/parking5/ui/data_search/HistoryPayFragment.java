@@ -1,5 +1,6 @@
 package com.example.parking5.ui.data_search;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -48,6 +50,7 @@ public class HistoryPayFragment extends Fragment {
     private Button btnSearch;
     private Button btnPrevious;
     private Button btnNext;
+    private Button btnDelete;
     private int tableIndex = 0;
 
     public static HistoryPayFragment newInstance() {
@@ -78,13 +81,42 @@ public class HistoryPayFragment extends Fragment {
             refreshButtons();
             tableRefresh();
         });
-        String start = "";
-        String end = "";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
-        Calendar c = new GregorianCalendar();
-        start = String.format(formatter.format(c.getTime()) + " 00:00:00");
-        end = String.format(formatter.format(c.getTime()) + " 23:59:59");
-        tableSetting(start, end, "", "");
+        btnDelete = root.findViewById(R.id.button_delete);
+        btnDelete.setOnClickListener(v -> {
+            final View dialogView = View.inflate(this.getContext(), R.layout.date_picker, null);
+            final AlertDialog alertDialog = new AlertDialog.Builder(this.getContext()).create();
+            DatePicker picker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+            picker.updateDate(2000, 0, 1);
+            dialogView.findViewById(R.id.confirm_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int month = picker.getMonth() + 1;
+                    deleteHistoryData(month);
+                    alertDialog.dismiss();
+                }
+            });
+            dialogView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+            // 隱藏日期選項，只顯示月份和年份
+            dialogView.findViewById(
+                    dialogView.getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+            dialogView.findViewById(
+                    dialogView.getResources().getIdentifier("year", "id", "android")).setVisibility(View.GONE);
+            alertDialog.setView(dialogView);
+            alertDialog.show();
+        });
+//        String start = "";
+//        String end = "";
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.TAIWAN);
+//        Calendar c = new GregorianCalendar();
+//        start = String.format(formatter.format(c.getTime()) + " 00:00:00");
+//        end = String.format(formatter.format(c.getTime()) + " 23:59:59");
+//        tableSetting(start, end, "", "");
+        tableSetting("", "", "", "");
         return root;
     }
 
@@ -259,7 +291,7 @@ public class HistoryPayFragment extends Fragment {
             if (!start.isEmpty() || !carNumber.isEmpty() || !payment.isEmpty()) {
                 json = ApacheServerRequest.getPayHistoryWithDates(start, end, carNumber, payment);
             } else {
-                json = ApacheServerRequest.getPayHistory();
+                json = ApacheServerRequest.getPayHistory20();
             }
 
             try {
@@ -290,4 +322,25 @@ public class HistoryPayFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    private void deleteHistoryData(int month) {
+        Thread t = new Thread(() -> {
+            // 獲取當前日期
+            Calendar calendar = Calendar.getInstance();
+
+            // 向前移動一個月
+            calendar.add(Calendar.MONTH, month * -1);
+
+            // 格式化日期輸出
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String oneMonthAgo = dateFormat.format(calendar.getTime());
+
+            ApacheServerRequest.deletePayHistoryWithDates(oneMonthAgo);
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

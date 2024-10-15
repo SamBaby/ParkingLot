@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.data_search.HistoryPayFragment">
+    tools:context=".ui.data_search.HistoryLogFragment">
 
     <TableLayout
         android:id="@+id/table_title"
@@ -21,50 +21,18 @@
                 android:id="@+id/textView_car_number"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="@string/car_number"
+                android:layout_weight="1"
+                android:text="@string/time"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/textView_in_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="@string/in_time"
+                android:layout_weight="3"
+                android:text="@string/log"
                 android:textAlignment="center" />
 
-            <TextView
-                android:id="@+id/textView_pay_time"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="@string/pay_time"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/textView_pay_amount"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/pay_amount"
-                android:textAlignment="center" />
-
-
-            <TextView
-                android:id="@+id/textView_bill_number"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="@string/bill_number"
-                android:textAlignment="center" />
-
-            <TextView
-                android:id="@+id/textView_pay_way"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/pay_way"
-                android:textAlignment="center" />
         </TableRow>
     </TableLayout>
 
@@ -77,10 +45,11 @@
         app:layout_constraintTop_toBottomOf="@id/table_title">
 
         <TableLayout
-            android:id="@+id/table_pay_data"
+            android:id="@+id/table_log_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
 
     <LinearLayout
         android:id="@+id/layout_buttons"
@@ -88,7 +57,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/next_page" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,11 +95,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
             <Button
                 android:id="@+id/button_search"
                 android:layout_width="wrap_content"
@@ -140,4 +102,5 @@
                 android:text="@string/search" />
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

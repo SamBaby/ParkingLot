@@ -65,7 +65,9 @@ public class RegularFragment extends Fragment {
             showAccountAddDialog();
         });
         btnModify.setOnClickListener((v) -> {
-            showAccountUpdateDialog();
+            if (selectedRow.get() != null) {
+                showAccountUpdateDialog();
+            }
         });
         btnDelete.setOnClickListener((v) -> {
             if (selectedRow.get() != null) {

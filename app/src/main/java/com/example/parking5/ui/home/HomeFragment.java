@@ -1,6 +1,8 @@
 package com.example.parking5.ui.home;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -22,9 +24,13 @@ import androidx.navigation.Navigation;
 
 import com.example.parking5.R;
 import com.example.parking5.data.ConfigurationString;
+import com.example.parking5.database.MyDatabaseHelper;
 import com.example.parking5.databinding.FragmentHomeBinding;
 import com.example.parking5.datamodel.Cam;
+import com.example.parking5.datamodel.PreferenceIP;
+import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
+import com.example.parking5.util.IP;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -184,15 +190,20 @@ public class HomeFragment extends Fragment {
             // 创建并设置按钮
             try {
                 Cam cam = cams.get(i - 1);
-                String ip = "rtsp://" + cam.getIp() + ":50000/video";
+                String camIP = cam.getIp();
+                boolean isVPN = isVPN(camIP);
+                Var<String> ip = new Var<>("rtsp://" + cam.getIp() + ":50000/video");
+                if (isVPN) {
+                    ip.set("rtsp://" + IP.getInstance().getIp().substring(0, IP.getInstance().getIp().indexOf(":")) + ":" + (cam.getNumber() + 8000) + "/video");
+                }
                 ToggleButton toggleButton = new ToggleButton(tableRow.getContext());
-                toggleButton.setTextOn("CH" + String.valueOf(i));
-                toggleButton.setTextOff("CH" + String.valueOf(i));
-                toggleButton.setText("CH" + String.valueOf(i));
+                toggleButton.setTextOn(cam.getName());
+                toggleButton.setTextOff(cam.getName());
+                toggleButton.setText(cam.getName());
                 if (i == 1) {
                     toggleButton.setChecked(true);
                     toggleButton.setTextColor(Color.BLACK);
-                    playRTSP(ip);
+                    playRTSP(ip.get());
                     selectedCam = cam;
                     textIP.setText(cam.getIp());
                 } else {
@@ -200,7 +211,7 @@ public class HomeFragment extends Fragment {
                 }
                 toggleButton.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 toggleButton.setOnClickListener(v -> {
-                    playRTSP(ip);
+                    playRTSP(ip.get());
                     toggleButton.setTextColor(Color.BLACK);
                     for (ToggleButton btn : channelButtons) {
                         if (!btn.equals(toggleButton)) {
@@ -272,6 +283,39 @@ public class HomeFragment extends Fragment {
         binding = null;
         mMediaPlayer.release();
         mLibVLC.release();
+    }
 
+    private boolean isVPN(String ip) {
+        int ret = 0;
+        try {
+            MyDatabaseHelper dbHelper = new MyDatabaseHelper(getActivity());
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+// Define a projection that specifies which columns you want to query
+            String[] projection = {"id", "ip", "vpn"};
+
+// Query the database
+            Cursor cursor = db.query("ip_preference",   // The table to query
+                    projection,            // The columns to return
+                    "ip = ?",                  // The columns for the WHERE clause
+                    new String[]{IP.getInstance().getIp()},                  // The values for the WHERE clause
+                    null,                  // Don't group the rows
+                    null,                  // Don't filter by row groups
+                    null                   // The sort order
+            );
+
+// Iterate over the cursor
+            while (cursor.moveToNext()) {
+                int vpn = cursor.getInt(cursor.getColumnIndexOrThrow("vpn"));
+                if (vpn == 1) {
+                    ret = 1;
+                }
+            }
+
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret == 1;
     }
 }

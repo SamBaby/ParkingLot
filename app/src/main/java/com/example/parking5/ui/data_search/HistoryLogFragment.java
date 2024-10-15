@@ -3,9 +3,9 @@ package com.example.parking5.ui.data_search;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -26,7 +27,9 @@ import android.widget.ToggleButton;
 
 import com.example.parking5.R;
 import com.example.parking5.databinding.FragmentHistoryEntranceBinding;
+import com.example.parking5.databinding.FragmentHistoryLogBinding;
 import com.example.parking5.datamodel.CarHistory;
+import com.example.parking5.datamodel.ServerLog;
 import com.example.parking5.event.Var;
 import com.example.parking5.util.ApacheServerRequest;
 import com.example.parking5.util.Util;
@@ -43,38 +46,34 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Vector;
 
-/***
- * show the history of all car entrance. By default, shows the data today.
- */
-public class HistoryEntranceFragment extends Fragment {
-    private static final int[] tableWeight = new int[]{2, 3, 3, 1, 1, 1};
-    private HistoryEntranceViewModel mViewModel;
-    private FragmentHistoryEntranceBinding binding;
-    private Button btnAdd;
+public class HistoryLogFragment extends Fragment {
+    private static final int[] tableWeight = new int[]{1, 3};
+    private FragmentHistoryLogBinding binding;
     private Button btnSearch;
     private Button btnDelete;
     private Button btnPrevious;
     private Button btnNext;
     private int tableIndex = 0;
     Var<TableRow> selectedRow = new Var<>();
-    Vector<CarHistory> histories;
+    Vector<ServerLog> histories;
     private String startDate;
     private String endDate;
+    private HistoryLogViewModel mViewModel;
 
-    public static HistoryEntranceFragment newInstance() {
-        return new HistoryEntranceFragment();
+    public static HistoryLogFragment newInstance() {
+        return new HistoryLogFragment();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(HistoryEntranceViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        mViewModel = new ViewModelProvider(this).get(HistoryLogViewModel.class);
 
-        binding = FragmentHistoryEntranceBinding.inflate(inflater, container, false);
+        binding = FragmentHistoryLogBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         selectedRow = new Var<>();
         histories = new Vector<>();
 
-//        btnAdd = root.findViewById(R.id.button_add);
         btnDelete = root.findViewById(R.id.button_delete);
         btnSearch = root.findViewById(R.id.button_search);
         btnPrevious = root.findViewById(R.id.button_previous);
@@ -89,11 +88,33 @@ public class HistoryEntranceFragment extends Fragment {
             refreshButtons();
             tableRefresh();
         });
-//        btnAdd.setOnClickListener(v -> {
-////            addHistory();
-//        });
         btnDelete.setOnClickListener(v -> {
-            deleteHistory();
+//            deleteHistory();
+            final View dialogView = View.inflate(this.getContext(), R.layout.date_picker, null);
+            final AlertDialog alertDialog = new AlertDialog.Builder(this.getContext()).create();
+            DatePicker picker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+            picker.updateDate(2000, 0, 1);
+            dialogView.findViewById(R.id.confirm_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int month = picker.getMonth() + 1;
+                    deleteHistoryData(month);
+                    alertDialog.dismiss();
+                }
+            });
+            dialogView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+            // 隱藏日期選項，只顯示月份和年份
+            dialogView.findViewById(
+                    dialogView.getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+            dialogView.findViewById(
+                    dialogView.getResources().getIdentifier("year", "id", "android")).setVisibility(View.GONE);
+            alertDialog.setView(dialogView);
+            alertDialog.show();
         });
         btnSearch.setOnClickListener(v -> {
             searchHistory();
@@ -110,20 +131,10 @@ public class HistoryEntranceFragment extends Fragment {
         return root;
     }
 
-    private void deleteHistory() {
-        if (selectedRow.get() != null) {
-            TableLayout table = binding.tableEntranceData;
-            int index = table.indexOfChild(selectedRow.get());
-            deleteHistoryData(histories.get(index).getId());
-            tableSetting();
-        }
-    }
-
     private void searchHistory() {
-        final View dialogView = View.inflate(getActivity(), R.layout.car_search, null);
+        final View dialogView = View.inflate(getActivity(), R.layout.log_search, null);
         Dialog dialog = new Dialog(getActivity());
 
-        EditText txtNumber = dialogView.findViewById(R.id.car_number_edittext);
         TextView txtStart = dialogView.findViewById(R.id.textView_start);
         TextView txtEnd = dialogView.findViewById(R.id.textView_end);
         ToggleButton buttonDay = dialogView.findViewById(R.id.toggleButton_day);
@@ -238,117 +249,97 @@ public class HistoryEntranceFragment extends Fragment {
     }
 
     private void tableRefresh() {
-        TableLayout tableData = binding.tableEntranceData;
+        TableLayout tableData = binding.tableLogData;
         tableData.removeAllViews();
         selectedRow.set(null);
         // 遍历数据列表并为每行创建 TableRow
         int max = tableIndex * UtilParam.tableItemCount + UtilParam.tableItemCount;
         max = Math.min(max, histories.size());
         for (int i = tableIndex * UtilParam.tableItemCount; i < max; i++) {
-            CarHistory history = histories.get(i);
-            createRow(tableData, history, false);
-            createRow(tableData, history, true);
+            TableRow tableRow = new TableRow(tableData.getContext());
+            tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+            ServerLog history = histories.get(i);
+            // 为每行添加单元格
+            for (int j = 0; j < 2; j++) {
+                TextView textView = new TextView(tableRow.getContext());
+                textView.setPadding(5, 5, 5, 5);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
+                textView.setGravity(Gravity.CENTER);
+                textView.setLayoutParams(layoutParams);
+                switch (j) {
+                    case 0:
+                        String time = history.getTime();
+                        if (history.getUrl() != null && !history.getUrl().isEmpty()) {
+                            time = "*" + time;
+                        }
+                        textView.setText(time);
+                        break;
+                    case 1:
+                        textView.setText(history.getDescription());
+                        break;
+                    default:
+                        break;
+                }
+                tableRow.addView(textView);
+
+            }
+            tableRow.setOnClickListener(v -> {
+                if (selectedRow.get() != null) {
+                    selectedRow.get().setBackground(null);
+                }
+                v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
+                selectedRow.set((TableRow) v);
+            });
+            if (history.getUrl() != null && !history.getUrl().isEmpty()) {
+                tableRow.setOnLongClickListener(v -> {
+                    // Load the image and set it to the ImageView
+                    String path = history.getUrl();
+                    Bitmap bitmap = ApacheServerRequest.getPictureByPath(path);
+                    if (bitmap != null) {
+                        showImageDialog(bitmap);
+                    }
+                    return false;
+                });
+            }
+            // 将 TableRow 添加到 TableLayout
+            tableData.addView(tableRow);
         }
     }
 
-    private void createRow(TableLayout table, CarHistory history, boolean in) {
-        TableRow tableRow = new TableRow(table.getContext());
-        tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        // 为每行添加单元格
-        for (int j = 0; j < 6; j++) {
-            TextView textView = new TextView(tableRow.getContext());
-            textView.setPadding(5, 5, 5, 5);
-            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, tableWeight[j]);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(layoutParams);
-            switch (j) {
-                case 0:
-                    textView.setText(history.getCar_number());
-                    break;
-                case 1:
-                    textView.setText(in ? history.getTime_in() : history.getTime_out());
-                    break;
-                case 2:
-                    textView.setText(in ? "進" : "出");
-                    break;
-                case 3:
-                    textView.setText("小客");
-                    break;
-                case 4:
-                    textView.setText("白");
-                    break;
-                case 5:
-                    textView.setText(history.getArtificial() == 0 ? "否" : "是");
-                    break;
-                default:
-                    break;
-            }
-            tableRow.addView(textView);
-
-        }
-        tableRow.setOnClickListener(v -> {
-            if (selectedRow.get() != null) {
-                selectedRow.get().setBackground(null);
-            }
-            v.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.border));
-            selectedRow.set((TableRow) v);
-        });
-        tableRow.setOnLongClickListener(v -> {
-            // Load the image and set it to the ImageView
-//                Bitmap bitmap = BitmapFactory.decodeFile(history.getPicture_url());
-            String path = history.getPicture_url();
-            path += in ? "_in.png" : "_out.png";
-            Bitmap bitmap = ApacheServerRequest.getPictureByPath(path);
-            if (bitmap != null) {
-                showImageDialog(bitmap);
-            }
-            return false;
-        });
-        // 将 TableRow 添加到 TableLayout
-        table.addView(tableRow);
-    }
-
-    //    private void showImageDialog(Bitmap bitmapIn, Bitmap bitmapOut) {
-//        Dialog imageDialog = new Dialog(this.getContext());
-//        imageDialog.setContentView(R.layout.dialog_dual_image);
-//        ImageView imageViewIn = imageDialog.findViewById(R.id.imageView_in);
-//        imageViewIn.setImageBitmap(bitmapIn);// Set your image here
-//        ImageView imageViewOut = imageDialog.findViewById(R.id.imageView_out);
-//        imageViewOut.setImageBitmap(bitmapOut);// Set your image here
-//
-//        imageDialog.setOnDismissListener(dialog -> {
-//            // Handle the dialog dismissing
-//        });
-//
-//        imageDialog.setCanceledOnTouchOutside(true);
-//
-//        imageDialog.show();
-//    }
-    private void showImageDialog(Bitmap bitmap) {
-        Dialog imageDialog = new Dialog(this.getContext());
-        imageDialog.setContentView(R.layout.dialog_image);
-        ImageView imageView = imageDialog.findViewById(R.id.imageView);
-        imageView.setImageBitmap(bitmap);// Set your image here
-
-        imageDialog.setOnDismissListener(dialog -> {
-            // Handle the dialog dismissing
-        });
-
-        imageDialog.setCanceledOnTouchOutside(true);
-
-        imageDialog.show();
-    }
-
-    private void getHistory() {
+    private void getHistory20() {
         Thread t = new Thread(() -> {
             try {
-                String json = ApacheServerRequest.getHistories();
+                String json = ApacheServerRequest.getLogs20();
                 JSONArray array = new JSONArray(json);
                 histories.clear();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
+                    ServerLog history = gson.fromJson(obj.toString(), ServerLog.class);
+                    histories.add(history);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getHistory() {
+        Thread t = new Thread(() -> {
+            try {
+                String json = ApacheServerRequest.getLogs();
+                JSONArray array = new JSONArray(json);
+                histories.clear();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject obj = array.getJSONObject(i);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    ServerLog history = gson.fromJson(obj.toString(), ServerLog.class);
                     histories.add(history);
                 }
             } catch (Exception e) {
@@ -367,9 +358,9 @@ public class HistoryEntranceFragment extends Fragment {
         Thread t = new Thread(() -> {
             String json = "";
             if (!start.isEmpty() && !end.isEmpty()) {
-                json = ApacheServerRequest.getHistoriesWithDates(start, end);
+                json = ApacheServerRequest.getLogsWithDates(start, end);
             } else {
-                json = ApacheServerRequest.getHistories10();
+                json = ApacheServerRequest.getLogs20();
             }
 
             try {
@@ -378,7 +369,7 @@ public class HistoryEntranceFragment extends Fragment {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    CarHistory history = gson.fromJson(obj.toString(), CarHistory.class);
+                    ServerLog history = gson.fromJson(obj.toString(), ServerLog.class);
                     histories.add(history);
                 }
             } catch (Exception e) {
@@ -405,11 +396,47 @@ public class HistoryEntranceFragment extends Fragment {
         }
     }
 
+    private void deleteHistoryData(int month) {
+        Thread t = new Thread(() -> {
+            // 獲取當前日期
+            Calendar calendar = Calendar.getInstance();
+
+            // 向前移動一個月
+            calendar.add(Calendar.MONTH, month * -1);
+
+            // 格式化日期輸出
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String oneMonthAgo = dateFormat.format(calendar.getTime());
+
+            ApacheServerRequest.deleteLog(oneMonthAgo);
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HistoryEntranceViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(HistoryLogViewModel.class);
         // TODO: Use the ViewModel
     }
 
+    private void showImageDialog(Bitmap bitmap) {
+        Dialog imageDialog = new Dialog(this.getContext());
+        imageDialog.setContentView(R.layout.dialog_image);
+        ImageView imageView = imageDialog.findViewById(R.id.imageView);
+        imageView.setImageBitmap(bitmap);// Set your image here
+
+        imageDialog.setOnDismissListener(dialog -> {
+            // Handle the dialog dismissing
+        });
+
+        imageDialog.setCanceledOnTouchOutside(true);
+
+        imageDialog.show();
+    }
 }

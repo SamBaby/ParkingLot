@@ -1,6 +1,7 @@
 package com.example.parking5.util;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
@@ -9,7 +10,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.parking5.R;
+import com.example.parking5.datamodel.RegularPass;
 import com.example.parking5.event.Var;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -146,7 +153,33 @@ public class Util {
         alertDialog.setView(dialogView);
         alertDialog.show();
     }
-
+    public static void showMonthSelectDialog(Context context) {
+        final View dialogView = View.inflate(context, R.layout.date_picker, null);
+        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        dialogView.findViewById(R.id.confirm_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
+//                v.setText(String.format(Locale.TAIWAN, "%04d-%02d-%02d", datePicker.getYear(),
+//                        datePicker.getMonth() + 1,
+//                        datePicker.getDayOfMonth()));
+                alertDialog.dismiss();
+            }
+        });
+        dialogView.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        // 隱藏日期選項，只顯示月份和年份
+        dialogView.findViewById(
+                dialogView.getResources().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+        dialogView.findViewById(
+                dialogView.getResources().getIdentifier("year", "id", "android")).setVisibility(View.GONE);
+        alertDialog.setView(dialogView);
+        alertDialog.show();
+    }
     public static long getStartOfToday() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -221,5 +254,30 @@ public class Util {
 
     public static String getBase64Encode(byte[] text) {
         return android.util.Base64.encodeToString(text, 0);
+    }
+
+    public static RegularPass getRegularCar(String carNumber) {
+        Var<RegularPass> ret = new Var<>();
+        Thread t = new Thread(() -> {
+            String json = ApacheServerRequest.getRegularCar(carNumber);
+            try {
+                JSONArray array = new JSONArray(json);
+                if (array.length() > 0) {
+                    JSONObject obj = array.getJSONObject(0);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    RegularPass pass = gson.fromJson(obj.toString(), RegularPass.class);
+                    ret.set(pass);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        try {
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret.get();
     }
 }

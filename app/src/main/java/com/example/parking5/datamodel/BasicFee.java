@@ -1,13 +1,21 @@
 package com.example.parking5.datamodel;
 
 public class BasicFee {
+    //進場多少分鐘內不計費
     private int enter_time_not_count;
+    //進場一小時內以一小時(1/0)計算
     private int before_one_hour_count;
+    //進場一小時後以半小時(0)或一小時(1)計算
     private int after_one_hour_unit;
+    //平日時間單位價格
     private int weekday_fee;
+    //平日單日最高收費
     private int weekday_most_fee;
+    //假日時間單位價格
     private int holiday_fee;
+    //假日單日最高收費
     private int holiday_most_fee;
+    //跨平假日計算
     private int weekday_holiday_cross;
 
     public BasicFee(int enterTimeNotCount, int beforeOneHourCount, int afterOneHourUnit, int weekdayFee, int weekdayMostFee, int holidayFee, int holidayMostFee, int weekdayHolidayCross) {

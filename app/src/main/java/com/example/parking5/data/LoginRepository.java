@@ -15,6 +15,7 @@ public class LoginRepository {
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
     private User user = null;
+    private String ip = null;
 
     // private constructor : singleton access
     private LoginRepository(LoginDataSource dataSource) {
@@ -46,6 +47,7 @@ public class LoginRepository {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
+
     public User getLoggedInUser() {
         return this.user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
